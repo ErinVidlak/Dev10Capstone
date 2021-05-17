@@ -1,0 +1,91 @@
+src
+├───main
+│   ├───java
+│   │   └───learn
+│   │       └───inventory
+│   │           │   App.java
+│   │           │
+│   │           ├───controller
+│   │           │       Controller
+│   │           │       GlobalExceptionHandler
+│   │           │
+│   │           ├───validation
+│   │           │       CustomValidationAPI
+│   │           │       
+│   │           │
+│   │           ├───data
+│   │           │       DataException.java (do we still need this?)
+│   │           │       JdbcTemplateRepository.java
+│   │           │       Repository.java
+                        KnownGoodState
+│   │           │       
+│   │           │       
+│   │           │       
+│   │           │       
+│   │           │
+│   │           ├───domain
+│   │           │       Service.java
+│   │           │       ForageService.java
+│   │           │       ItemService.java
+│   │           │       Response.java
+│   │           │       Result.java
+│   │           │
+│   │           ├───models
+│   │           │       Category.java
+│   │           │       Forage.java
+│   │           │       Forager.java
+│   │           │       Item.java
+│   │           │
+│   │                  
+│   │                  
+│   │             
+│   │
+│   └───resources
+            application.properties
+
+
+
+
+
+└───test
+    └───java
+    │    └───learn
+    │        └───inventory
+    │            ├───data
+    │            │       ForageFileRepositoryTest.java
+    │            │       ForageRepositoryDouble.java
+    │            │       ForagerFileRepositoryTest.java
+    │            │       ForagerRepositoryDouble.java
+    │            │       ItemFileRepositoryTest.java
+    │            │       ItemRepositoryDouble.java
+    │            │
+    │            └───domain
+    │                    ForageServiceTest.java
+    │                    ItemServiceTest.java
+    │
+    │
+    │___ resources
+            application.properties
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
