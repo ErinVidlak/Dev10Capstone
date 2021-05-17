@@ -1,0 +1,72 @@
+@hostname = localhost
+@port = 5000
+@host = {{hostname}}:{{port}}
+@baseurl = http://{{host}}
+
+### Should return a 403 status code
+
+POST {{baseurl}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "user",
+    "password": "user"
+}
+
+### Should return a 200 status code with a JWT in the response body
+
+POST {{baseurl}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "john@smith.com",
+    "password": "P@ssw0rd!"
+}
+
+### Should return a 400 status code with the validation messages in the response body
+
+POST {{baseurl}}/create_account HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "",
+  "password": ""
+}
+
+### Should return a 201 status code with the new user's ID in the response body
+
+POST {{baseurl}}/create_account HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "smashdev",
+  "password": "Asdff88f67!"
+}
+
+### Should return a 200 status code with a JWT in the response body
+
+POST {{baseurl}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "smashdev",
+    "password": "Asdff88f67!"
+}
+
+### Should return a 403 status code
+
+POST {{baseurl}}/refresh_token HTTP/1.1
+Content-Type: application/json
+
+{
+  "jwt_token": ""
+}
+
+### Should return a 200 status code with an refreshed token in the response body
+
+POST {{baseurl}}/refresh_token HTTP/1.1
+Content-Type: application/json
+
+{
+  "jwt_token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkZXYxMC11c2Vycy1hcGkiLCJzdWIiOiJqb2huQHNtaXRoLmNvbSIsImlkIjoiOTgzZjEyMjQtYWY0Zi0xMWViLTgzNjgtMDI0MmFjMTEwMDAyIiwicm9sZXMiOiJBRE1JTiIsImV4cCI6MTYyMDQ5NTk1N30.2Z4k9hbY2GgfwPc-u3ARVMdRutbPrZ9svD2pvEHdkPs"
+}

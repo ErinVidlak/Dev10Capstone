@@ -36,5 +36,13 @@ TODO: Testing Plan
 
 TODO: Dependency libraries and other soft technical details
 
-
 Google Drive Document: https://docs.google.com/document/d/13JKfZd1I-laKHnOSUhpMPvYxjj2PxafvFzYYXhX1nlo/edit?usp=sharing
+
+Emails:
+
+erin.vidlak@gmail.com    |    mtbelgum@gmail.com    |    rph9ab@virginia.edu
+
+Github: 
+
+ErinVidlak, MarkBelgum, rhazlett
+
