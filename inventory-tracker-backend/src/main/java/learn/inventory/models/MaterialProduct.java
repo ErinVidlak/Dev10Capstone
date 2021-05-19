@@ -16,4 +16,5 @@ public class MaterialProduct {
     @Getter
     @Setter
     private Product product;
+
 }

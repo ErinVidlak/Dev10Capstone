@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class MaterialPurchase {
 
@@ -18,7 +19,14 @@ public class MaterialPurchase {
     @Getter
     @Setter
     private int quantityPurchased;
-    private String quantityUnits;
+
+    @Getter
+    @Setter
+    private String units;
+
+    @Getter
+    @Setter
+    private LocalDate datePurchased;
 
     @Getter
     @Setter
