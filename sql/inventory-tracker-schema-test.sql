@@ -30,7 +30,6 @@ create table listed_product (
     is_sold bit not null default 0,
     listing_name varchar(50) not null,
     product_id int not null,
-    platform_fee_id int,
     constraint fk_product_listed_product_id
         foreign key (product_id)
         references product(product_id)
@@ -107,7 +106,7 @@ begin
 
 
 
-	insert into listed_product (listed_price,fee_amount, date_listed, is_sold, date_sold, listing_name, product_id, platform_fee_id) values
+	insert into listed_product (listed_price,fee_amount, date_listed, is_sold, date_sold, listing_name, product_id) values
 		(750.99, 5.99, '2021-01-14', 0, null, 'gold earrings with real emeralds', 1, 1),
 		(15.99, 10.00, '2021-05-01', 1, '2021-05-10', 'soft and cozy hand knitted hat', 3, 1);
         

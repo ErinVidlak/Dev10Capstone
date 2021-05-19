@@ -21,28 +21,21 @@ create table product (
         references user(user_id)
 );
 
-create table platform_fee (
-    platform_fee_id int primary key auto_increment,
-    platform_name varchar(25) not null,
-    fee_amount decimal (10,2),
-    fee_type varchar(25)
-);
+
 
 create table listed_product (
     listed_product_id int primary key auto_increment,
     listed_price decimal (10,2) not null default 0.00,
+    fee_amount decimal (10,2),
     date_listed date not null,
     date_sold date,
     is_sold bit not null default 0,
     listing_name varchar(50) not null,
     product_id int not null,
-    platform_fee_id int,
     constraint fk_product_listed_product_id
         foreign key (product_id)
-        references product(product_id),
-	constraint fk_platform_fee_listed_product_id
-        foreign key (platform_fee_id)
-        references platform_fee(platform_fee_id)
+        references product(product_id)
+
 );
 
 create table material (
