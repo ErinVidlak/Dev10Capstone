@@ -23,7 +23,7 @@ public class Material {
 
     @Getter
     @Setter
-    private User user;
+    private String userId;
 
     @Getter
     @Setter
