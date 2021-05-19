@@ -30,7 +30,7 @@ public class ListedProduct {
 
     @Getter
     @Setter
-    private boolean hasSold;
+    private boolean isSold;
 
     @Getter
     @Setter
