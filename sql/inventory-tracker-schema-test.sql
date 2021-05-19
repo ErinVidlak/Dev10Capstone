@@ -3,7 +3,10 @@ create database inventory_tracker_test;
 use inventory_tracker_test;
 
 create table user (
-	user_id varchar(255) primary key
+	user_id varchar(255) not null,
+	constraint pk_user
+        primary key (user_id)
+
 );
 
 create table product (
@@ -11,7 +14,7 @@ create table product (
     product_name varchar(50) not null,
     total_materials_cost decimal (10,2) not null,
     -- time_to_make in hours, used to calculate "hourly wage" 
-    time_to_make int,
+    time_to_make int null,
     user_id varchar(255) not null,
 	constraint fk_product_user_id
         foreign key (user_id)
@@ -88,27 +91,18 @@ create table material_product (
         references product(product_id)
 );
 
+
+
+
+
+
+
+
 delimiter //
 create procedure set_known_good_state()
 begin
 
-	delete from product;
-    alter table product auto_increment = 1;
-    delete from platform_fee;
-    alter table platform_fee auto_increment = 1;
-    delete from listed_product;
-    alter table listed_product auto_increment = 1;
-    delete from material;
-    alter table material auto_increment = 1;
-    delete from material_inventory;
-    alter table material_inventory auto_increment = 1;
-    delete from material_purchase;
-    alter table material_purchase auto_increment = 1;
-    delete from material_product;
-	alter table material_product auto_increment = 1;
 
-    
-    
     insert into user (user_id) values
 		('username'),
         ('test');
@@ -124,8 +118,8 @@ begin
 		('Etsy', 10.45, "payment proccessing fee");
 
 	insert into listed_product (listed_price, date_listed, is_sold, date_sold, listing_name, product_id, platform_fee_id) values
-		(750.99, 2021-01-14, 0, null, 'gold earrings with real emeralds', 1, 1),
-		(15.99, 2021-05-01, 1, 2021-05-10, 'soft and cozy hand knitted hat', 3, 1);
+		(750.99, '2021-01-14', 0, null, 'gold earrings with real emeralds', 1, 1),
+		(15.99, '2021-05-01', 1, '2021-05-10', 'soft and cozy hand knitted hat', 3, 1);
         
         
 	insert into material(material_id, material_name, price_per_unit, user_id) values
@@ -150,11 +144,11 @@ begin
         (470, 5);
         
 	insert into material_purchase(purchase_price, purchase_quantity, quantity_units, purchase_date, purchase_description, material_id) values
-		(500.00, 10, 'one pair', 04-22-2020, '10 pairs of gold earrings that have room to put a gem or other decoration. Purchased from Kay Jewelers', 1),
-		(1000.00, 2, '3 carats', 04-25-2020, 'two 3 carat cut emeralds from Kay Jewelers', 2),
-		(205.00, 10, '', 12-26-2020, 'small chain, bought from Michaels', 3),
-		(20.00, 10, '', 12-26-2020, 'metal plates that I plan to use for keychains or dog/cat collars, bought from michaels', 4),
-		(250.00, 500, 'yards', 08-03-2020, 'yarn of various colors totaling 500 yards', 5);
+		(500.00, 10, 'one pair', '04-22-2020', '10 pairs of gold earrings that have room to put a gem or other decoration. Purchased from Kay Jewelers', 1),
+		(1000.00, 2, '3 carats', '04-25-2020', 'two 3 carat cut emeralds from Kay Jewelers', 2),
+		(205.00, 10, '', '12-26-2020', 'small chain, bought from Michaels', 3),
+		(20.00, 10, '', '12-26-2020', 'metal plates that I plan to use for keychains or dog/cat collars, bought from michaels', 4),
+		(250.00, 500, 'yards', '08-03-2020', 'yarn of various colors totaling 500 yards', 5);
 
 
 
@@ -163,5 +157,4 @@ end //
 delimiter ;
 
 
-
-
+select * from material;
