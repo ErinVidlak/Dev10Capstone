@@ -1,9 +1,11 @@
 package learn.inventory.data;
 
 import learn.inventory.models.Material;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class MaterialJdbcTemplateRepository implements MaterialRepository{
     @Override
     public List<Material> findAll() {

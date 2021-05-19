@@ -1,7 +1,9 @@
 package learn.inventory.data;
 
 import learn.inventory.models.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserJdbcTemplateRepository implements UserRepository{
     @Override
     public User findById(int userId) {

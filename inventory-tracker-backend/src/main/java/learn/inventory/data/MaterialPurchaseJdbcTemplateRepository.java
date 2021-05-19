@@ -1,9 +1,11 @@
 package learn.inventory.data;
 
 import learn.inventory.models.MaterialPurchase;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class MaterialPurchaseJdbcTemplateRepository implements MaterialPurchaseRepository{
 
 
