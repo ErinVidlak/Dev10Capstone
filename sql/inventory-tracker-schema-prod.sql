@@ -78,7 +78,7 @@ create table material_purchase (
 );
 
 create table material_product (
-	quantity int not null,
+	material_quantity_used int not null,
     material_id int not null,
     product_id int not null,
     constraint pk_material_product

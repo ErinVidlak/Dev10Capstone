@@ -78,7 +78,7 @@ create table material_purchase (
 );
 
 create table material_product (
-	quantity int not null,
+	material_quantity_used int not null,
     material_id int not null,
     product_id int not null,
     constraint pk_material_product
@@ -143,7 +143,7 @@ begin
 		(20.00, 10, '', '2020-10-10', 'metal plates that I plan to use for keychains or dog/cat collars, bought from michaels', 4),
 		(250.00, 500, 'yards', '2020-09-15', 'yarn of various colors totaling 500 yards', 5);
         
-	insert into material_product(quantity, material_id, product_id) values 
+	insert into material_product(material_quantity_used, material_id, product_id) values 
 		(1, 1, 1),
         (2, 2, 1),
         (1, 3, 2),
