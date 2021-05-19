@@ -21,16 +21,10 @@ create table product (
         references user(user_id)
 );
 
-create table platform_fee (
-    platform_fee_id int primary key auto_increment,
-    platform_name varchar(25) not null,
-    fee_amount decimal (10,2),
-    fee_type varchar(25)
-);
-
 create table listed_product (
     listed_product_id int primary key auto_increment,
     listed_price decimal (10,2) not null default 0.00,
+    fee_amount decimal (10,2),
     date_listed date not null,
     date_sold date,
     is_sold bit not null default 0,
@@ -39,10 +33,8 @@ create table listed_product (
     platform_fee_id int,
     constraint fk_product_listed_product_id
         foreign key (product_id)
-        references product(product_id),
-	constraint fk_platform_fee_listed_product_id
-        foreign key (platform_fee_id)
-        references platform_fee(platform_fee_id)
+        references product(product_id)
+
 );
 
 create table material (
@@ -113,12 +105,11 @@ begin
         (3, 'hand knitted hat', 15.00, 720, 'test' );
 
 
-	insert into platform_fee ( platform_name, fee_amount, fee_type) values
-		('Etsy', 10.45, "payment proccessing fee");
 
-	insert into listed_product (listed_price, date_listed, is_sold, date_sold, listing_name, product_id, platform_fee_id) values
-		(750.99, '2021-01-14', 0, null, 'gold earrings with real emeralds', 1, 1),
-		(15.99, '2021-05-01', 1, '2021-05-10', 'soft and cozy hand knitted hat', 3, 1);
+
+	insert into listed_product (listed_price,fee_amount, date_listed, is_sold, date_sold, listing_name, product_id, platform_fee_id) values
+		(750.99, 5.99, '2021-01-14', 0, null, 'gold earrings with real emeralds', 1, 1),
+		(15.99, 10.00, '2021-05-01', 1, '2021-05-10', 'soft and cozy hand knitted hat', 3, 1);
         
         
 	insert into material(material_id, material_name, price_per_unit, user_id) values
