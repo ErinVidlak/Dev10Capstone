@@ -2,8 +2,11 @@ drop database if exists inventory_tracker;
 create database inventory_tracker;
 use inventory_tracker;
 
-create table user (
-	user_id varchar(255) primary key
+create table `user` (
+	user_id varchar(255) not null,
+	constraint pk_user
+        primary key (user_id)
+
 );
 
 create table product (
@@ -87,3 +90,6 @@ create table material_product (
         foreign key (product_id)
         references product(product_id)
 );
+
+
+
