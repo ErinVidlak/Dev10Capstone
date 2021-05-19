@@ -14,6 +14,10 @@ public class ListedProduct {
 
     @Getter
     @Setter
+    private String listedName;
+
+    @Getter
+    @Setter
     private BigDecimal listedPrice;
 
     @Getter
@@ -31,4 +35,8 @@ public class ListedProduct {
     @Getter
     @Setter
     private int productId;
+
+    @Getter
+    @Setter
+    private int platformFeeId;
 }
