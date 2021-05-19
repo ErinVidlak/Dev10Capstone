@@ -2,23 +2,22 @@ drop database if exists inventory_tracker_test;
 create database inventory_tracker_test;
 use inventory_tracker_test;
 
-<<<<<<< Updated upstream
-=======
+
 create table user (
 	user_id varchar(255) primary key
 );
 
->>>>>>> Stashed changes
+
 create table product (
     product_id int primary key auto_increment,
     product_name varchar(50) not null,
     total_materials_cost decimal (10,2) not null,
     time_to_make dateTime,
-<<<<<<< Updated upstream
+
     user_name varchar(50) not null
-=======
+
     user_id varchar(255) not null
->>>>>>> Stashed changes
+
 );
 
 create table platform_fee (
@@ -48,11 +47,10 @@ create table listed_product (
 create table material (
 	material_id int primary key auto_increment,
 	material_name varchar(50) not null,
-<<<<<<< Updated upstream
+
 	user_name varchar(50) not null,
-=======
+
 	user_id varchar(255) not null,
->>>>>>> Stashed changes
 	price_per_unit decimal (10,2)
 );
 
@@ -81,10 +79,7 @@ create table material_purchase (
 create table material_product (
     material_id int not null,
     product_id int not null,
-<<<<<<< Updated upstream
-=======
     quantity int not null,
->>>>>>> Stashed changes
     constraint pk_material_product
         primary key(material_id, product_id),
     constraint fk_material_product_material_id
@@ -113,11 +108,8 @@ begin
     alter table material_purchase auto_increment = 1;
     delete from material_product;
     
-<<<<<<< Updated upstream
     insert into product (product_id, product_name, total_materials_cost, time_to_make, user_name) values
-=======
     insert into product (product_id, product_name, total_materials_cost, time_to_make, user_id) values
->>>>>>> Stashed changes
         (1, 'ACME', 'Agency to Classify & Monitor Evildoers'),
         (2, 'MASK', 'Mobile Armored Strike Kommand'),
         (3, 'ODIN', 'Organization of Democratic Intelligence Networks');
