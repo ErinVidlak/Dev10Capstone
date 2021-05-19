@@ -32,7 +32,6 @@ create table listed_product (
     is_sold bit not null default 0,
     listing_name varchar(50) not null,
     product_id int not null,
-    platform_fee_id int,
     constraint fk_product_listed_product_id
         foreign key (product_id)
         references product(product_id)
