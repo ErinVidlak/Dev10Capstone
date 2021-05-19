@@ -138,7 +138,7 @@ begin
         concat(agency.agency_id, '-', agent.agent_id), -- identifier
         1,                                             -- security_clearance_id
         date_add(agent.dob, interval 10 year)          -- activation_date
-    from agency
+    from agenc
     inner join agent
     where agent.agent_id not in (6, 8)
     and agency.agency_id != 2;
