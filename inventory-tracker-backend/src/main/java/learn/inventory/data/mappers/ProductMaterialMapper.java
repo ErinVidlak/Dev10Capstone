@@ -9,6 +9,14 @@ public class ProductMaterialMapper implements RowMapper<ProductMaterial> {
 
     @Override
     public ProductMaterial mapRow(ResultSet resultSet, int i) throws SQLException {
-        return null;
+        ProductMaterial productMaterial = new ProductMaterial();
+
+        productMaterial.setMaterialQuantity(resultSet.getInt("material_quantity_used"));
+        productMaterial.setProductId(resultSet.getInt("product_id"));
+
+        MaterialMapper materialMapper = new MaterialMapper();
+        productMaterial.setMaterial(materialMapper.mapRow(resultSet, i));
+
+        return productMaterial;
     }
 }
