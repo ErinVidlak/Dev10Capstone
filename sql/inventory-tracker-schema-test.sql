@@ -11,7 +11,10 @@ create table product (
     product_name varchar(50) not null,
     total_materials_cost decimal (10,2) not null,
     time_to_make dateTime,
-    user_id varchar(255) not null
+    user_id varchar(255) not null,
+	constraint fk_product_user_id
+        foreign key (user_id)
+        references user(user_id)
 );
 
 create table platform_fee (
@@ -42,7 +45,10 @@ create table material (
 	material_id int primary key auto_increment,
 	material_name varchar(50) not null,
 	user_id varchar(255) not null,
-	price_per_unit decimal (10,2)
+	price_per_unit decimal (10,2),
+	constraint fk_material_user_id
+        foreign key (user_id)
+        references user(user_id)
 );
 
 create table material_inventory (
@@ -98,6 +104,12 @@ begin
     delete from material_purchase;
     alter table material_purchase auto_increment = 1;
     delete from material_product;
+    
+    
+    insert into user (user_id) values
+		('username'),
+        ('test');
+    
     
     insert into product (product_id, product_name, total_materials_cost, time_to_make, user_id) values
         (1, 'ACME', 'Agency to Classify & Monitor Evildoers'),
