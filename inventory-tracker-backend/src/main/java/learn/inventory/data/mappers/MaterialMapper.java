@@ -19,27 +19,12 @@ public class MaterialMapper implements RowMapper<Material> {
         material.setMaterialId((resultSet.getInt("material_id")));
         material.setMaterialName(resultSet.getString("material_name"));
         material.setPricePerUnit(resultSet.getBigDecimal("price_per_unit"));
+        material.setUserId(resultSet.getString("user_id"));
 
-        UserMapper userMapper = new UserMapper();
-        material.setUser(userMapper.mapRow(resultSet, i));
+        MaterialInventoryMapper inventoryMapper = new MaterialInventoryMapper();
+        material.setInventory(inventoryMapper.mapRow(resultSet, i));
 
+        
         return material;
-
-
-
-//
-
-
-//
-//        Agent agent = new Agent();
-//        agent.setAgentId(resultSet.getInt("agent_id"));
-//        agent.setFirstName(resultSet.getString("first_name"));
-//        agent.setMiddleName(resultSet.getString("middle_name"));
-//        agent.setLastName(resultSet.getString("last_name"));
-//        if (resultSet.getDate("dob") != null) {
-//            agent.setDob(resultSet.getDate("dob").toLocalDate());
-//        }
-//        agent.setHeightInInches(resultSet.getInt("height_in_inches"));
-//        return agent;
     }
 }
