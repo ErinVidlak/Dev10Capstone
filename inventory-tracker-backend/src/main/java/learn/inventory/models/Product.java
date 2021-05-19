@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Product {
 
@@ -23,4 +24,8 @@ public class Product {
     @Getter
     @Setter
     private String userId;
+
+    @Getter
+    @Setter
+    private List<ProductMaterial> materials;
 }
