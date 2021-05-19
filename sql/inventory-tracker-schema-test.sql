@@ -2,37 +2,31 @@ drop database if exists inventory_tracker_test;
 create database inventory_tracker_test;
 use inventory_tracker_test;
 
-
 create table user (
 	user_id varchar(255) primary key
 );
-
 
 create table product (
     product_id int primary key auto_increment,
     product_name varchar(50) not null,
     total_materials_cost decimal (10,2) not null,
     time_to_make dateTime,
-
-    user_name varchar(50) not null
-
     user_id varchar(255) not null
-
 );
 
 create table platform_fee (
     platform_fee_id int primary key auto_increment,
     platform_name varchar(25) not null,
-    fee_amount decimal (10,2) not null,
+    fee_amount decimal (10,2),
     fee_type varchar(25)
 );
 
 create table listed_product (
     listed_product_id int primary key auto_increment,
-    listed_price decimal (10,2) not null,
+    listed_price decimal (10,2) not null default 0.00,
     date_listed date not null,
     date_sold date,
-    is_sold bit default 0,
+    is_sold bit not null default 0,
     listing_name varchar(50) not null,
     product_id int not null,
     platform_fee_id int,
@@ -47,9 +41,6 @@ create table listed_product (
 create table material (
 	material_id int primary key auto_increment,
 	material_name varchar(50) not null,
-
-	user_name varchar(50) not null,
-
 	user_id varchar(255) not null,
 	price_per_unit decimal (10,2)
 );
@@ -65,7 +56,7 @@ create table material_inventory (
 
 create table material_purchase (
 	material_purchase_id int primary key auto_increment,
-    purchase_price decimal (10,2) not null,
+    purchase_price decimal (10,2) not null default 0.00,
     purchase_quantity int not null,
     quantity_units varchar(25),
     purchase_date date,
@@ -108,7 +99,6 @@ begin
     alter table material_purchase auto_increment = 1;
     delete from material_product;
     
-    insert into product (product_id, product_name, total_materials_cost, time_to_make, user_name) values
     insert into product (product_id, product_name, total_materials_cost, time_to_make, user_id) values
         (1, 'ACME', 'Agency to Classify & Monitor Evildoers'),
         (2, 'MASK', 'Mobile Armored Strike Kommand'),
