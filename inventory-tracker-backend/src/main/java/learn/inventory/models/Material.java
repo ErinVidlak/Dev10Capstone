@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Material {
 
@@ -19,9 +21,21 @@ public class Material {
     @Setter
     private BigDecimal pricePerUnit;
 
-
     @Getter
     @Setter
     private User user;
+
+    @Getter
+    @Setter
+    private MaterialInventory inventory;
+
+    @Getter
+    @Setter
+    private List<MaterialPurchase> purchases = new ArrayList<>();
+
+    @Getter
+    @Setter
+    private List<MaterialProduct> products = new ArrayList<>();
+
 
 }
