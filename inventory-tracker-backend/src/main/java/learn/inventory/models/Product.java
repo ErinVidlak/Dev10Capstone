@@ -14,11 +14,15 @@ public class Product {
 
     @Getter
     @Setter
+    private int productId;
+
+    @Getter
+    @Setter
     private String productName;
 
     @Getter
     @Setter
-    private BigDecimal totalMaterialCost;
+    private BigDecimal totalMaterialsCost;
 
     @Getter
     @Setter

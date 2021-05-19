@@ -12,5 +12,9 @@ public class MaterialProduct {
     @Getter
     @Setter
     private int materialQuantity;
-    //add product as field
+
+    @Getter
+    @Setter
+    private Product product;
+
 }
