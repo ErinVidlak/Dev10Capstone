@@ -10,7 +10,8 @@ create table product (
     product_id int primary key auto_increment,
     product_name varchar(50) not null,
     total_materials_cost decimal (10,2) not null,
-    time_to_make dateTime,
+    -- time_to_make in hours, used to calculate "hourly wage" 
+    time_to_make int,
     user_id varchar(255) not null,
 	constraint fk_product_user_id
         foreign key (user_id)
@@ -44,8 +45,8 @@ create table listed_product (
 create table material (
 	material_id int primary key auto_increment,
 	material_name varchar(50) not null,
-	user_id varchar(255) not null,
 	price_per_unit decimal (10,2),
+    user_id varchar(255) not null,
 	constraint fk_material_user_id
         foreign key (user_id)
         references user(user_id)
@@ -66,7 +67,7 @@ create table material_purchase (
     purchase_quantity int not null,
     quantity_units varchar(25),
     purchase_date date,
-    description text,
+    purchase_description text,
     material_id int not null,
     constraint fk_material_purchase_material_id
         foreign key (material_id)
@@ -74,9 +75,9 @@ create table material_purchase (
 );
 
 create table material_product (
+	quantity int not null,
     material_id int not null,
     product_id int not null,
-    quantity int not null,
     constraint pk_material_product
         primary key(material_id, product_id),
     constraint fk_material_product_material_id
@@ -104,57 +105,63 @@ begin
     delete from material_purchase;
     alter table material_purchase auto_increment = 1;
     delete from material_product;
+	alter table material_product auto_increment = 1;
+
     
     
     insert into user (user_id) values
 		('username'),
         ('test');
     
-    
+    -- dateTime wont work for time_to_make
     insert into product (product_id, product_name, total_materials_cost, time_to_make, user_id) values
-        (1, 'ACME', 'Agency to Classify & Monitor Evildoers'),
-        (2, 'MASK', 'Mobile Armored Strike Kommand'),
-        (3, 'ODIN', 'Organization of Democratic Intelligence Networks');
-    
-    insert into product(agency_id, short_name, long_name) values
-        (1, 'ACME', 'Agency to Classify & Monitor Evildoers'),
-        (2, 'MASK', 'Mobile Armored Strike Kommand'),
-        (3, 'ODIN', 'Organization of Democratic Intelligence Networks');
+        (1, 'gold earrings with emeralds', 20.05, 1 , 'username'),
+        (2, 'silver keychain', 5.00, 3, 'username' ),        
+        (3, 'hand knitted hat', 15.00, 720, 'test' );
+
+
+	insert into platform_fee ( platform_name, fee_amount, fee_type) values
+		('Etsy', 10.45, "payment proccessing fee");
+
+	insert into listed_product (listed_price, date_listed, is_sold, date_sold, listing_name, product_id, platform_fee_id) values
+		(750.99, 2021-01-14, 0, null, 'gold earrings with real emeralds', 1, 1),
+		(15.99, 2021-05-01, 1, 2021-05-10, 'soft and cozy hand knitted hat', 3, 1);
         
-	insert into location (location_id, name, address, city, region, country_code, postal_code, agency_id)
-		values
-	(1, 'HQ', '123 Elm', 'Des Moines', 'IA', 'USA', '55555', 1),
-    (2, 'Safe House #1', 'A One Ave.', 'Walla Walla', 'WA', 'USA', '54321-1234', 1),
-    (3, 'HQ', '123 Elm', 'Test', 'WI', 'USA', '55555', 2),
-	(4, 'Remote', '999 Nine St.', 'Test', 'WI', 'USA', '55555', 2),
-	(5, 'HQ', '123 Elm', 'Test', 'WI', 'USA', '55555', 3), -- for delete tests
-	(6, 'Remote', '999 Nine St.', 'Test', 'WI', 'USA', '55555', 3);
         
-	insert into agent 
-		(first_name, middle_name, last_name, dob, height_in_inches) 
-	values
-		('Hazel','C','Sauven','1954-09-16',76),
-		('Claudian','C','O''Lynn','1956-11-09',41),
-		('Winn','V','Puckrin','1999-10-21',60),
-		('Kiab','U','Whitham','1960-07-29',52),
-		('Min','E','Dearle','1967-04-18',44),
-		('Urban','H','Carwithen',null,58),
-		('Ulises','B','Muhammad','2008-04-01',80),
-		('Phylys','Y','Howitt','1979-03-28',68);
+	insert into material(material_id, material_name, price_per_unit, user_id) values
+		(1,'gold earring set', 50.00, 'username'),
+        (2,'cut emerald gem', 500.00, 'username'),
+        (3,'silver chain', 20.50, 'username'),
+        (4,'metal keychain plate', 2.00, 'username'),
+        (5,'yarn', 0.50, 'test');
         
-	insert into agency_agent 
-		(agency_id, agent_id, identifier, security_clearance_id, activation_date)
-    select
-        agency.agency_id,                              -- agency_id
-        agent.agent_id,                                -- agent_id
-        concat(agency.agency_id, '-', agent.agent_id), -- identifier
-        1,                                             -- security_clearance_id
-        date_add(agent.dob, interval 10 year)          -- activation_date
-    from agenc
-    inner join agent
-    where agent.agent_id not in (6, 8)
-    and agency.agency_id != 2;
+	insert into material_product(quantity, material_id, product_id) values 
+		(1, 1, 1),
+        (2, 2, 1),
+        (1, 3, 2),
+        (1, 4, 2),
+        (30, 5, 3);  
+
+    insert into material_inventory(total_quantity, material_id) values
+		(9, 1),
+        (0, 2),
+        (9, 3),
+        (9, 4),
+        (470, 5);
+        
+	insert into material_purchase(purchase_price, purchase_quantity, quantity_units, purchase_date, purchase_description, material_id) values
+		(500.00, 10, 'one pair', 04-22-2020, '10 pairs of gold earrings that have room to put a gem or other decoration. Purchased from Kay Jewelers', 1),
+		(1000.00, 2, '3 carats', 04-25-2020, 'two 3 carat cut emeralds from Kay Jewelers', 2),
+		(205.00, 10, '', 12-26-2020, 'small chain, bought from Michaels', 3),
+		(20.00, 10, '', 12-26-2020, 'metal plates that I plan to use for keychains or dog/cat collars, bought from michaels', 4),
+		(250.00, 500, 'yards', 08-03-2020, 'yarn of various colors totaling 500 yards', 5);
+
+
 
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
+
+
+
+
