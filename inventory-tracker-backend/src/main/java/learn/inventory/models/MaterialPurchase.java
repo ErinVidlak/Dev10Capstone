@@ -1,43 +1,36 @@
 package learn.inventory.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@ToString
-@EqualsAndHashCode
+@Data
 public class MaterialPurchase {
 
-    @Getter
-    @Setter
+   @PositiveOrZero
     private int purchaseId;
 
-    @Getter
-    @Setter
+   @PositiveOrZero
     private BigDecimal purchasePrice;
 
-    @Getter
-    @Setter
+    @Positive
     private int quantityPurchased;
 
-    @Getter
-    @Setter
+    @Size(max = 25, message = "Units of measurement cannot be greater than 25 characters.")
     private String units;
 
-    @Getter
-    @Setter
+    @PastOrPresent(message = "Date of purchase cant be in the future")
     private LocalDate datePurchased;
 
-    @Getter
-    @Setter
     private String description;
 
-    @Getter
-    @Setter
+    @PositiveOrZero
     private int materialId;
+
+    public MaterialPurchase(){
+
+    }
 
 }
