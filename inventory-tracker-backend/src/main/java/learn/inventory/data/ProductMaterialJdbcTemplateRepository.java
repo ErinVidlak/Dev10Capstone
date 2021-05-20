@@ -15,16 +15,35 @@ public class ProductMaterialJdbcTemplateRepository implements ProductMaterialRep
 
     @Override
     public boolean add(ProductMaterial productMaterial) {
-        return false;
+
+        final String sql = "insert into product_material (material_quantity_used, material_id, product_id) values "
+                + "(?,?,?);";
+
+        return jdbcTemplate.update(sql,
+                productMaterial.getMaterialQuantity(),
+                productMaterial.getMaterial().getMaterialId(),
+                productMaterial.getProductId()) > 0;
     }
 
     @Override
     public boolean update(ProductMaterial productMaterial) {
-        return false;
+
+        final String sql = "update product_material set "
+                + "material_quantity_used = ? "
+                + "where material_id = ? and product_id = ?;";
+
+        return jdbcTemplate.update(sql,
+                productMaterial.getMaterialQuantity(),
+                productMaterial.getMaterial().getMaterialId(),
+                productMaterial.getProductId()) > 0;
     }
 
     @Override
     public boolean deleteByKey(int productId, int materialId) {
-        return false;
+
+        final String sql = " delete from product_material "
+                + "where material_id = ? and product_id = ?;";
+
+        return jdbcTemplate.update(sql, materialId, productId) > 0;
     }
 }
