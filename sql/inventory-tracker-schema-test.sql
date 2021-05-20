@@ -68,16 +68,16 @@ create table material_purchase (
         references material(material_id)
 );
 
-create table material_product (
+create table product_material (
 	material_quantity_used int not null,
     material_id int not null,
     product_id int not null,
-    constraint pk_material_product
+    constraint pk_product_material
         primary key(material_id, product_id),
-    constraint fk_material_product_material_id
+    constraint fk_product_material_material_id
         foreign key (material_id)
         references material(material_id),
-    constraint fk_material_product_product_id
+    constraint fk_product_material_product_id
         foreign key (product_id)
         references product(product_id)
 );
@@ -99,7 +99,7 @@ begin
     delete from material_inventory;
 	alter table material_inventory auto_increment = 1;
         
-	delete from material_product;
+	delete from product_material;
     
     delete from product;
     alter table product auto_increment = 1;
@@ -145,7 +145,7 @@ begin
 		(20.00, 10, '', '2020-10-10', 'metal plates that I plan to use for keychains or dog/cat collars, bought from michaels', 4),
 		(250.00, 500, 'yards', '2020-09-15', 'yarn of various colors totaling 500 yards', 5);
         
-	insert into material_product(material_quantity_used, material_id, product_id) values 
+	insert into product_material(material_quantity_used, material_id, product_id) values 
 		(1, 1, 1),
         (2, 2, 1),
         (1, 3, 2),

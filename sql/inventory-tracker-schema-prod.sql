@@ -70,19 +70,20 @@ create table material_purchase (
         references material(material_id)
 );
 
-create table material_product (
+create table product_material (
 	material_quantity_used int not null,
     material_id int not null,
     product_id int not null,
-    constraint pk_material_product
+    constraint pk_product_material
         primary key(material_id, product_id),
-    constraint fk_material_product_material_id
+    constraint fk_product_material_material_id
         foreign key (material_id)
         references material(material_id),
-    constraint fk_material_product_product_id
+    constraint fk_product_material_product_id
         foreign key (product_id)
         references product(product_id)
 );
+
 
 
 
