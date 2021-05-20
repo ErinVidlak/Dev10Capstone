@@ -24,15 +24,12 @@ class UserJdbcTemplateRepositoryTest {
         knownGoodState.set();
     }
 
+
     @Test
-<<<<<<< Updated upstream
-    void findById() { assertTrue(true); }
-=======
     void shouldFindTest() {
         User test = repository.findById("test");
         assertEquals("test", test.getUserId());
     }
->>>>>>> Stashed changes
 
     @Test
     void shouldAddNewbie() {
@@ -41,12 +38,5 @@ class UserJdbcTemplateRepositoryTest {
         User actual = repository.add(user);
         assertNotNull(actual);
         assertEquals("Newbie", actual.getUserId());
-    }
-
-
-    @Test
-    void shouldDeleteUser() {
-        assertTrue(repository.deleteById("test"));
-        assertTrue(repository.deleteById("fake"));
     }
 }

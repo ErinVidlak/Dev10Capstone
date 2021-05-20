@@ -95,8 +95,8 @@ begin
     alter table material_purchase auto_increment = 1;
     delete from listed_product;
     alter table listed_product auto_increment = 1;
-    delete from material_product;
-    alter table material_product auto_increment = 1;
+    delete from product_material;
+    alter table product_material auto_increment = 1;
     delete from product;
     alter table product auto_increment = 1;
     delete from material;

@@ -7,7 +7,4 @@ public interface UserRepository {
     User findById(String userId);
 
     User add(User user);
-
-    @Transactional
-    boolean deleteById(String userId);
 }

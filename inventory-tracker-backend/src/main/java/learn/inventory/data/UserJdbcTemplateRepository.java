@@ -47,13 +47,4 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
         return user;
     }
-
-
-    @Transactional
-    @Override
-    public boolean deleteById(String userId) {
-        jdbcTemplate.update("delete from product where user_id = ?", userId);
-        jdbcTemplate.update("delete from material where user_id = ?", userId);
-        return jdbcTemplate.update("delete from user where user_id = ?", userId) > 0;
-    }
 }
