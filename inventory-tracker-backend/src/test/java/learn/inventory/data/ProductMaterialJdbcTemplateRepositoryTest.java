@@ -34,10 +34,18 @@ public class ProductMaterialJdbcTemplateRepositoryTest {
         assertTrue(repository.add(productMaterial));
         try {
             repository.add(productMaterial);
-            fail("cannot add the same productmaterial twice");
+            fail("cannot add the same ProductMaterial twice");
         } catch (DataAccessException ex) {
-
+            // this is expected
         }
+    }
+
+    @Test
+    void shouldUpdate() {
+        ProductMaterial productMaterial = makeProductMaterial();
+        repository.add(productMaterial);
+        productMaterial.setMaterialQuantity(10);
+        assertTrue(repository.update(productMaterial));
     }
 
     private ProductMaterial makeProductMaterial() {

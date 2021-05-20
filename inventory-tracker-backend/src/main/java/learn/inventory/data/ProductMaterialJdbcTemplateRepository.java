@@ -27,7 +27,15 @@ public class ProductMaterialJdbcTemplateRepository implements ProductMaterialRep
 
     @Override
     public boolean update(ProductMaterial productMaterial) {
-        return false;
+
+        final String sql = "update product_material set "
+                + "material_quantity_used = ? "
+                + "where material_id = ? and product_id = ?;";
+
+        return jdbcTemplate.update(sql,
+                productMaterial.getMaterialQuantity(),
+                productMaterial.getMaterial().getMaterialId(),
+                productMaterial.getProductId()) > 0;
     }
 
     @Override
