@@ -35,7 +35,7 @@ public class Material {
 
     @Getter
     @Setter
-    private List<MaterialProduct> products = new ArrayList<>();
+    private List<ProductMaterial> products = new ArrayList<>();
 
 
 }
