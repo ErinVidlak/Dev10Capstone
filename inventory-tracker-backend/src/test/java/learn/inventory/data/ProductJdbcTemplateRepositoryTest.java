@@ -44,9 +44,24 @@ public class ProductJdbcTemplateRepositoryTest {
         assertNotNull(actual);
     }
 
+    @Test
+    void shouldUpdate() {
+        Product product = makeProduct();
+        repository.add(product);
+        product.setProductName("Resin necklace");
+        assertTrue(repository.update(product));
+    }
+
+    @Test
+    void shouldDeleteById() {
+        Product product = makeProduct();
+        repository.add(product);
+        assertTrue(repository.deleteById(4));
+        assertFalse(repository.deleteById(4));
+    }
+
     private Product makeProduct() {
         Product product = new Product();
-        product.setProductId(5);
         product.setProductName("Resin paperweight");
         product.setTimeToMake(1);
         product.setUserId("username");

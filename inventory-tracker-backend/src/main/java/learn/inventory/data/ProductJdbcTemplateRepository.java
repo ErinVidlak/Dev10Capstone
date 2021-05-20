@@ -67,11 +67,24 @@ public class ProductJdbcTemplateRepository implements ProductRepository {
 
     @Override
     public boolean update(Product product) {
-        return false;
+
+        final String sql = "update product set "
+                + "product_name = ?, "
+                + "total_materials_cost = ?, "
+                + "time_to_make = ?, "
+                + "user_id = ? "
+                + "where product_id = ?;";
+
+        return jdbcTemplate.update(sql,
+                product.getProductName(),
+                product.getTotalMaterialsCost(),
+                product.getTimeToMake(),
+                product.getUserId(),
+                product.getProductId()) > 0;
     }
 
     @Override
     public boolean deleteById(int productId) {
-        return false;
+        return jdbcTemplate.update("delete from product where product_id = ?;", productId) > 0;
     }
 }
