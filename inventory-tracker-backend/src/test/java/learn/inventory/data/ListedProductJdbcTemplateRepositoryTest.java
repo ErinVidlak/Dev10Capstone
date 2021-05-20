@@ -28,7 +28,10 @@ public class ListedProductJdbcTemplateRepositoryTest {
 
     @Test
     void findById() {
-        assertTrue(true);
+        ListedProduct necklace = makeListedProduct();
+        repository.add(necklace);
+        ListedProduct actual = repository.findById(3);
+        assertEquals(necklace, actual);
     }
 
     @Test

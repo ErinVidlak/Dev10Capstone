@@ -24,7 +24,8 @@ public class ListedProductJdbcTemplateRepository implements ListedProductReposit
     @Override
     public ListedProduct findById(int listedProductId) {
 
-        final String sql = "select listed_product_id, listing_name "
+        final String sql = "select listed_product_id, listing_name, listed_price, fee_amount, "
+                + "date_listed, date_sold, is_sold, product_id "
                 + "from listed_product "
                 + "where listed_product_id = ?;";
 
