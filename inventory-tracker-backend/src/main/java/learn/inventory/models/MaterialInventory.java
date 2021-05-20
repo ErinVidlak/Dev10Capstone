@@ -1,20 +1,21 @@
 package learn.inventory.models;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+
+@Data
 public class MaterialInventory {
 
-    @Getter
-    @Setter
+    @PositiveOrZero
     private int inventoryId;
 
-    @Getter
-    @Setter
     private int totalQuantity;
 
-    @Getter
-    @Setter
+    @Positive
     private int materialId;
 
 }

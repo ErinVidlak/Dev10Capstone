@@ -81,11 +81,32 @@ public class MaterialInventoryJdbcTemplateRepository implements MaterialInventor
 
     @Override
     public boolean update(MaterialInventory inventory) {
-        return false;
+        final String sql = "update material_inventory set " +
+                " total_quantity = ? " +
+                " where material_inventory_id = ?";
+        return jdbcTemplate.update(sql,
+                inventory.getTotalQuantity(),
+                inventory.getInventoryId()) > 0;
     }
 
     @Override
     public boolean deleteById(int inventoryId) {
-        return false;
+       return jdbcTemplate.update(
+               "delete from material_inventory where material_inventory_id = ?",
+               inventoryId) > 0;
     }
+
+    // private void addAgents(Agency agency) {
+    //
+    //        final String sql = "select aa.agency_id, aa.agent_id, aa.identifier, aa.activation_date, aa.is_active, "
+    //                + "sc.security_clearance_id, sc.name security_clearance_name, "
+    //                + "a.first_name, a.middle_name, a.last_name, a.dob, a.height_in_inches "
+    //                + "from agency_agent aa "
+    //                + "inner join agent a on aa.agent_id = a.agent_id "
+    //                + "inner join security_clearance sc on aa.security_clearance_id = sc.security_clearance_id "
+    //                + "where aa.agency_id = ?";
+    //
+    //        var agencyAgents = jdbcTemplate.query(sql, new AgencyAgentMapper(), agency.getAgencyId());
+    //        agency.setAgents(agencyAgents);
+    //    }
 }

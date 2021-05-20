@@ -39,14 +39,27 @@ class MaterialInventoryJdbcTemplateRepositoryTest {
 
     @Test
     void add() {
+        MaterialInventory inventory = makeInventory();
+        MaterialInventory result = repository.add(inventory);
+        assertEquals(result, inventory);
+
     }
 
     @Test
     void update() {
+        MaterialInventory inventory = makeInventory();
+        MaterialInventory result = repository.add(inventory);
+        result.setTotalQuantity(50);
+        assertTrue(repository.update(result));
+
     }
 
     @Test
     void deleteById() {
+        MaterialInventory inventory = makeInventory();
+        MaterialInventory result = repository.add(inventory);
+        assertTrue(repository.deleteById(result.getInventoryId()));
+
     }
 
     private MaterialInventory makeInventory(){
