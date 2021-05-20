@@ -53,8 +53,7 @@ class MaterialPurchaseJdbcTemplateRepositoryTest {
         purchase.setMaterialId(3);
 
         MaterialPurchase result = repository.add(purchase);
-        System.out.println(purchase);
-        System.out.println(result);
+       
         assertEquals(purchase, result);
         assertNotNull(result);
 
