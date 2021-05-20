@@ -80,5 +80,17 @@ class MaterialPurchaseJdbcTemplateRepositoryTest {
 
     @Test
     void deleteById() {
+        MaterialPurchase purchase = new MaterialPurchase();
+        purchase.setPurchasePrice(new BigDecimal("2.00"));
+        purchase.setQuantityPurchased(1);
+        purchase.setUnits("");
+        purchase.setDatePurchased(Date.valueOf("2021-11-26").toLocalDate());
+        purchase.setDescription("small chain, bought in bulk from Michaels");
+        purchase.setMaterialId(3);
+
+        MaterialPurchase result = repository.add(purchase);
+        assertTrue(repository.deleteById(result.getPurchaseId()));
+
+
     }
 }
