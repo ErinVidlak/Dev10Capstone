@@ -84,32 +84,45 @@ create table material_product (
 
 
 
-   
-
-
 
 delimiter //
 create procedure set_known_good_state()
 begin
 
 
+    delete from listed_product;
+    alter table listed_product auto_increment = 1;
+    
+	delete from material_purchase;
+    alter table material_purchase auto_increment = 1;
+
+    delete from material_inventory;
+	alter table material_inventory auto_increment = 1;
+        
+	delete from material_product;
+    
+    delete from product;
+    alter table product auto_increment = 1;
+    
+    delete from material;
+    alter table material auto_increment = 1;
+    
+	delete from `user`;
+    
+	
     insert into `user` (user_id) values
 		('username'),
         ('test');
     
- 
     insert into product (product_id, product_name, total_materials_cost, time_to_make, user_id) values
         (1, 'gold earrings with emeralds', 1050.00, 1 , 'username'),
         (2, 'silver keychain', 22.50, 3, 'username' ),        
         (3, 'hand knitted hat', 15.00, 720, 'test' );
 
-
-
-
 	insert into listed_product (listed_price,fee_amount, date_listed, is_sold, date_sold, listing_name, product_id) values
 		(750.99, 5.99, '2021-01-14', 0, null, 'gold earrings with real emeralds', 1),
 		(15.99, 10.00, '2021-05-01', 1, '2021-05-10', 'soft and cozy hand knitted hat', 3);
-        
+
         
 	insert into material(material_id, material_name, price_per_unit, user_id) values
 		(1,'gold earring set', 50.00, 'username'),
@@ -118,7 +131,6 @@ begin
         (4,'metal keychain plate', 2.00, 'username'),
         (5,'yarn', 0.50, 'test');
         
-
     insert into material_inventory(total_quantity, material_id) values
 		(9, 1),
         (0, 2),
@@ -141,10 +153,6 @@ begin
         (30, 5, 3);  
 
 
-
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
-
-
-
