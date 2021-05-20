@@ -22,9 +22,7 @@ class UserJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void findById() {
-        assertTrue(true);
-    }
+    void findById() { assertTrue(true); }
 
     @Test
     void add() {
