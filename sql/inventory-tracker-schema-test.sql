@@ -155,7 +155,7 @@ begin
 	insert into material_purchase(purchase_price, purchase_quantity, quantity_units, purchase_date, purchase_description, material_id) values
 		(500.00, 10, 'one pair', '2020-03-12', '10 pairs of gold earrings that have room to put a gem or other decoration. Purchased from Kay Jewelers', 1),
 		(1000.00, 2, '3 carats', '2020-05-12', 'two 3 carat cut emeralds from Kay Jewelers', 2),
-		(205.00, 10, '', '2021-11-25', 'small chain, bought from Michaels', 3),
+		(205.00, 10, '', '2020-11-25', 'small chain, bought from Michaels', 3),
 		(20.00, 10, '', '2020-10-10', 'metal plates that I plan to use for keychains or dog/cat collars, bought from michaels', 4),
 		(250.00, 500, 'yards', '2020-09-15', 'yarn of various colors totaling 500 yards', 5);
 
