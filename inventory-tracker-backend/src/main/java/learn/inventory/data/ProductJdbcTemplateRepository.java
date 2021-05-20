@@ -24,7 +24,7 @@ public class ProductJdbcTemplateRepository implements ProductRepository {
     @Override
     public Product findById(int productId) {
 
-        final String sql = "select product_id, product_name "
+        final String sql = "select product_id, product_name, total_materials_cost, time_to_make, user_id  "
                 + "from product "
                 + "where product_id = ?;";
 

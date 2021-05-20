@@ -1,7 +1,6 @@
 package learn.inventory.data;
 
 import learn.inventory.models.Product;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,10 @@ public class ProductJdbcTemplateRepositoryTest {
 
     @Test
     void findById() {
-        assertTrue(true);
+        Product paperweight = makeProduct();
+        repository.add(paperweight);
+        Product actual = repository.findById(4);
+        assertEquals(paperweight, actual);
     }
 
     @Test
