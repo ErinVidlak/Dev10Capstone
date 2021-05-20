@@ -44,6 +44,21 @@ public class ListedProductJdbcTemplateRepositoryTest {
         assertNotNull(actual);
     }
 
+    @Test
+    void shouldUpdate() {
+        ListedProduct listedProduct = makeListedProduct();
+        repository.add(listedProduct);
+        listedProduct.setListingName("Resin Paperweight with Purple Wildflowers");
+        assertTrue(repository.update(listedProduct));
+    }
+
+    @Test
+    void shouldDeleteById() {
+        ListedProduct listedProduct = makeListedProduct();
+        repository.add(listedProduct);
+        assertTrue(repository.deleteById(3));
+    }
+
     private ListedProduct makeListedProduct() {
         ListedProduct listedProduct = new ListedProduct();
         listedProduct.setListingName("Resin necklace");

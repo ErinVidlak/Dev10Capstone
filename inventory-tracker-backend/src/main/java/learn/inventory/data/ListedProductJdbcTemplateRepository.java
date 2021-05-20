@@ -73,11 +73,30 @@ public class ListedProductJdbcTemplateRepository implements ListedProductReposit
 
     @Override
     public boolean update(ListedProduct listedProduct) {
-        return false;
+
+        final String sql = "update listed_product set "
+                + "listing_name = ?, "
+                + "listed_price = ?, "
+                + "fee_amount = ?, "
+                + "date_listed = ?, "
+                + "date_sold = ?, "
+                + "is_sold = ?, "
+                + "product_id = ? "
+                + "where listed_product_id = ?;";
+
+        return jdbcTemplate.update(sql,
+                listedProduct.getListingName(),
+                listedProduct.getListedPrice(),
+                listedProduct.getFeeAmount(),
+                listedProduct.getDateListed(),
+                listedProduct.getDateSold(),
+                listedProduct.isSold(),
+                listedProduct.getProductId(),
+                listedProduct.getListedProductId()) > 0;
     }
 
     @Override
     public boolean deleteById(int listedProductId) {
-        return false;
+        return jdbcTemplate.update("delete from listed_product where listed_product_id = ?;", listedProductId) > 0;
     }
 }
