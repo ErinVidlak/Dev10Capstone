@@ -68,16 +68,16 @@ create table material_purchase (
         references material(material_id)
 );
 
-create table material_product (
+create table product_material (
 	material_quantity_used int not null,
     material_id int not null,
     product_id int not null,
-    constraint pk_material_product
+    constraint pk_product_material
         primary key(material_id, product_id),
-    constraint fk_material_product_material_id
+    constraint fk_product_material_material_id
         foreign key (material_id)
         references material(material_id),
-    constraint fk_material_product_product_id
+    constraint fk_product_material_product_id
         foreign key (product_id)
         references product(product_id)
 );
@@ -99,7 +99,7 @@ begin
     delete from material_inventory;
 	alter table material_inventory auto_increment = 1;
         
-	delete from material_product;
+	delete from product_material;
     
     delete from product;
     alter table product auto_increment = 1;
@@ -122,7 +122,7 @@ begin
 	insert into listed_product (listed_price,fee_amount, date_listed, is_sold, date_sold, listing_name, product_id) values
 		(750.99, 5.99, '2021-01-14', 0, null, 'gold earrings with real emeralds', 1),
 		(15.99, 10.00, '2021-05-01', 1, '2021-05-10', 'soft and cozy hand knitted hat', 3);
-       
+
 	insert into material(material_id, material_name, price_per_unit, user_id) values
 		(1,'gold earring set', 50.00, 'username'),
         (2,'cut emerald gem', 500.00, 'username'),
@@ -144,7 +144,7 @@ begin
 		(20.00, 10, '', '2020-10-10', 'metal plates that I plan to use for keychains or dog/cat collars, bought from michaels', 4),
 		(250.00, 500, 'yards', '2020-09-15', 'yarn of various colors totaling 500 yards', 5);
         
-	insert into material_product(material_quantity_used, material_id, product_id) values 
+	insert into product_material(material_quantity_used, material_id, product_id) values 
 		(1, 1, 1),
         (2, 2, 1),
         (1, 3, 2),

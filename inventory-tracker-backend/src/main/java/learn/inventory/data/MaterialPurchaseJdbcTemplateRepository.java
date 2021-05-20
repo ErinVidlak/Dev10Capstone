@@ -26,10 +26,12 @@ public class MaterialPurchaseJdbcTemplateRepository implements MaterialPurchaseR
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
     private final String PURCHASE_COL_NAMES = " material_purchase_id, purchase_price, purchase_quantity, quantity_units," +
             " purchase_date, purchase_description, material_id ";
 
-
+    
+    
     @Override
     public List<MaterialPurchase> findAll() {
         final String sql = "select " + PURCHASE_COL_NAMES + " from material_purchase limit 1000;";
