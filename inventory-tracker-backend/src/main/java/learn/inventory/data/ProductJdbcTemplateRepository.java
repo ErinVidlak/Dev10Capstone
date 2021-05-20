@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -84,7 +85,10 @@ public class ProductJdbcTemplateRepository implements ProductRepository {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(int productId) {
+        jdbcTemplate.update("delete from material_product where product_id = ?;", productId);
+        jdbcTemplate.update("delete from listed_product where product_id = ?;", productId);
         return jdbcTemplate.update("delete from product where product_id = ?;", productId) > 0;
     }
 }

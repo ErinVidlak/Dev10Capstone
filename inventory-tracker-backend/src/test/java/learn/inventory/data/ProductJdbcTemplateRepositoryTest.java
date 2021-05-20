@@ -58,6 +58,7 @@ public class ProductJdbcTemplateRepositoryTest {
         repository.add(product);
         assertTrue(repository.deleteById(4));
         assertFalse(repository.deleteById(4));
+        assertTrue(repository.deleteById(3));
     }
 
     private Product makeProduct() {
