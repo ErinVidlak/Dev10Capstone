@@ -90,18 +90,24 @@ create procedure set_known_good_state()
 begin
 
 
-    delete from material_inventory;
-	alter table material_inventory auto_increment = 1;
-    alter table material_purchase auto_increment = 1;
-    delete from material_product;
     delete from listed_product;
     alter table listed_product auto_increment = 1;
+    
+	delete from material_purchase;
+    alter table material_purchase auto_increment = 1;
+
+    delete from material_inventory;
+	alter table material_inventory auto_increment = 1;
+        
+        
 	delete from material_product;
-    alter table material_product auto_increment = 1;
+    
     delete from product;
     alter table product auto_increment = 1;
+    
     delete from material;
     alter table material auto_increment = 1;
+    
 	delete from `user`;
     
 	
