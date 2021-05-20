@@ -48,6 +48,14 @@ public class ProductMaterialJdbcTemplateRepositoryTest {
         assertTrue(repository.update(productMaterial));
     }
 
+    @Test
+    void shouldDelete() {
+        ProductMaterial productMaterial = makeProductMaterial();
+        repository.add(productMaterial);
+        assertTrue(repository.deleteByKey(1, 4));
+        assertFalse(repository.deleteByKey(1, 4));
+    }
+
     private ProductMaterial makeProductMaterial() {
         ProductMaterial productMaterial = new ProductMaterial();
         productMaterial.setMaterialQuantity(15);

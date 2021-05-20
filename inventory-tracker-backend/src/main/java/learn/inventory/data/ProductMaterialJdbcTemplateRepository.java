@@ -40,6 +40,10 @@ public class ProductMaterialJdbcTemplateRepository implements ProductMaterialRep
 
     @Override
     public boolean deleteByKey(int productId, int materialId) {
-        return false;
+
+        final String sql = " delete from product_material "
+                + "where material_id = ? and product_id = ?;";
+
+        return jdbcTemplate.update(sql, materialId, productId) > 0;
     }
 }
