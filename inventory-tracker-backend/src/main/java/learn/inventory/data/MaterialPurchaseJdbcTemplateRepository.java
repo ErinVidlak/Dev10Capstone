@@ -131,7 +131,6 @@ public class MaterialPurchaseJdbcTemplateRepository implements MaterialPurchaseR
     }
 
     @Override
-    @Transactional
     public boolean deleteById(int purchaseId) {
         return jdbcTemplate.update("delete from material_purchase where material_purchase_id = ?", purchaseId) > 0;
 
