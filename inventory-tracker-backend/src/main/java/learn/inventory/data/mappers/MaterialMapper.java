@@ -21,8 +21,8 @@ public class MaterialMapper implements RowMapper<Material> {
         material.setPricePerUnit(resultSet.getBigDecimal("price_per_unit"));
         material.setUserId(resultSet.getString("user_id"));
 
-        MaterialInventoryMapper inventoryMapper = new MaterialInventoryMapper();
-        material.setInventory(inventoryMapper.mapRow(resultSet, i));
+//        MaterialInventoryMapper inventoryMapper = new MaterialInventoryMapper();
+//        material.setInventory(inventoryMapper.mapRow(resultSet, i));
 
         
         return material;

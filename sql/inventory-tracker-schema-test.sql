@@ -92,6 +92,20 @@ delimiter //
 create procedure set_known_good_state()
 begin
 
+	delete from material_inventory;
+    alter table material_inventory auto_increment = 1;
+    delete from material_purchase;
+    alter table material_purchase auto_increment = 1;
+    delete from listed_product;
+    alter table listed_product auto_increment = 1;
+    delete from material_product;
+    alter table material_product auto_increment = 1;
+    delete from product;
+    alter table product auto_increment = 1;
+    delete from material;
+    alter table material auto_increment = 1;
+    delete from `user`;
+
 
     insert into `user` (user_id) values
 		('username'),
@@ -111,7 +125,7 @@ begin
 		(15.99, 10.00, '2021-05-01', 1, '2021-05-10', 'soft and cozy hand knitted hat', 3);
         
         
-	insert into material(material_id, material_name, price_per_unit, user_id) values
+	insert into material (material_id, material_name, price_per_unit, user_id) values
 		(1,'gold earring set', 50.00, 'username'),
         (2,'cut emerald gem', 500.00, 'username'),
         (3,'silver chain', 20.50, 'username'),
@@ -145,6 +159,8 @@ begin
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
+
+select material_id, material_name, price_per_unit, user_id from material where material_id = 5;
 
 
 

@@ -1,13 +1,13 @@
 package learn.inventory.data;
 
 import learn.inventory.models.User;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface UserRepository {
-    User findById(int userId);
+    User findById(String userId);
 
     User add(User user);
 
-    boolean update(User user);
-
-    boolean deleteById(int userId);
+    @Transactional
+    boolean deleteById(String userId);
 }
