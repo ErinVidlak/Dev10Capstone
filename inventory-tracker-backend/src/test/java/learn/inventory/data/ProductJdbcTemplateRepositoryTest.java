@@ -27,7 +27,10 @@ public class ProductJdbcTemplateRepositoryTest {
 
     @Test
     void findById() {
-        assertTrue(true);
+        Product paperweight = makeProduct();
+        repository.add(paperweight);
+        Product actual = repository.findById(4);
+        assertEquals(paperweight, actual);
     }
 
     @Test
