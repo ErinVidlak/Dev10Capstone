@@ -29,6 +29,7 @@ public class ListedProductService {
     }
 
     public Result<ListedProduct> add(ListedProduct listedProduct){
+        listedProduct.setListingName(listedProduct.getListingName().trim());
         Result<ListedProduct> result = validate(listedProduct);
 
         if(result.isSuccess()){
@@ -42,6 +43,7 @@ public class ListedProductService {
     }
 
     public Result<ListedProduct> update(ListedProduct listedProduct){
+        listedProduct.setListingName(listedProduct.getListingName().trim());
         Result<ListedProduct> result = validate(listedProduct);
 
        if(result.isSuccess()){
@@ -77,7 +79,5 @@ public class ListedProductService {
         }
         return result;
     }
-    //    boolean update(ListedProduct listedProduct);
-    //
-    //    boolean deleteById(int listedProductId);
+
 }
