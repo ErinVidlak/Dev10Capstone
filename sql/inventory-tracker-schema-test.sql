@@ -16,6 +16,7 @@ create table product (
     -- time_to_make in hours, used to calculate "hourly wage"
     time_to_make int null,
     user_id varchar(255) not null,
+    
 	constraint fk_product_user_id
         foreign key (user_id)
         references user(user_id)
@@ -104,26 +105,6 @@ begin
     delete from `user`;
 
 
-    delete from listed_product;
-    alter table listed_product auto_increment = 1;
-
-	delete from material_purchase;
-    alter table material_purchase auto_increment = 1;
-
-    delete from material_inventory;
-	alter table material_inventory auto_increment = 1;
-
-	delete from product_material;
-
-    delete from product;
-    alter table product auto_increment = 1;
-
-    delete from material;
-    alter table material auto_increment = 1;
-
-	delete from `user`;
-
-
     insert into `user` (user_id) values
 		('username'),
         ('test');
@@ -155,8 +136,8 @@ begin
 	insert into material_purchase(purchase_price, purchase_quantity, quantity_units, purchase_date, purchase_description, material_id) values
 		(500.00, 10, 'one pair', '2020-03-12', '10 pairs of gold earrings that have room to put a gem or other decoration. Purchased from Kay Jewelers', 1),
 		(1000.00, 2, '3 carats', '2020-05-12', 'two 3 carat cut emeralds from Kay Jewelers', 2),
-		(205.00, 10, '', '2020-11-25', 'small chain, bought from Michaels', 3),
-		(20.00, 10, '', '2020-10-10', 'metal plates that I plan to use for keychains or dog/cat collars, bought from michaels', 4),
+		(205.00, 10, null, '2020-11-25', 'small chain, bought from Michaels', 3),
+		(20.00, 10, null, '2020-10-10', 'metal plates that I plan to use for keychains or dog/cat collars, bought from michaels', 4),
 		(250.00, 500, 'yards', '2020-09-15', 'yarn of various colors totaling 500 yards', 5);
 
 	insert into product_material(material_quantity_used, material_id, product_id) values

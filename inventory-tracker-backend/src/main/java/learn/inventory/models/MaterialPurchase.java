@@ -22,8 +22,10 @@ public class MaterialPurchase {
     private String units;
 
     @PastOrPresent(message = "Date of purchase cant be in the future")
+    @NotEmpty
     private LocalDate datePurchased;
 
+    @NotEmpty
     private String description;
 
     @PositiveOrZero

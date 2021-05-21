@@ -1,19 +1,16 @@
 package learn.inventory.models;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Data
 public class ProductMaterial {
 
-    @Getter
-    @Setter
+
     private int productId;
 
-    @Getter
-    @Setter
     private int materialQuantity;
 
-    @Getter
-    @Setter
     private Material material;
 }

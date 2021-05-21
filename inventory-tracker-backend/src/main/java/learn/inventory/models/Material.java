@@ -1,5 +1,7 @@
 package learn.inventory.models;
 
+import lombok.AccessLevel;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,35 +9,27 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Material {
 
-    @Getter
-    @Setter
+
     private int materialId;
 
-    @Getter
-    @Setter
     private String materialName;
 
-    @Getter
-    @Setter
+    //TODO: price per unit is a generated value
     private BigDecimal pricePerUnit;
 
-    @Getter
-    @Setter
+    //user ID will always remain constant
     private String userId;
 
-    @Getter
-    @Setter
-    private MaterialInventory inventory;
+    private MaterialInventory inventory = new MaterialInventory();
 
-    @Getter
-    @Setter
     private List<MaterialPurchase> purchases = new ArrayList<>();
 
-    @Getter
-    @Setter
-    private List<ProductMaterial> products = new ArrayList<>();
+    private List<MaterialProduct> products = new ArrayList<>();
+
+
 
 
 }
