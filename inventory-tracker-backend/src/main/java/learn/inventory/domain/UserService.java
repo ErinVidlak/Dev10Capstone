@@ -24,6 +24,10 @@ public class UserService {
         return repository.findById(userId);
     }
 
+    public List<User> findAll() {
+        return repository.findAll();
+    }
+
     public Result<User> add(User user) {
         Result<User> result = validate(user);
         validateNoDuplicatesExist(user, result);
