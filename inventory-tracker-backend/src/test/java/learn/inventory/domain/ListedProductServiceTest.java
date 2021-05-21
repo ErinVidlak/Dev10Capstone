@@ -58,6 +58,19 @@ class ListedProductServiceTest {
     }
 
     @Test
+    void shouldNotUpdateIfDatesInvalid() {
+        ListedProduct listing = makeProductListing();
+        listing.setListedProductId(1);
+        listing.setDateSold(LocalDate.of(2019,1,1));
+
+        when(repository.update(listing)).thenReturn(false);
+        Result<ListedProduct> actual = service.update(listing);
+        System.out.println(actual.getMessages());
+        assertEquals(ResultType.INVALID, actual.getType());
+
+    }
+
+    @Test
     void shouldNotUpdateIfIdNotFound() {
         ListedProduct listing = makeProductListing();
         listing.setListedProductId(20);
@@ -66,6 +79,8 @@ class ListedProductServiceTest {
         assertEquals(ResultType.NOT_FOUND, actual.getType());
 
     }
+
+
 
     @Test
     void shouldNotUpdateIfBadId() {
