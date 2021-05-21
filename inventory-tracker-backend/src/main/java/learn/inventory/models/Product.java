@@ -20,9 +20,11 @@ public class Product {
 
     private String userId;
 
+    private  ListedProduct listedProduct;
+
     private List<ProductMaterial> materials = new ArrayList<>();
 
-    private  ListedProduct listedProduct;
+
 
 
 }

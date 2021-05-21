@@ -1,6 +1,8 @@
 package learn.inventory.data;
 
+import learn.inventory.data.mappers.ListedProductMapper;
 import learn.inventory.data.mappers.ProductMapper;
+import learn.inventory.data.mappers.ProductMaterialMapper;
 import learn.inventory.models.Product;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -22,22 +24,29 @@ public class ProductJdbcTemplateRepository implements ProductRepository {
     }
 
     @Override
+    @Transactional
     public Product findById(int productId) {
 
         final String sql = "select product_id, product_name, total_materials_cost, time_to_make, user_id  "
                 + "from product "
                 + "where product_id = ?;";
 
-        return jdbcTemplate.query(sql, new ProductMapper(), productId)
+        Product product = jdbcTemplate.query(sql, new ProductMapper(), productId)
                 .stream()
                 .findFirst().orElse(null);
+        if(product != null){
+            addMaterials(product);
+            addListedProduct(product);
+        }
+
+        return product;
     }
 
     @Override
     public List<Product> findAll() {
 
         final String sql = "select product_id, product_name, total_materials_cost, time_to_make, user_id "
-                + "from product;";
+                + "from product limit 1000;";
 
         return jdbcTemplate.query(sql, new ProductMapper());
     }
@@ -72,23 +81,41 @@ public class ProductJdbcTemplateRepository implements ProductRepository {
         final String sql = "update product set "
                 + "product_name = ?, "
                 + "total_materials_cost = ?, "
-                + "time_to_make = ?, "
-                + "user_id = ? "
+                + "time_to_make = ? "
                 + "where product_id = ?;";
 
         return jdbcTemplate.update(sql,
                 product.getProductName(),
                 product.getTotalMaterialsCost(),
                 product.getTimeToMake(),
-                product.getUserId(),
                 product.getProductId()) > 0;
     }
 
     @Override
     @Transactional
     public boolean deleteById(int productId) {
-        jdbcTemplate.update("delete from material_product where product_id = ?;", productId);
+        jdbcTemplate.update("delete from product_material where product_id = ?;", productId);
         jdbcTemplate.update("delete from listed_product where product_id = ?;", productId);
         return jdbcTemplate.update("delete from product where product_id = ?;", productId) > 0;
+    }
+
+    private void addListedProduct(Product product){
+        final String sql = "select listed_product_id, listing_name, listed_price, fee_amount, "
+                + "date_listed, date_sold, is_sold, product_id "
+                + "from listed_product "
+                + "where product_id = ?;";
+        var listedProduct = jdbcTemplate.query(sql, new ListedProductMapper(), product.getProductId()).stream().findAny().orElse(null);
+        product.setListedProduct(listedProduct);
+    }
+
+    private void addMaterials(Product product){
+        final String sql = "select pm.material_quantity_used, pm.product_id, pm.material_id, "
+                        + "m.material_name, m.price_per_unit, m.user_id "
+                        + "from product_material pm "
+                        + "inner join material m on pm.material_id = m.material_id "
+                        + "where pm.product_id = ?;";
+        var materials = jdbcTemplate.query(sql, new ProductMaterialMapper(), product.getProductId());
+        product.setMaterials(materials);
+        
     }
 }
