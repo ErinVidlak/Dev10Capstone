@@ -10,13 +10,13 @@ import javax.validation.constraints.Positive;
 @Data
 public class MaterialProduct {
 
-    @Positive
+    @Positive(message = "Material must already exist")
     private int materialId;
 
-    @Positive
+    @Positive(message = "Quantity of material must be at least 1")
     private int materialQuantity;
 
-    @NotNull
+    @NotNull(message = "Product cannot be null")
     private Product product;
 
 }

@@ -20,19 +20,19 @@ public class Material {
     @PositiveOrZero
     private int materialId;
 
-    @NotBlank
+    @NotBlank(message = "Material name is required")
     @Size(max = 50, message = "Material cannot be more than 50 characters.")
     private String materialName;
 
     //TODO: price per unit is a generated value from MaterialPurchases
-    @PositiveOrZero
+    @PositiveOrZero(message = "Price per material unit cannot be negative")
     private BigDecimal pricePerUnit;
 
     //user ID will always remain constant
-    @NotBlank
+    @NotBlank(message = "UserId is required")
     private String userId;
 
-    @NotNull
+    @NotNull(message = "Material Inventory cannot be null")
     private MaterialInventory inventory = new MaterialInventory();
 
     private List<MaterialPurchase> purchases = new ArrayList<>();

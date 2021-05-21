@@ -14,7 +14,7 @@ public class User {
 
     //TODO: Later after controllers + security have been added,
     //TODO: remove userId setter, make userId `final`, and have it be a constructor arg
-    @NotBlank
+    @NotBlank(message="UserId cannot be null or whitespace")
     @Size(max = 255, message = "UserId cannot be more than 255 characters.")
     private String userId;
 

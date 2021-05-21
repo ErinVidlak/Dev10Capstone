@@ -16,7 +16,7 @@ public class MaterialInventory {
 
     private int totalQuantity;
 
-    @Positive
+    @Positive(message = "Inventory must be tied to a material")
     private int materialId;
 
 }

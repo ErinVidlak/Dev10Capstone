@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,17 +17,17 @@ public class Product {
     @PositiveOrZero
     private int productId;
 
-    @NotBlank
+    @NotBlank(message = "Product name is required")
     @Size(max = 50, message = "Product cannot be more than 50 characters.")
     private String productName;
 
-    @PositiveOrZero
-    private BigDecimal totalMaterialsCost;
+    @PositiveOrZero(message = "Total cost cannot be negative")
+    private BigDecimal totalMaterialsCost = new BigDecimal(BigInteger.ZERO);;
 
-    @PositiveOrZero
+    @PositiveOrZero(message = "Total hours to make cannot be negative")
     private int timeToMake;
 
-    @NotBlank
+    @NotBlank(message = "UserId is required")
     private String userId;
 
     private  ListedProduct listedProduct;
