@@ -11,7 +11,7 @@ import java.util.List;
 public class User {
 
     //TODO: Later after controllers + security have been added,
-    //TODO: remove userId setter & make userId `final`
+    //TODO: remove userId setter, make userId `final`, and have it be a constructor arg
     private String userId;
 
 
