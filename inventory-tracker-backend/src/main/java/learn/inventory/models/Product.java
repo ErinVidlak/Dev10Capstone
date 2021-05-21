@@ -1,41 +1,40 @@
 package learn.inventory.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString
-@EqualsAndHashCode
+@Data
 public class Product {
 
-    @Getter
-    @Setter
+
+    @PositiveOrZero
     private int productId;
 
-    @Getter
-    @Setter
+    @NotBlank(message = "Product name is required")
+    @Size(max = 50, message = "Product cannot be more than 50 characters.")
     private String productName;
 
-    @Getter
-    @Setter
-    private BigDecimal totalMaterialsCost;
+    @PositiveOrZero(message = "Total cost cannot be negative")
+    private BigDecimal totalMaterialsCost = new BigDecimal(BigInteger.ZERO);;
 
-    @Getter
-    @Setter
+    @PositiveOrZero(message = "Total hours to make cannot be negative")
     private int timeToMake;
 
-    @Getter
-    @Setter
+    @NotBlank(message = "UserId is required")
     private String userId;
 
-    @Getter
-    @Setter
+    private  ListedProduct listedProduct;
+
     private List<ProductMaterial> materials = new ArrayList<>();
+
+
 
 
 }

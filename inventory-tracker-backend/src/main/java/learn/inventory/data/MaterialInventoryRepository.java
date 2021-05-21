@@ -11,6 +11,7 @@ public interface MaterialInventoryRepository {
 
     MaterialInventory findById(int inventoryId);
 
+    //TODO: remove add/revise add
     MaterialInventory add(MaterialInventory inventory);
 
     boolean update(MaterialInventory inventory);

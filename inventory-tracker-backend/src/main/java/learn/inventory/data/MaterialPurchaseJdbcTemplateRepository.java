@@ -48,6 +48,7 @@ public class MaterialPurchaseJdbcTemplateRepository implements MaterialPurchaseR
                 .orElse(null);
     }
 
+    //TODO: when adding a new purchase, Material pricePerUnit is recalculated
     @Override
     @Transactional
     public MaterialPurchase add(MaterialPurchase purchase) {

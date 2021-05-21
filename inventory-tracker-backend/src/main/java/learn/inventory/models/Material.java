@@ -1,41 +1,45 @@
 package learn.inventory.models;
 
+import lombok.AccessLevel;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Material {
 
-    @Getter
-    @Setter
+
+    @PositiveOrZero
     private int materialId;
 
-    @Getter
-    @Setter
+    @NotBlank(message = "Material name is required")
+    @Size(max = 50, message = "Material cannot be more than 50 characters.")
     private String materialName;
 
-    @Getter
-    @Setter
+    //TODO: price per unit is a generated value from MaterialPurchases
+    @PositiveOrZero(message = "Price per material unit cannot be negative")
     private BigDecimal pricePerUnit;
 
-    @Getter
-    @Setter
+    //user ID will always remain constant
+    @NotBlank(message = "UserId is required")
     private String userId;
 
-    @Getter
-    @Setter
-    private MaterialInventory inventory;
+    @NotNull(message = "Material Inventory cannot be null")
+    private MaterialInventory inventory = new MaterialInventory();
 
-    @Getter
-    @Setter
     private List<MaterialPurchase> purchases = new ArrayList<>();
 
-    @Getter
-    @Setter
     private List<MaterialProduct> products = new ArrayList<>();
+
+
 
 
 }

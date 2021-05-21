@@ -28,16 +28,16 @@ public class ListedProductJdbcTemplateRepositoryTest {
 
     @Test
     void findById() {
-        ListedProduct necklace = makeListedProduct();
-        repository.add(necklace);
-        ListedProduct actual = repository.findById(3);
-        assertEquals(necklace, actual);
+        ListedProduct keychain = makeListedProduct();
+        ListedProduct actual = repository.add(keychain);
+        ListedProduct expected = repository.findById(actual.getListedProductId());
+        assertEquals(expected, actual);
     }
 
     @Test
     void shouldFindAll() {
         List<ListedProduct> total = repository.findAll();
-        assertEquals(2, total.size());
+        assertTrue(total.size() > 0);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ListedProductJdbcTemplateRepositoryTest {
     @Test
     void shouldUpdate() {
         ListedProduct listedProduct = makeListedProduct();
-        repository.add(listedProduct);
+        listedProduct = repository.add(listedProduct);
         listedProduct.setListingName("Resin Paperweight with Purple Wildflowers");
         assertTrue(repository.update(listedProduct));
     }
@@ -58,18 +58,17 @@ public class ListedProductJdbcTemplateRepositoryTest {
     @Test
     void shouldDeleteById() {
         ListedProduct listedProduct = makeListedProduct();
-        repository.add(listedProduct);
-        assertTrue(repository.deleteById(3));
+        listedProduct = repository.add(listedProduct);
+        assertTrue(repository.deleteById(listedProduct.getListedProductId()));
     }
 
     private ListedProduct makeListedProduct() {
         ListedProduct listedProduct = new ListedProduct();
-        listedProduct.setListingName("Resin necklace");
+        listedProduct.setListingName("Personalized silver keychain");
         listedProduct.setListedPrice(new BigDecimal("30.00"));
-        listedProduct.setDateListed(LocalDate.now());
+        listedProduct.setDateListed(LocalDate.of(2021, 5,1));
         listedProduct.setFeeAmount(new BigDecimal("3.50"));
-        listedProduct.setSold(false);
-        listedProduct.setProductId(2);
+        listedProduct.setProductId(4);
         return listedProduct;
     }
 }

@@ -1,20 +1,22 @@
 package learn.inventory.models;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
+@Data
 public class MaterialProduct {
 
-    @Getter
-    @Setter
+    @Positive(message = "Material must already exist")
     private int materialId;
 
-    @Getter
-    @Setter
+    @Positive(message = "Quantity of material must be at least 1")
     private int materialQuantity;
 
-    @Getter
-    @Setter
+    @NotNull(message = "Product cannot be null")
     private Product product;
 
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ProductMaterialJdbcTemplateRepositoryTest {
         try {
             repository.add(productMaterial);
             fail("cannot add the same ProductMaterial twice");
-        } catch (DataAccessException ex) {
+        } catch (DuplicateKeyException ex) {
             // this is expected
         }
     }
@@ -43,6 +44,7 @@ public class ProductMaterialJdbcTemplateRepositoryTest {
     @Test
     void shouldUpdate() {
         ProductMaterial productMaterial = makeProductMaterial();
+        productMaterial.setProductId(3);
         repository.add(productMaterial);
         productMaterial.setMaterialQuantity(10);
         assertTrue(repository.update(productMaterial));
@@ -51,20 +53,23 @@ public class ProductMaterialJdbcTemplateRepositoryTest {
     @Test
     void shouldDelete() {
         ProductMaterial productMaterial = makeProductMaterial();
-        repository.add(productMaterial);
-        assertTrue(repository.deleteByKey(1, 4));
-        assertFalse(repository.deleteByKey(1, 4));
+        productMaterial.setProductId(3);
+        Material material = new Material();
+        material.setMaterialId(5);
+        productMaterial.setMaterial(material);
+        assertTrue(repository.deleteByKey(3, 5));
+        assertFalse(repository.deleteByKey(3, 5));
     }
 
     private ProductMaterial makeProductMaterial() {
         ProductMaterial productMaterial = new ProductMaterial();
-        productMaterial.setMaterialQuantity(15);
+        productMaterial.setMaterialQuantity(1);
 
         Material material = new Material();
-        material.setMaterialId(4);
+        material.setMaterialId(6);
 
         productMaterial.setMaterial(material);
-        productMaterial.setProductId(1);
+        productMaterial.setProductId(4);
         return productMaterial;
     }
 }
