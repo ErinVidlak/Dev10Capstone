@@ -36,7 +36,6 @@ public class ProductJdbcTemplateRepositoryTest {
     @Test
     void shouldFindProductWithNonNullFields(){
         Product earrings = repository.findById(1);
-        System.out.println(earrings);
         assertTrue(earrings.getListedProduct() != null && !earrings.getMaterials().isEmpty());
     }
 
