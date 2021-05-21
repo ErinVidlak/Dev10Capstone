@@ -112,7 +112,9 @@ begin
     insert into product (product_id, product_name, total_materials_cost, time_to_make, user_id) values
         (1, 'gold earrings with emeralds', 1050.00, 1 , 'username'),
         (2, 'silver keychain', 22.50, 3, 'username' ),
-        (3, 'hand knitted hat', 15.00, 720, 'test' );
+        (3, 'hand knitted hat', 15.00, 720, 'test' ),        
+        (4, 'test product', 1.00, 2, 'test' );
+
 
 	insert into listed_product (listed_price,fee_amount, date_listed, is_sold, date_sold, listing_name, product_id) values
 		(750.99, 5.99, '2021-01-14', 0, null, 'gold earrings with real emeralds', 1),
@@ -124,14 +126,16 @@ begin
         (2,'cut emerald gem', 500.00, 'username'),
         (3,'silver chain', 20.50, 'username'),
         (4,'metal keychain plate', 2.00, 'username'),
-        (5,'yarn', 0.50, 'test');
+        (5,'yarn', 0.50, 'test'),
+        (6,'test', 1.00, 'test');
 
     insert into material_inventory(total_quantity, material_id) values
 		(9, 1),
         (0, 2),
         (9, 3),
         (9, 4),
-        (470, 5);
+        (470, 5),
+        (1,6);
 
 	insert into material_purchase(purchase_price, purchase_quantity, quantity_units, purchase_date, purchase_description, material_id) values
 		(500.00, 10, 'one pair', '2020-03-12', '10 pairs of gold earrings that have room to put a gem or other decoration. Purchased from Kay Jewelers', 1),

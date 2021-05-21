@@ -62,7 +62,8 @@ public class ProductJdbcTemplateRepositoryTest {
 
     @Test
     void shouldDeleteById() {
-        Product product = repository.findById(2);
+        Product product = makeProduct();
+        product = repository.add(product);
         assertTrue(repository.deleteById(product.getProductId()));
         assertFalse(repository.deleteById(product.getProductId()));
     }

@@ -42,7 +42,6 @@ class MaterialJdbcTemplateRepositoryTest {
 
         Material actual = repository.add(vibranium);
         assertNotNull(actual);
-        assertEquals(6, actual.getMaterialId());
         assertEquals("Vibranium", actual.getMaterialName());
     }
 
