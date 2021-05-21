@@ -14,7 +14,7 @@ public class MaterialPurchase {
 
    @PositiveOrZero
     private BigDecimal purchasePrice;
-
+ //TODO: Material's price per unit is a generated value from MaterialPurchases
     @Positive
     private int quantityPurchased;
 
