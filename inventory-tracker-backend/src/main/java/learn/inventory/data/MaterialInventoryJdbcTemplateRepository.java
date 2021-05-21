@@ -52,9 +52,7 @@ public class MaterialInventoryJdbcTemplateRepository implements MaterialInventor
 
     }
 
-    //TODO: if a material ever only has one inventory, then would it not make more sense
-    //TODO: to create an inventory at the same time as a new material?
-    //TODO: rather than adding an inventory
+    //TODO: remove/revise add
     @Override
     public MaterialInventory add(MaterialInventory inventory) {
         final String sql = "insert into material_inventory " +
@@ -79,6 +77,7 @@ public class MaterialInventoryJdbcTemplateRepository implements MaterialInventor
 
     }
 
+    //TODO:Revise
     @Override
     public boolean update(MaterialInventory inventory) {
         final String sql = "update material_inventory set " +
@@ -89,6 +88,7 @@ public class MaterialInventoryJdbcTemplateRepository implements MaterialInventor
                 inventory.getInventoryId()) > 0;
     }
 
+    //TODO: revise/remove
     @Override
     public boolean deleteById(int inventoryId) {
        return jdbcTemplate.update(
