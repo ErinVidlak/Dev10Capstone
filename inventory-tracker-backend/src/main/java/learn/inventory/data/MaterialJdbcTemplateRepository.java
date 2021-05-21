@@ -2,6 +2,7 @@ package learn.inventory.data;
 
 import learn.inventory.data.mappers.*;
 import learn.inventory.models.Material;
+import learn.inventory.models.MaterialInventory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -30,6 +31,7 @@ public class MaterialJdbcTemplateRepository implements MaterialRepository{
     }
 
     @Override
+    @Transactional
     public Material findById(int materialId) {
 
         final String sql = "select material_id, material_name, price_per_unit, user_id "
@@ -49,6 +51,7 @@ public class MaterialJdbcTemplateRepository implements MaterialRepository{
     }
 
     @Override
+    @Transactional
     public Material add(Material material) {
         final String sql = "insert into material (material_name, price_per_unit, user_id) "
                 + "values (?,?,?);";
@@ -67,21 +70,47 @@ public class MaterialJdbcTemplateRepository implements MaterialRepository{
         }
 
         material.setMaterialId(keyHolder.getKey().intValue());
+        material.setInventory(generateInventoryOnAdd(material));
         return material;
+    }
+
+
+    private MaterialInventory generateInventoryOnAdd(Material material){
+        MaterialInventory inventory = material.getInventory();
+        inventory.setMaterialId(material.getMaterialId());
+
+        final String sql = "insert into material_inventory " +
+                "( total_quantity, material_id ) " +
+                " values (?, ? );";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, inventory.getTotalQuantity());
+            ps.setInt(2, inventory.getMaterialId());
+            return ps;
+        }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+
+        inventory.setInventoryId(keyHolder.getKey().intValue());
+        return inventory;
+
     }
 
     @Override
     public boolean update(Material material) {
         final String sql = "update material set "
                 + "material_name = ?, "
-                + "price_per_unit = ?, "
-                + "user_id = ?, "
-                + "where agent_id = ?;";
+                + "price_per_unit = ? "
+                + "where material_id = ?;";
 
         return jdbcTemplate.update(sql,
                 material.getMaterialName(),
                 material.getPricePerUnit(),
-                material.getUserId()) > 0;
+                material.getMaterialId()) > 0;
     }
 
     @Override
@@ -120,29 +149,14 @@ public class MaterialJdbcTemplateRepository implements MaterialRepository{
     private void addProducts(Material material) {
 
         final String sql = "select pm.material_quantity_used, pm.material_id, pm.product_id, "
-                + "p.product_id, p.product_name, p.total_materials_cost, p.time_to_make, p.user_id, "
-                + "m.material_name, m.price_per_unit, m.user_id "
+                + "p.product_id, p.product_name, p.total_materials_cost, p.time_to_make, p.user_id "
                 + "from product_material pm "
                 + "inner join product p on pm.product_id = p.product_id "
-                + "inner join material m on pm.material_id = ? "
                 + "where pm.material_id = ?;";
 
-        var products = jdbcTemplate.query(sql, new ProductMaterialMapper(), material.getMaterialId(), material.getMaterialId());
+        var products = jdbcTemplate.query(sql, new MaterialProductMapper(), material.getMaterialId());
         material.setProducts(products);
     }
 
-//    private void addAgents(Agency agency) {
-//
-//        final String sql = "select aa.agency_id, aa.agent_id, aa.identifier, aa.activation_date, aa.is_active, "
-//                + "sc.security_clearance_id, sc.name security_clearance_name, "
-//                + "a.first_name, a.middle_name, a.last_name, a.dob, a.height_in_inches "
-//                + "from agency_agent aa "
-//                + "inner join agent a on aa.agent_id = a.agent_id "
-//                + "inner join security_clearance sc on aa.security_clearance_id = sc.security_clearance_id "
-//                + "where aa.agency_id = ?";
-//
-//        var agencyAgents = jdbcTemplate.query(sql, new AgencyAgentMapper(), agency.getAgencyId());
-//        agency.setAgents(agencyAgents);
-//    }
 
 }

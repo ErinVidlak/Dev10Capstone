@@ -30,9 +30,7 @@ class MaterialJdbcTemplateRepositoryTest {
     @Test
     void shouldFindYarn() {
         Material yarn = repository.findById(5);
-        System.out.println(yarn.getMaterialName());
         assertTrue("yarn".equals(yarn.getMaterialName()));
-        //assertEquals("yarn", yarn.getMaterialName());
     }
 
     @Test
@@ -46,6 +44,16 @@ class MaterialJdbcTemplateRepositoryTest {
         assertNotNull(actual);
         assertEquals(6, actual.getMaterialId());
         assertEquals("Vibranium", actual.getMaterialName());
+    }
+
+    @Test
+    void shouldUpdate() {
+        Material yarn = repository.findById(5);
+        yarn.setMaterialName("wool yarn");
+        assertTrue(repository.update(yarn));
+        Material result = repository.findById(5);
+        assertEquals(yarn.getMaterialName(), "wool yarn");
+
     }
 
     @Test
