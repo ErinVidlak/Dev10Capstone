@@ -84,7 +84,7 @@ public class ProductService {
             if (newProduct.getProductName().equalsIgnoreCase(product.getProductName())
                     && newProduct.getTimeToMake() == product.getTimeToMake()
                     && newProduct.getUserId().equalsIgnoreCase(product.getUserId())
-                    && newProduct.getMaterials() == product.getMaterials()) {
+                    && newProduct.getMaterials().equals(product.getMaterials())) {
                 result.addMessage("Products must be unique", ResultType.INVALID);
             }
         }
