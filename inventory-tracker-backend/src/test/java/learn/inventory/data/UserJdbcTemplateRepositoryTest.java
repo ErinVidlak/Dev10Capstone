@@ -39,4 +39,16 @@ class UserJdbcTemplateRepositoryTest {
         assertNotNull(actual);
         assertEquals("Newbie", actual.getUserId());
     }
+
+    @Test
+    void shouldFindUserMaterials(){
+        User user = repository.findById("username");
+        assertFalse(user.getMaterials().isEmpty());
+    }
+
+    @Test
+    void shouldFindUserProducts(){
+        User user = repository.findById("username");
+        assertFalse(user.getProducts().isEmpty());
+    }
 }
