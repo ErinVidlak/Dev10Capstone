@@ -1,5 +1,6 @@
 package learn.inventory.models;
 
+import learn.inventory.validation.ListedProductDateValidation;
 import lombok.*;
 
 import javax.validation.constraints.*;
@@ -8,6 +9,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Data
+@ListedProductDateValidation
 public class ListedProduct {
 
 
@@ -19,12 +21,13 @@ public class ListedProduct {
     private String listingName;
 
     @PositiveOrZero(message = "Price of listing must not be negative")
-    private BigDecimal listedPrice;
+    @NotNull(message = "Listing price required")
+    private BigDecimal listedPrice = new BigDecimal(BigInteger.ZERO);
 
     @PastOrPresent(message = "Date listed cannot be in the future")
+    @NotNull(message = "Listings require date listed")
     private LocalDate dateListed;
 
-    //TODO: date sold must come after or be same day as date listed
     @PastOrPresent(message = "Date sold cannot be in the future")
     private LocalDate dateSold;
 
