@@ -28,15 +28,22 @@ public class ProductJdbcTemplateRepositoryTest {
     @Test
     void findById() {
         Product paperweight = makeProduct();
-        repository.add(paperweight);
-        Product actual = repository.findById(4);
+        paperweight = repository.add(paperweight);
+        Product actual = repository.findById(paperweight.getProductId());
         assertEquals(paperweight, actual);
+    }
+
+    @Test
+    void shouldFindProductWithNonNullFields(){
+        Product earrings = repository.findById(1);
+        System.out.println(earrings);
+        assertTrue(earrings.getListedProduct() != null && !earrings.getMaterials().isEmpty());
     }
 
     @Test
     void shouldFindAll() {
         List<Product> total = repository.findAll();
-        assertEquals(3, total.size());
+        assertTrue(total.size() > 0);
     }
 
     @Test
@@ -49,18 +56,16 @@ public class ProductJdbcTemplateRepositoryTest {
     @Test
     void shouldUpdate() {
         Product product = makeProduct();
-        repository.add(product);
+        product = repository.add(product);
         product.setProductName("Resin necklace");
         assertTrue(repository.update(product));
     }
 
     @Test
     void shouldDeleteById() {
-        Product product = makeProduct();
-        repository.add(product);
-        assertTrue(repository.deleteById(4));
-        assertFalse(repository.deleteById(4));
-        assertTrue(repository.deleteById(3));
+        Product product = repository.findById(2);
+        assertTrue(repository.deleteById(product.getProductId()));
+        assertFalse(repository.deleteById(product.getProductId()));
     }
 
     private Product makeProduct() {
