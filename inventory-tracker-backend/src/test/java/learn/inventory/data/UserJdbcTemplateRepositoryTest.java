@@ -32,6 +32,12 @@ class UserJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindAll() {
+        List<User> total = repository.findAll();
+        assertTrue(total.size() > 0);
+    }
+
+    @Test
     void shouldAddNewbie() {
         User user = new User();
         user.setUserId("Newbie");

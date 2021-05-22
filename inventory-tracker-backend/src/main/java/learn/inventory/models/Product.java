@@ -34,6 +34,10 @@ public class Product {
 
     private List<ProductMaterial> materials = new ArrayList<>();
 
+    public boolean equals(Product product) {
+        return this.productId == product.productId;
+    }
+
 
 
 
