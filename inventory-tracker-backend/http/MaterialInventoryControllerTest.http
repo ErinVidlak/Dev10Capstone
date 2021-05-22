@@ -1,0 +1,92 @@
+//6 materials in setKnownGoodState, all with inventory objects
+
+// Find All MaterialInventories; give 200 & show materialInventoryies
+GET /api/materialInventory HTTP/1.1 
+Host: localhost:8080 
+### 
+
+
+// Find MaterialInventory By ID; should give 200 & show materialInventory of 9 for'gold earring set'
+GET /api/materialInventory/1 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+
+// Delete By Id; should give 204
+DELETE /api/materialInventory/1 HTTP/1.1 
+Host: localhost:8080
+### 
+
+// Add a MaterialInventory 
+// Should give 201 & show materialInventory
+POST /api/materialInventory HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "totalquantity": 10,
+    "materialId": 1,
+} 
+
+
+### 
+
+// View new MaterialInventory 
+// Should give 200 & show materialInventory
+GET /api/materialInventory/7 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+
+// Try to add a duplicate materialInventory 
+// Should give 400 with "MaterialInventorys must be unique" message
+POST /api/materialInventory HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "totalquantity": 10,
+    "materialId": 1,
+} 
+###  
+
+
+// Update the materialInventory  
+// Should give 204
+PUT /api/materialInventory/7 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "totalquantity": 15,
+    "materialId": 1,
+} 
+
+### 
+
+// View the updated materialInventory 
+// Should give 200 & show materialInventory's new name
+GET /api/materialInventory/7 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+
+// Try to update materialInventory without UserId 
+// Should give 400 with "UserId is required" message
+PUT /api/materialInventory/5 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "materialInventoryId": 5, 
+    "materialInventoryName": "silver necklace"
+} 
+
+### 
+
+
+// View all materialInventorys to make sure it was deleted
+// Should give 200 with only 4 materialInventorys in there
+GET /api/materialInventory HTTP/1.1 
+Host: localhost:8080 
+###  
