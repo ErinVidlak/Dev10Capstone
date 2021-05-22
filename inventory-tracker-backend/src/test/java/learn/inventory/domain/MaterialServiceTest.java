@@ -2,6 +2,7 @@ package learn.inventory.domain;
 
 import learn.inventory.data.MaterialJdbcTemplateRepository;
 import learn.inventory.models.Material;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,12 +45,13 @@ class MaterialServiceTest {
     @Test
     void shouldUpdate() {
         Material material = makeMaterial();
+        material.setMaterialId(1);
         material.setMaterialName("Titanium");
 
         when(repository.update(material)).thenReturn(true);
-        Result<Material> actual = service.update(material);
-        System.out.println(actual.getMessages());
-        assertEquals(ResultType.SUCCESS, actual.getType());
+        Result<Material> actualUpdate = service.update(material);
+        assertEquals(ResultType.SUCCESS, actualUpdate.getType());
+        assertEquals(material.getMaterialName(), "Titanium");
     }
 
     @Test
