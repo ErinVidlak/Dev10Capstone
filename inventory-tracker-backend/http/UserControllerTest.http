@@ -1,0 +1,36 @@
+//2 users in setKnownGoodState, all with inventory objects
+
+// Find All users; give 200 & show users
+GET /api/user HTTP/1.1 
+Host: localhost:8080 
+### 
+
+
+// Find user By ID; should give 200 & show user 'username'
+GET /api/user/username HTTP/1.1 
+Host: localhost:8080 
+###  
+
+// Should not find this user; should show 400
+GET /api/user/fakeuser HTTP/1.1 
+Host: localhost:8080 
+###  
+
+
+// Add a user; should give 201 & show user
+POST /api/user HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "userID": newUser
+} 
+
+
+### 
+
+// View newUser 
+// Should give 200 & show user
+GET /api/user/3 HTTP/1.1 
+Host: localhost:8080 
+###  
