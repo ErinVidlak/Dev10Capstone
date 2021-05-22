@@ -39,7 +39,8 @@ public class Material {
 
     private List<MaterialProduct> products = new ArrayList<>();
 
-
-
+    public boolean equals(Material material) {
+        return this.materialId == material.materialId;
+    }
 
 }
