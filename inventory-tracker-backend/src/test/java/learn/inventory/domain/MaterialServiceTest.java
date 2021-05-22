@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -41,6 +42,16 @@ class MaterialServiceTest {
         assertEquals(ResultType.SUCCESS, actual.getType());
         assertEquals(mockOut, actual.getPayload());
     }
+
+    @Test
+    void shouldNotAddDuplicate() {
+        Material material = makeMaterial();
+        when(repository.findAll()).thenReturn(Arrays.asList(material));
+        Material duplicate = makeMaterial();
+        Result<Material> actual = service.add(duplicate);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
 
     @Test
     void shouldUpdate() {

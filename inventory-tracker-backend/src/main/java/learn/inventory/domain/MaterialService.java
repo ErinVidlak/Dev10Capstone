@@ -29,6 +29,7 @@ public class MaterialService {
 
     public Result<Material> add(Material material) {
         Result<Material> result = validate(material);
+        validateNoDuplicatesExist(material, result);
         if (!result.isSuccess()) {
             return result;
         }
@@ -86,6 +87,16 @@ public class MaterialService {
             return result;
         }
         return result;
+    }
+
+    private void validateNoDuplicatesExist(Material newMaterial, Result<Material> result) {
+        List<Material> materials = materialRepository.findAll();
+        for (Material material : materials) {
+            if (newMaterial.getMaterialName().equalsIgnoreCase(material.getMaterialName())
+                    && newMaterial.getUserId().equalsIgnoreCase(material.getUserId())) {
+                result.addMessage("Materials must have a unique name for a user", ResultType.INVALID);
+            }
+        }
     }
 }
 
