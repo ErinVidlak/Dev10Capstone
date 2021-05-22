@@ -1,0 +1,100 @@
+// First--insert data into test database
+// I used set_known_good_state from test 
+// This starts out with 4 products, so the new one I will add has ID 5
+
+// Find All Products 
+// Should give 200 & show products
+GET /api/product HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Find Product By ID 
+// Should give 200 & show product
+GET /api/product/1 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+// Add a Product 
+// Should give 201 & show product
+POST /api/product HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "productName": "resin paperweight",
+    "totalMaterialsCost": 10.00,
+    "timeToMake": 1,
+    "userId": "username",
+    "listedProduct": null,
+    "materials": []
+} 
+
+### 
+
+// View new Product 
+// Should give 200 & show product
+GET /api/product/5 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+// Try to add a duplicate product 
+// Should give 400 with "Products must be unique" message
+POST /api/product HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "productName": "resin paperweight",
+    "totalMaterialsCost": 10.00,
+    "timeToMake": 1,
+    "userId": "username",
+    "listedProduct": null,
+    "materials": []
+} 
+
+###  
+
+// Update the product  
+// Should give 204
+PUT /api/product/5 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "productId": 5, 
+    "productName": "resin necklace", 
+    "userId": "username"
+} 
+
+### 
+
+// View the updated product 
+// Should give 200 & show product's new name
+GET /api/product/5 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+// Try to update product without UserId 
+// Should give 400 with "UserId is required" message
+PUT /api/product/5 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "productId": 5, 
+    "productName": "silver necklace"
+} 
+
+### 
+
+// Delete By Id
+// Should give 204
+DELETE /api/product/5 HTTP/1.1 
+Host: localhost:8080
+### 
+
+// View all products to make sure it was deleted
+// Should give 200 with only 4 products in there
+GET /api/product HTTP/1.1 
+Host: localhost:8080 
+### 
