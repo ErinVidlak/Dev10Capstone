@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.List;
 
 @Repository
 public class UserJdbcTemplateRepository implements UserRepository{
@@ -38,6 +39,14 @@ public class UserJdbcTemplateRepository implements UserRepository{
             addProducts(user);
         }
         return user;
+    }
+
+    @Override
+    public List<User> findAll() {
+        final String sql = "select user_id "
+                + "from user limit 1000;";
+
+        return jdbcTemplate.query(sql, new UserMapper());
     }
 
     @Override
