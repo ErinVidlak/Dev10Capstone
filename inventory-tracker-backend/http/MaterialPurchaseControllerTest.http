@@ -1,0 +1,105 @@
+// First--insert data into test database
+// I used set_known_good_state from test 
+
+// Find all material purchases
+// Should give 200 & show purchases
+GET /api/materialPurchase HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Find Purchase By ID 
+// Should give 200 & show purchase
+GET /api/materialPurchase/5 HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Update a materialPurchase's description
+// Should give 204
+PUT /api/materialPurchase/5 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "purchaseId": 5,
+    "purchasePrice": 250.00,
+    "quantityPurchased": 500,
+    "units": "yards",
+    "datePurchased": "2020-09-15",
+    "description": "yarn of various colors totaling 500 yards from Amazon",
+    "materialId": 5
+} 
+
+###
+
+// View changes 
+GET /api/materialPurchase/5 HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Try to make datePurchased in the future
+// Should get a 400 saying the date can't be in the future
+PUT /api/materialPurchase/5 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "purchaseId": 5,
+    "purchasePrice": 250.00,
+    "quantityPurchased": 500,
+    "units": "yards",
+    "datePurchased": "2022-09-15",
+    "description": "yarn of various colors totaling 500 yards from Amazon",
+    "materialId": 5
+} 
+
+###
+
+// Delete by ID
+// Should give a 204
+DELETE /api/materialPurchase/5 HTTP/1.1 
+Host: localhost:8080 
+###
+
+// Find all to see it was properly deleted
+GET /api/materialPurchase HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Add a new purchase
+// Should give a 201 and show the purchase info
+// Duplicate dates are allowed
+POST /api/materialPurchase HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "purchasePrice": 500.00,
+    "quantityPurchased": 10,
+    "units": "one pair",
+    "datePurchased": "2020-03-12",
+    "description": "10 pairs of gold earrings that have room to put a gem or other decoration. Purchased from Kay Jewelers",
+    "materialId": 1
+} 
+
+###
+
+// Add a purchase on a different date
+POST /api/materialPurchase HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "purchasePrice": 500.00,
+    "quantityPurchased": 10,
+    "units": "one pair",
+    "datePurchased": "2020-05-12",
+    "description": "More gold earrings",
+    "materialId": 1
+} 
+
+###
+
+// View the new purchases
+GET /api/materialPurchase HTTP/1.1 
+Host: localhost:8080 
+### 
