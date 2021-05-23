@@ -9,7 +9,19 @@ Host: localhost:8080
 
 // Find Material by ID
 // Should give 200 & show material
-GET /api/material/1 HTTP/1.1 
+GET /api/material/2 HTTP/1.1 
 Host: localhost:8080 
 ### 
+
+// Delete by ID
+// Should give 204
+DELETE /api/material/1 HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Find all to see it was properly deleted
+GET /api/material HTTP/1.1 
+Host: localhost:8080 
+### 
+
 
