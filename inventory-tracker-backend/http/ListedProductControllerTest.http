@@ -1,0 +1,84 @@
+// First--insert data into test database
+// I used set_known_good_state from test 
+
+// Find all listed products
+// Should give 200 & show products
+GET /api/listedProduct HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Find Product By ID 
+// Should give 200 & show listed product
+GET /api/listedProduct/1 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+// Make a new product & associate it with a new listing
+POST /api/product HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "productName": "Four Leaf Clover Paperweight",
+    "totalMaterialsCost": 10.00,
+    "timeToMake": 1,
+    "userId": "username",
+    "listedProduct": null,
+    "materials": []
+} 
+
+###  
+
+// Should give a 201 and show new listedProduct
+POST /api/listedProduct HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "listingName": "Lucky Four Leaf Clover Resin Paperweight",
+    "listedPrice": 25.00,
+    "dateListed": "2021-01-14",
+    "dateSold": null,
+    "productId": 6,
+    "feeAmount": 5.99,
+    "sold": false
+}  
+
+###
+
+// View the new listed product 
+GET /api/listedProduct HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Update the listed product's name 
+// Should give 204
+PUT /api/listedProduct/3 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "listedProductId": 3,
+    "listingName": "Four Leaf Clover Resin Necklace",
+    "productId": 6,
+    "userId": "username", 
+    "dateListed": "2021-01-14"
+}   
+
+###
+
+// View the updated name by ID
+GET /api/listedProduct/3 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+// Delete By Id
+// Should give 204
+DELETE /api/listedProduct/3 HTTP/1.1 
+Host: localhost:8080
+### 
+
+// View all to see it was removed
+GET /api/listedProduct HTTP/1.1 
+Host: localhost:8080 
+###  

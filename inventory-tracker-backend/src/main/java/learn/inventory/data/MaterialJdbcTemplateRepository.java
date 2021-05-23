@@ -157,6 +157,4 @@ public class MaterialJdbcTemplateRepository implements MaterialRepository{
         var products = jdbcTemplate.query(sql, new MaterialProductMapper(), material.getMaterialId());
         material.setProducts(products);
     }
-
-
 }
