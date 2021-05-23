@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AuthContext from './AuthContext'; 
 import jwt_decode from 'jwt-decode'; 
 import Login from './Login'; 
-import NotFound from './static/NotFound'; 
+import NotFound from './NotFound'; 
 import Register from './Register';
 
 function InventoryManager() {
