@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 import Login from './Login'; 
 import NotFound from './NotFound'; 
 import Register from './Register';
+import MaterialPurchaseList from './MaterialPurchaseList';
 
 function InventoryManager() {
     const [user, setUser] = useState(null); 
@@ -63,6 +64,9 @@ function InventoryManager() {
         <AuthContext.Provider value={auth}>
             <Router>
             <Switch>
+                <Route path="/materialPurchases">
+                    <MaterialPurchaseList />
+                </Route>
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="*" component={NotFound} />
