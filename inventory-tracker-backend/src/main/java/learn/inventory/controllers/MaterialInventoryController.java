@@ -39,6 +39,7 @@ public class MaterialInventoryController {
 
     @PutMapping("/{materialInventoryId}")
     public ResponseEntity<Object> update(@PathVariable int materialInventoryId, @RequestBody MaterialInventory materialInventory) {
+        materialInventory.setInventoryId(materialInventoryId);
         if (materialInventoryId != materialInventory.getInventoryId()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }

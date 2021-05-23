@@ -31,6 +31,7 @@ public class MaterialInventoryService {
 
     public Result<MaterialInventory> add(MaterialInventory inventory){
         Result<MaterialInventory> result = validate(inventory);
+        result = checkInventoryForMaterial(result, inventory);
         if (result.isSuccess()){
             if (inventory.getInventoryId() != 0) {
                 result.addMessage("InventoryId cannot be set for `add` operation", ResultType.INVALID);
@@ -76,8 +77,13 @@ public class MaterialInventoryService {
             }
             return result;
         }
+        
+        return result;
+    }
 
-        List<MaterialInventory> inventoryList = repository.findAll();
+    private Result<MaterialInventory> checkInventoryForMaterial(Result<MaterialInventory> result, MaterialInventory inventory) {
+
+        List<MaterialInventory> inventoryList = findAll();
         for (MaterialInventory i : inventoryList) {
             if (i.getMaterialId() == inventory.getMaterialId()) {
                 result.addMessage("This material already has an inventory object.", ResultType.INVALID);

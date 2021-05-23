@@ -6,26 +6,26 @@ Host: localhost:8080
 ### 
 
 
-// Find MaterialInventory By ID; should give 200 & show materialInventory of 9 for 'gold earring set'
+// Find MaterialInventory By ID; 
+//should give 200 & show materialInventory of 9 for 'gold earring set' (if run from scratch)
 GET /api/materialInventory/1 HTTP/1.1 
 Host: localhost:8080 
 ###  
 
 
-// Delete By Id; should give 204
+// Delete By Id; should give 204 first time and 404 after
 DELETE /api/materialInventory/1 HTTP/1.1 
 Host: localhost:8080
 ### 
 
-// Add a MaterialInventory 
-// Should give 201 & show materialInventory
+// Add a MaterialInventory; should give 201 & show materialInventory for materialId: 1
 POST /api/materialInventory HTTP/1.1 
 Host: localhost:8080 
 Content-Type: application/json 
 
 {
-    "totalquantity": 10,
-    "materialId": 1,
+    "totalQuantity": 10,
+    "materialId": 1
 } 
 
 
@@ -39,14 +39,14 @@ Host: localhost:8080
 
 
 // Try to add a duplicate materialInventory 
-// Should give 400 with "MaterialInventorys must be unique" message
+// Should give 400 with "This material already has an inventory object." message
 POST /api/materialInventory HTTP/1.1 
 Host: localhost:8080 
 Content-Type: application/json 
 
 {
-    "totalquantity": 10,
-    "materialId": 1,
+    "totalQuantity": 11,
+    "materialId": 1
 } 
 ###  
 
@@ -58,8 +58,8 @@ Host: localhost:8080
 Content-Type: application/json 
 
 {
-    "totalquantity": 15,
-    "materialId": 1,
+    "totalQuantity": 16,
+    "materialId": 1
 } 
 
 ### 
@@ -71,22 +71,15 @@ Host: localhost:8080
 ###  
 
 
-// Try to update materialInventory without UserId 
-// Should give 400 with "UserId is required" message
-PUT /api/materialInventory/5 HTTP/1.1 
-Host: localhost:8080 
-Content-Type: application/json 
 
-{
-    "materialInventoryId": 5, 
-    "materialInventoryName": "silver necklace"
-} 
-
+// Delete By Id; should give 204 the first time
+DELETE /api/materialInventory/7 HTTP/1.1 
+Host: localhost:8080
 ### 
 
 
 // View all materialInventorys to make sure it was deleted
-// Should give 200 with only 4 materialInventorys in there
+// Should give 200 with remaining materialInventory objects
 GET /api/materialInventory HTTP/1.1 
 Host: localhost:8080 
 ###  
