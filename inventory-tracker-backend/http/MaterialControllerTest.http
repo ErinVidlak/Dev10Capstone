@@ -24,4 +24,41 @@ GET /api/material HTTP/1.1
 Host: localhost:8080 
 ### 
 
+// Add a new material
+// Should give 201 and show you the new material
+POST /api/material HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
 
+{
+    "materialName": "gold chain",
+    "pricePerUnit": 10.00,
+    "userId": "username"
+} 
+
+###
+
+// Find all to see it was added
+GET /api/material HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Update the material
+// Should give a 204
+PUT /api/material/7 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "materialId": 7,
+    "materialName": "fancy gold chain",
+    "pricePerUnit": 10.00,
+    "userId": "username"
+} 
+
+###
+
+// View your changes
+GET /api/material HTTP/1.1 
+Host: localhost:8080 
+### 
