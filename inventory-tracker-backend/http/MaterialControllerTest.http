@@ -1,0 +1,15 @@
+// First--insert data into test database
+// I used set_known_good_state from test 
+
+// Find All Materials 
+// Should give 200 & show materials
+GET /api/material HTTP/1.1 
+Host: localhost:8080 
+### 
+
+// Find Material by ID
+// Should give 200 & show material
+GET /api/material/1 HTTP/1.1 
+Host: localhost:8080 
+### 
+
