@@ -6,7 +6,7 @@ Host: localhost:8080
 ### 
 
 
-// Find MaterialInventory By ID; should give 200 & show materialInventory of 9 for'gold earring set'
+// Find MaterialInventory By ID; should give 200 & show materialInventory of 9 for 'gold earring set'
 GET /api/materialInventory/1 HTTP/1.1 
 Host: localhost:8080 
 ###  
@@ -65,7 +65,7 @@ Content-Type: application/json
 ### 
 
 // View the updated materialInventory 
-// Should give 200 & show materialInventory's new name
+// Should give 200 & show materialInventory's new quanitity
 GET /api/materialInventory/7 HTTP/1.1 
 Host: localhost:8080 
 ###  

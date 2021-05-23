@@ -1,36 +1,50 @@
 //2 users in setKnownGoodState, all with inventory objects
 
-// Find All users; give 200 & show users
+// Find All users; 200 & show users 'username' and 'test' with materials and products
+//does not show materials or products
 GET /api/user HTTP/1.1 
 Host: localhost:8080 
 ### 
 
 
-// Find user By ID; should give 200 & show user 'username'
+// Find user By ID; should give 200 & show user 'username' with materials and products
+//currently shows materials and products
 GET /api/user/username HTTP/1.1 
 Host: localhost:8080 
 ###  
 
-// Should not find this user; should show 400
+// Should not find this user; should show 200 with an empty response
 GET /api/user/fakeuser HTTP/1.1 
 Host: localhost:8080 
+
 ###  
 
-
-// Add a user; should give 201 & show user
+// Add a user; should give 201 & show newUser
 POST /api/user HTTP/1.1 
 Host: localhost:8080 
 Content-Type: application/json 
 
 {
-    "userID": newUser
+    "userId": "newUser"
+} 
+
+###  
+
+
+// Attempt to add same user; should give 400
+POST /api/user HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "userId": "newUser"
 } 
 
 
 ### 
 
-// View newUser 
-// Should give 200 & show user
-GET /api/user/3 HTTP/1.1 
+// View newUse; should give 200 & show newUser
+GET /api/user/newUser HTTP/1.1 
 Host: localhost:8080 
-###  
+
+###
