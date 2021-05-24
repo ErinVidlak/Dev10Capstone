@@ -6,11 +6,8 @@ export default function AddMaterialForm() {
   const [material, setMaterial] = useState({
     materialId: 0,
     materialName: "",
-    pricePerUnit: 0.00,
-    userId: "",
-    inventory: {},
-    purchases: [],
-    products: [],
+    pricePerUnit: 0.0,
+    userId: "username",
   });
 
   const history = useHistory();
@@ -24,6 +21,7 @@ export default function AddMaterialForm() {
 
   async function handleSubmit(evt) {
     let nextMaterial = { ...material };
+    nextMaterial.pricePerUnit = parseInt(material.pricePerUnit);
     setMaterial(nextMaterial);
 
     evt.preventDefault();
@@ -34,7 +32,16 @@ export default function AddMaterialForm() {
 
   return (
     <div className="container">
-      <h2> Add New Material </h2>
+      <div className="row">
+        <div class="col s12">
+          <div className="card light-blue lighten-4">
+            <div className="card-content black-text">
+              <span className="card-title ">Add New Material</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <form class="col s12" id="addMaterialForm" onSubmit={handleSubmit}>
           <div class="row">
@@ -54,11 +61,16 @@ export default function AddMaterialForm() {
             <div class="input-field col s12">
               <input
                 class="decimal"
+                min="0.00"
+                step="0.01"
+                Defaultvalue={material.pricePerUnit}
+                presicion={2}
                 name="pricePerUnit"
-                type="text"
+                type="number"
                 id="price_per_unit"
-                class="materialize-textarea"></input>
-              <label for="price_per_unit">Price Per Unit</label>
+                onChange={handleChange}
+              />
+              <label for="price_per_unit">Price Per Unit{" (Optional)"}</label>
             </div>
             <div className="row">
               <div className="col">
