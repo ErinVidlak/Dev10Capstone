@@ -1,0 +1,53 @@
+//5 productMaterial objects in setKnownGoodState
+
+
+// Add a ProductMaterial; should give 201 & show productMaterial for materialId: 1
+POST /api/productMaterial HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "totalQuantity": 10,
+    "materialId": 1
+} 
+
+### 
+
+
+// Try to add a duplicate productMaterial 
+// Should give 400 with "This material already has an inventory object." message
+POST /api/productMaterial HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "materialQuantity": 16,
+    "productId": 1,
+    "material" : {
+        "materialId": 1
+    }
+} 
+###  
+
+
+// Update the productMaterial  
+// Should give 204
+PUT /api/productMaterial/1/1 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "materialQuantity": 16,
+    "productId": 1,
+    "material" : {
+        "materialId": 1
+    }
+} 
+
+### 
+
+
+// Delete By Id; should give 204 the first time
+DELETE /api/productMaterial/1/1 HTTP/1.1 
+Host: localhost:8080
+### 
