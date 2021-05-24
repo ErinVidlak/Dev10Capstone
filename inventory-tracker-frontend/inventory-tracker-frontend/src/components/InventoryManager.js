@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 import Login from './Login'; 
 import NotFound from './NotFound'; 
 import Register from './Register';
+import MaterialListView from './material/MaterialListView';
 
 function InventoryManager() {
     const [user, setUser] = useState(null); 
@@ -65,6 +66,7 @@ function InventoryManager() {
             <Switch>
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
+                <Route path="/materials" component={MaterialListView} />
                 <Route path="*" component={NotFound} />
             </Switch>
         </Router> 
