@@ -24,7 +24,6 @@ function MaterialPurchaseList() {
         <table className="striped">
             <thead>
                 <tr>
-                    <th></th>
                     <th>Purchase Date</th>
                     <th>Name</th>
                     <th>Quantity</th>
@@ -34,7 +33,10 @@ function MaterialPurchaseList() {
                 </tr>
             </thead>
             <tbody>
-                {materialPurchases.map(materialPurchase => 
+                {materialPurchases.sort( (a, b) => {
+                    return new Date(b.datePurchased) - new Date(a.datePurchased)
+                })
+                .map(materialPurchase => 
                     <MaterialPurchase key={materialPurchase.matherialPurchaseId} materialPurchase={materialPurchase} />
                 )}
             </tbody>

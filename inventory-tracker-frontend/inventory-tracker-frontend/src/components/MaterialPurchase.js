@@ -18,9 +18,6 @@ function MaterialPurchase({ materialPurchase }) {
 
     return (
         <tr>
-            <td>
-                <input type="checkbox" checked="checked" />
-            </td>
             <td>{materialPurchase.datePurchased}</td>
             <td>{material.materialName}</td>
             <td>{materialPurchase.quantityPurchased}</td>
