@@ -7,8 +7,8 @@ export default function MaterialPurchaseTableSummary({purchaseId, purchasePrice,
 	return (
     <tr>
       <td>{purchaseId}</td>
-      <td>{quantityPurchased}</td>
       <td>${formatPricePerUnit(purchasePrice)}</td>
+      <td>{quantityPurchased}</td>
     </tr>
   );
 }

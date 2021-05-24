@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { findById } from "../../services/materialAPI";
 import { capitalizeEach, formatPricePerUnit } from "../../utils/helpers";
 import MaterialInventory from "./MaterialInventory";
+import MaterialProductListView from "./MaterialProductListView";
 import MaterialPurchaseListView from "./MaterialPurchaseListView";
 
 export default function MaterialDetailedView() {
@@ -27,8 +28,6 @@ export default function MaterialDetailedView() {
 
   return (
     <div className="container">
-
-
       <div className="row center">
         <div class="col s12">
           <div className="card light-blue lighten-4">
@@ -53,16 +52,15 @@ export default function MaterialDetailedView() {
         </div>
 
         <div class="col s6">
-          <MaterialInventory
-            inventory={material.inventory}
-          />
+          <MaterialInventory inventory={material.inventory} />
         </div>
       </div>
-	  <div className="row">
-		  <MaterialPurchaseListView purchases={material.purchases} />
-	  </div>
-
-
+      <div className="row">
+        <MaterialPurchaseListView purchases={material.purchases} />
+      </div>
+      <div className="row">
+        <MaterialProductListView products={material.products} />
+      </div>
     </div>
   );
 }
