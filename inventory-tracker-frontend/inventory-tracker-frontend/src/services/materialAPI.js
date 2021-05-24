@@ -1,5 +1,7 @@
 const apiUrl = "http://localhost:8080/api/material";
 
+
+
 //find all materials
 export async function findAll() {
 	  const response = await fetch(apiUrl);

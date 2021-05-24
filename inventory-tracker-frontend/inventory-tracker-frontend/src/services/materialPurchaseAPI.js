@@ -1,5 +1,7 @@
 const apiUrl = "http://localhost:8080/api/materialPurchase";
 
+
+
 // find all purchases
 export async function findAll() {
   const response = await fetch(apiUrl);

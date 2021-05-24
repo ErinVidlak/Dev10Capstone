@@ -1,5 +1,7 @@
 const apiUrl = "http://localhost:8080/api/materialInventory";
 
+
+
 // find all inventories
 export async function findAll() {
   const response = await fetch(apiUrl);
