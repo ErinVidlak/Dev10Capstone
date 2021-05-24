@@ -14,7 +14,7 @@ export default function MaterialSummary({
       <td>{materialName}</td>
       <td>${formatPricePerUnit(pricePerUnit)}</td>
       <td>
-        <Link to={`materials/${materialId}`}>
+        <Link to={`/materials/${materialId}`}>
           <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3">
             View
           </button>
