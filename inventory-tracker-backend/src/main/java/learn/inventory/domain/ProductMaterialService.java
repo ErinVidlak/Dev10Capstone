@@ -33,7 +33,8 @@ public class ProductMaterialService {
             return result;
         }
 
-        if (repository.add(productMaterial)) {
+        //forgot ! for this if statement
+        if (!repository.add(productMaterial)) {
             result.addMessage("productMaterial not added", ResultType.INVALID);
         }
 

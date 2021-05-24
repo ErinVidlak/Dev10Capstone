@@ -23,8 +23,9 @@ public class UserServiceTest {
 
     @Test
     void findById() {
-        User expected = repository.findById("username");
-        assertNotNull(expected);
+
+        User expected = makeUser();
+        expected.setUserId("username");
         when(repository.findById("username")).thenReturn(expected);
         User actual = service.findById("username");
         assertEquals(expected, actual);
