@@ -30,6 +30,11 @@ class MaterialInventoryServiceTest {
         Result<MaterialInventory> actual = service.add(expected);
         assertEquals(ResultType.SUCCESS, actual.getType());
         assertEquals(mockOut, actual.getPayload());
+
+        when(repository.add(expected)).thenReturn(mockOut);
+        actual = service.add(expected);
+        assertEquals(ResultType.INVALID, actual.getType());
+        assertEquals(mockOut, actual.getPayload());
     }
 
     @Test
