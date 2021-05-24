@@ -24,10 +24,9 @@ public class ProductMaterialServiceTest {
     @MockBean
     ProductMaterialRepository repository;
 
-
     @Test
     void findByProductId() {
-        List<ProductMaterial> initialList = repository.findByProductId(1);
+        List<ProductMaterial> initialList = service.findByProductId(1);
         assertEquals(initialList.size(), 2);
 
         ProductMaterial expected = initialList.get(0);
