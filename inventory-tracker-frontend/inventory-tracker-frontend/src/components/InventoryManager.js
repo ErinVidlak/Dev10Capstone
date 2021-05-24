@@ -72,9 +72,9 @@ function InventoryManager() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/materials" component={MaterialListView} />
+          <Route exact path="/materials" component={MaterialListView} />
           <Route
-            path="/materials/:materialId"
+            exact path="/materials/:materialId"
             component={MaterialDetailedView}
           />
           <Route path="*" component={NotFound} />
