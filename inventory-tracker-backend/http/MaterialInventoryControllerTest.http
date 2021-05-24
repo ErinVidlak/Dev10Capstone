@@ -1,0 +1,85 @@
+//6 materials in setKnownGoodState, all with inventory objects
+
+// Find All MaterialInventories; give 200 & show materialInventoryies
+GET /api/materialInventory HTTP/1.1 
+Host: localhost:8080 
+### 
+
+
+// Find MaterialInventory By ID; 
+//should give 200 & show materialInventory of 9 for 'gold earring set' (if run from scratch)
+GET /api/materialInventory/1 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+
+// Delete By Id; should give 204 first time and 404 after
+DELETE /api/materialInventory/1 HTTP/1.1 
+Host: localhost:8080
+### 
+
+// Add a MaterialInventory; should give 201 & show materialInventory for materialId: 1
+POST /api/materialInventory HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "totalQuantity": 10,
+    "materialId": 1
+} 
+
+
+### 
+
+// View new MaterialInventory 
+// Should give 200 & show materialInventory
+GET /api/materialInventory/7 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+
+// Try to add a duplicate materialInventory 
+// Should give 400 with "This material already has an inventory object." message
+POST /api/materialInventory HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "totalQuantity": 11,
+    "materialId": 1
+} 
+###  
+
+
+// Update the materialInventory  
+// Should give 204
+PUT /api/materialInventory/7 HTTP/1.1 
+Host: localhost:8080 
+Content-Type: application/json 
+
+{
+    "totalQuantity": 16,
+    "materialId": 1
+} 
+
+### 
+
+// View the updated materialInventory 
+// Should give 200 & show materialInventory's new quanitity
+GET /api/materialInventory/7 HTTP/1.1 
+Host: localhost:8080 
+###  
+
+
+
+// Delete By Id; should give 204 the first time
+DELETE /api/materialInventory/7 HTTP/1.1 
+Host: localhost:8080
+### 
+
+
+// View all materialInventorys to make sure it was deleted
+// Should give 200 with remaining materialInventory objects
+GET /api/materialInventory HTTP/1.1 
+Host: localhost:8080 
+###  

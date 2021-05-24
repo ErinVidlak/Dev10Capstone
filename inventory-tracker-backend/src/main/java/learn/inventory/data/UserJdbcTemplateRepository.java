@@ -46,7 +46,12 @@ public class UserJdbcTemplateRepository implements UserRepository{
         final String sql = "select user_id "
                 + "from user limit 1000;";
 
-        return jdbcTemplate.query(sql, new UserMapper());
+        List<User> users = jdbcTemplate.query(sql, new UserMapper());
+        for (User user : users) {
+            addMaterials(user);
+            addProducts(user);
+        }
+        return users;
     }
 
     @Override
