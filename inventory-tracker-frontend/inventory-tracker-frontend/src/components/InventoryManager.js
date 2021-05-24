@@ -9,7 +9,7 @@ import MaterialPurchaseList from './MaterialPurchaseList';
 
 function InventoryManager() {
     const [user, setUser] = useState(null); 
-    // const [messages, setMessages] = useState([]); 
+    const [messages, setMessages] = useState([]); 
 
     const login = (token) => {
         const { id, sub: username, roles: rolesString } = jwt_decode(token);
@@ -65,7 +65,7 @@ function InventoryManager() {
             <Router>
             <Switch>
                 <Route path="/materialPurchases">
-                    <MaterialPurchaseList />
+                    <MaterialPurchaseList messages={messages}/>
                 </Route>
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
