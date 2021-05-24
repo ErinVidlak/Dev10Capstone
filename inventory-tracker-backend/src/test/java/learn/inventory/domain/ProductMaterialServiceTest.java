@@ -30,6 +30,7 @@ public class ProductMaterialServiceTest {
         assertEquals(initialList.size(), 2);
 
         ProductMaterial expected = initialList.get(0);
+        assertNotNull(expected);
         when(repository.findByProductId(1).get(0)).thenReturn(expected);
         ProductMaterial actual = service.findByProductId(1).get(0);
         assertEquals(expected, actual);
