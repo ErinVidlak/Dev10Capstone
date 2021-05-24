@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useState } from 'react';
-import AuthContext from './AuthContext'; 
+import AuthContext from '../context/AuthContext'; 
 import jwt_decode from 'jwt-decode'; 
 import Login from './Login'; 
 import NotFound from './NotFound'; 
