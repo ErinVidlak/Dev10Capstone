@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router-dom";
 import { findById } from "../../services/materialAPI";
 import { capitalizeEach, formatPricePerUnit } from "../../utils/helpers";
 import MaterialInventory from "./MaterialInventory";
@@ -12,7 +12,7 @@ export default function MaterialDetailedView() {
   const [material, setMaterial] = useState({
     materialId: 0,
     materialName: "",
-    pricePerUnit: 0.0,
+    pricePerUnit: 0.00,
     userId: "",
     inventory: {},
     purchases: [],
@@ -60,6 +60,23 @@ export default function MaterialDetailedView() {
       </div>
       <div className="row">
         <MaterialProductListView products={material.products} />
+      </div>
+      <div className="row">
+        <div className="col 1">
+          <Link to="/materials">
+            <button className=" waves-effect waves-light btn ">Back </button>
+          </Link>
+        </div>
+        <div className="col 1">
+          <button className="waves-effect waves-light btn  blue darken-3">
+            Update Material
+          </button>
+        </div>
+        <div className="col 1">
+          <button className="waves-effect waves-light btn  red lighten-1">
+            Delete Material
+          </button>
+        </div>
       </div>
     </div>
   );

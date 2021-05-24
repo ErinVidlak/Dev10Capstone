@@ -12,6 +12,7 @@ import NotFound from "./NotFound";
 import Register from "./Register";
 import MaterialListView from "./material/MaterialListView";
 import MaterialDetailedView from "./material/MaterialDetailedView";
+import AddMaterialForm from "./material/forms/AddMaterialForm";
 
 function InventoryManager() {
   const [user, setUser] = useState(null);
@@ -73,6 +74,7 @@ function InventoryManager() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route exact path="/materials" component={MaterialListView} />
+          <Route exact path="/materials/add" component={AddMaterialForm} />
           <Route
             exact path="/materials/:materialId"
             component={MaterialDetailedView}
