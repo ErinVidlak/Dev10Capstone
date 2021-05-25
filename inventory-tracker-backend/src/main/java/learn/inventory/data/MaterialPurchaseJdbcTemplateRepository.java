@@ -101,7 +101,8 @@ public class MaterialPurchaseJdbcTemplateRepository implements MaterialPurchaseR
                     " purchase_quantity = ?, " +
                     " quantity_units = ?, " +
                     " purchase_date = ?, " +
-                    " purchase_description = ? " +
+                    " purchase_description = ?, " +
+                    " material_id = ? " +
                     " where material_purchase_id = ?;";
 
             return jdbcTemplate.update(sql,
@@ -110,6 +111,7 @@ public class MaterialPurchaseJdbcTemplateRepository implements MaterialPurchaseR
                     purchase.getUnits(),
                     purchase.getDatePurchased(),
                     purchase.getDescription(),
+                    purchase.getMaterialId(),
                     purchase.getPurchaseId()) > 0;
     }
 

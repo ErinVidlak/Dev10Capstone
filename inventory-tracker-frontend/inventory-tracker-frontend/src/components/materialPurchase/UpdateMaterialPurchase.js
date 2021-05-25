@@ -1,15 +1,21 @@
-import { useState, useContext } from 'react'; 
+import { useState, useEffect, useContext } from 'react'; 
 import { useHistory, useParams } from 'react-router';
 import MessageContext from '../../context/MessageContext';
+import { findAll } from '../../services/materialAPI';
 
 function UpdateMaterialPurchase({ materialName, materialPurchase }) {
     const history = useHistory();
     const { purchaseId } = useParams();
     const [updatedMaterialPurchase, setUpdatedMaterialPurchase] = useState(materialPurchase); 
     const { setMessages } = useContext(MessageContext);
+    const [materials, setMaterials] = useState([]);
+    useEffect(() => {
+        findAll().then((result) => {setMaterials(result)});
+    }, []);
 
     const submit = (evt) => {
-        evt.preventDefault()  
+        evt.preventDefault()
+        console.log(updatedMaterialPurchase)
         fetch(`http://localhost:8080/api/materialPurchase/${purchaseId}`, {
             method: "PUT", 
             headers: { "Content-Type": "application/json"}, 
@@ -35,6 +41,13 @@ function UpdateMaterialPurchase({ materialName, materialPurchase }) {
         history.push("/purchases");
     }
 
+    const onSelectChange = (event) => {
+        setUpdatedMaterialPurchase({
+            ...updatedMaterialPurchase,
+            materialId: +event.target.value,
+        })
+    }
+
     return (
         <>
         {updatedMaterialPurchase && (
@@ -45,9 +58,13 @@ function UpdateMaterialPurchase({ materialName, materialPurchase }) {
                 <label htmlFor="datePurchased">Purchase Date</label>
                     <input type="date" id="datePurchased" name="updatedMaterialPurchase[datePurchased]" value={updatedMaterialPurchase.datePurchased} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, datePurchased: evt.target.value})}/>
                 </div>
-                <div>
-                <label htmlFor="materialName">Material Name</label>    
-                    <input type="text" id="materialName" name="material[materialName]" readOnly value={materialName}/>
+                <label>Material Name</label>
+                <div className="input-field col s12">
+                <select className="browser-default" value={updatedMaterialPurchase.materialId} onChange={onSelectChange}>
+                    {materials.map((material) => (
+                        <option key={material.materialId} value={material.materialId}>{material.materialName}</option>
+                    ))}
+                </select>
                 </div>
                 <div>
                 <label htmlFor="purchasePrice">Cost</label>    
@@ -59,7 +76,7 @@ function UpdateMaterialPurchase({ materialName, materialPurchase }) {
                 </div>
                 <div>
                 <label htmlFor="units">Units</label>    
-                    <input type="text" id="units" name="updatedMaterialPurchase[units]" value={updatedMaterialPurchase.units} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, units: evt.target.value})}/>
+                    <input type="text" id="units" name="updatedMaterialPurchase[units]" value={updatedMaterialPurchase.units || ""} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, units: evt.target.value})}/>
                 </div>
                 <div>
                 <label htmlFor="description">Description</label>    

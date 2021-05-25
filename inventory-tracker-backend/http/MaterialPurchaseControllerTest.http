@@ -26,7 +26,7 @@ Content-Type: application/json
     "units": "yards",
     "datePurchased": "2020-09-15",
     "description": "yarn of various colors totaling 500 yards from Amazon",
-    "materialId": 5
+    "materialId": 6
 } 
 
 ###
