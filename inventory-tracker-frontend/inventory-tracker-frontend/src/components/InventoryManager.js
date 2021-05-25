@@ -101,8 +101,6 @@ function InventoryManager() {
               path="/purchases/:purchaseId"
               component={MaterialPurchaseDetailedView}
             />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>
