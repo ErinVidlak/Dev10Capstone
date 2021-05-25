@@ -9,6 +9,7 @@ function UpdateMaterialPurchase({ materialName, materialPurchase }) {
     const [updatedMaterialPurchase, setUpdatedMaterialPurchase] = useState(materialPurchase); 
     const { setMessages } = useContext(MessageContext);
     const [materials, setMaterials] = useState([]);
+
     useEffect(() => {
         findAll().then((result) => {setMaterials(result)});
     }, []);
@@ -68,7 +69,7 @@ function UpdateMaterialPurchase({ materialName, materialPurchase }) {
                 </div>
                 <div>
                 <label htmlFor="purchasePrice">Cost</label>    
-                    <input type="number" id="purchasePrice" name="updatedMaterialPurchase[purchasePrice]" value={updatedMaterialPurchase.purchasePrice} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, purchasePrice: evt.target.value})}/>
+                    <input type="number" step="0.01" id="purchasePrice" name="updatedMaterialPurchase[purchasePrice]" value={updatedMaterialPurchase.purchasePrice} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, purchasePrice: evt.target.value})}/>
                 </div>
                 <div>
                 <label htmlFor="quantityPurchased">Quantity</label>    

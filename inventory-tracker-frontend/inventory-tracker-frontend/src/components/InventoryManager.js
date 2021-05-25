@@ -8,6 +8,7 @@ import Register from './Register';
 import MaterialPurchaseListView from './materialPurchase/MaterialPurchaseListView'
 import MaterialPurchaseDetailedView from './materialPurchase/MaterialPurchaseDetailedView';
 import MessageContext from '../context/MessageContext';
+import AddMaterialPurchase from '../components/materialPurchase/AddMaterialPurchase';
 
 function InventoryManager() {
     const [user, setUser] = useState(null); 
@@ -70,9 +71,13 @@ function InventoryManager() {
                             <MaterialPurchaseListView />
                         </Route>
                         <Route 
+                            path="/purchases/add"
+                            component={AddMaterialPurchase}
+                        />
+                        <Route 
                             path="/purchases/:purchaseId"
                             component={MaterialPurchaseDetailedView}
-                        />
+                        /> 
                         <Route path="/login" component={Login} />
                         <Route path="/register" component={Register} />
                         <Route path="*" component={NotFound} />
