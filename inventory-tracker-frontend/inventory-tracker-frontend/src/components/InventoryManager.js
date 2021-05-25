@@ -1,24 +1,22 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
-import { useState } from "react";
-import AuthContext from "../context/AuthContext";
-import jwt_decode from "jwt-decode";
-import Login from "./Login";
-import NotFound from "./NotFound";
-import Register from "./Register";
-import MaterialPurchaseListView from "./materialPurchase/MaterialPurchaseListView";
-import MaterialPurchaseDetailedView from "./materialPurchase/MaterialPurchaseDetailedView";
-import MessageContext from "../context/MessageContext";
-import AddMaterialPurchase from "../components/materialPurchase/AddMaterialPurchase";
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { useState } from 'react';
+import AuthContext from '../context/AuthContext';
+import jwt_decode from 'jwt-decode';
+import Login from './Login';
+import NotFound from './NotFound';
+import Register from './Register';
+import MaterialPurchaseListView from './materialPurchase/MaterialPurchaseListView'
+import MaterialPurchaseDetailedView from './materialPurchase/MaterialPurchaseDetailedView';
+import MessageContext from '../context/MessageContext';
+import AddMaterialPurchase from '../components/materialPurchase/AddMaterialPurchase';
 
 import MaterialListView from "./material/MaterialListView";
 import MaterialDetailedView from "./material/MaterialDetailedView";
 import AddMaterialForm from "./material/forms/AddMaterialForm";
 import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
+
+import ProductListView from './product/ProductListView';
+import ProductDetailedView from './product/ProductListView';
 
 function InventoryManager() {
   const [user, setUser] = useState(null);
@@ -100,6 +98,13 @@ function InventoryManager() {
             <Route
               path="/purchases/:purchaseId"
               component={MaterialPurchaseDetailedView}
+            />
+            <Route exact path="/products">
+                <ProductListView />
+            </Route>
+            <Route
+                path="/products/:productId"
+                component={ProductDetailedView}
             />
             <Route path="*" component={NotFound} />
           </Switch>
