@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router-dom";
 import { findById } from "../../services/materialPurchaseAPI";
 import { capitalizeEach } from "../../utils/helpers";
 import dateFormat from 'dateformat';
@@ -89,6 +89,9 @@ export default function MaterialPurchaseDetailedView() {
                     </tbody>
                 </table>
             </div> 
+            <Link to="/purchases">
+            <button className=" waves-effect waves-light btn ">Back </button>
+            </Link>
             <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" onClick={() => setShowUpdateForm(true)}>Update</button>
             <button className="waves-effect waves-light btn  red lighten-1" onClick={() => setShowDeleteCard(true)}>Delete</button>
             {showUpdateForm && (

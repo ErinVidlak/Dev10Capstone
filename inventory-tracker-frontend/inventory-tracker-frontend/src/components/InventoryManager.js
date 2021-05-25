@@ -19,6 +19,7 @@ import MaterialListView from "./material/MaterialListView";
 import MaterialDetailedView from "./material/MaterialDetailedView";
 import AddMaterialForm from "./material/forms/AddMaterialForm";
 import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
+import ProductDetailedView from "./product/ProductDetailedView";
 
 function InventoryManager() {
   const [user, setUser] = useState(null);
@@ -81,26 +82,12 @@ function InventoryManager() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/materials" component={MaterialListView} />
             <Route exact path="/materials/add" component={AddMaterialForm} />
-            <Route
-              exact
-              path="/materials/edit/:materialId"
-              component={UpdateMaterialForm}
-            />
-            <Route
-              exact
-              path="/materials/:materialId"
-              component={MaterialDetailedView}
-            />
-            <Route
-              exact
-              path="/purchases"
-              component={MaterialPurchaseListView}
-            />
+            <Route exact path="/materials/edit/:materialId" component={UpdateMaterialForm} />
+            <Route exact path="/materials/:materialId" component={MaterialDetailedView} />
+            <Route exact path="/purchases" component={MaterialPurchaseListView} />
             <Route path="/purchases/add" component={AddMaterialPurchase} />
-            <Route
-              path="/purchases/:purchaseId"
-              component={MaterialPurchaseDetailedView}
-            />
+            <Route path="/purchases/:purchaseId" component={MaterialPurchaseDetailedView} />
+            <Route path="/products/:productId" component={ProductDetailedView}  />
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>
