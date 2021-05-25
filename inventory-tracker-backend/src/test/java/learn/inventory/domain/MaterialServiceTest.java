@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -22,14 +23,6 @@ class MaterialServiceTest {
 
     @MockBean
     MaterialJdbcTemplateRepository repository;
-
-    @Test
-    void findById() {
-        Material expected = repository.findById(1);
-        when(repository.findById(1)).thenReturn(expected);
-        Material actual = service.findById(1);
-        assertEquals(expected, actual);
-    }
 
 
     @Test

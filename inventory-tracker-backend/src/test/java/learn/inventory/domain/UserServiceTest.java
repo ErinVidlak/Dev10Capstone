@@ -22,14 +22,6 @@ public class UserServiceTest {
     UserRepository repository;
 
     @Test
-    void findById() {
-        User expected = repository.findById("username");
-        when(repository.findById("username")).thenReturn(expected);
-        User actual = service.findById("username");
-        assertEquals(expected, actual);
-    }
-
-    @Test
     void shouldAdd() {
         User expected = makeUser();
         User mockOut = makeUser();

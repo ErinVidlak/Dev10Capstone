@@ -2,8 +2,12 @@ package learn.inventory.data;
 
 import learn.inventory.models.ProductMaterial;
 
+import java.util.List;
+
 public interface ProductMaterialRepository {
-    boolean add(ProductMaterial productMaterial);
+    List<ProductMaterial> findByProductId(int productId);
+
+    ProductMaterial add(ProductMaterial productMaterial);
 
     boolean update(ProductMaterial productMaterial);
 

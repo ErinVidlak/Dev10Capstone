@@ -24,8 +24,6 @@ class MaterialPurchaseServiceTest {
     @MockBean
     MaterialPurchaseRepository repository;
 
-
-
     @Test
     void shouldAdd() {
         MaterialPurchase expected = makePurchase();
