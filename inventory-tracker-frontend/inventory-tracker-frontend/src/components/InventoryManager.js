@@ -7,22 +7,24 @@ import {
 import { useState } from "react";
 import AuthContext from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
-import Login from "./Login";
+import Login from "./user/Login";
 import NotFound from "./NotFound";
-import Register from "./Register";
+import Register from "./user/Register";
 import MaterialPurchaseListView from "./materialPurchase/MaterialPurchaseListView";
 import MaterialPurchaseDetailedView from "./materialPurchase/MaterialPurchaseDetailedView";
 import MessageContext from "../context/MessageContext";
 import AddMaterialPurchase from "../components/materialPurchase/AddMaterialPurchase";
-
 import MaterialListView from "./material/MaterialListView";
 import MaterialDetailedView from "./material/MaterialDetailedView";
 import AddMaterialForm from "./material/forms/AddMaterialForm";
 import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
+import { addAppUser, findAll, findById } from "../services/userAPI";
+
 
 function InventoryManager() {
   const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([]);
+
   const login = (token) => {
     const { id, sub: username, roles: rolesString } = jwt_decode(token);
     const roles = rolesString.split(",");
@@ -70,6 +72,10 @@ function InventoryManager() {
     user,
     authenticate,
     logout,
+    //our User class API service call functions
+    addAppUser,
+    findById,
+    findAll
   };
 
   return (
@@ -101,8 +107,6 @@ function InventoryManager() {
               path="/purchases/:purchaseId"
               component={MaterialPurchaseDetailedView}
             />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>
