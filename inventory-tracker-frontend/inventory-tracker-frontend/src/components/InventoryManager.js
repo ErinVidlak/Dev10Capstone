@@ -19,10 +19,13 @@ import MaterialDetailedView from "./material/MaterialDetailedView";
 import AddMaterialForm from "./material/forms/AddMaterialForm";
 import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
 import { addAppUser, findAll, findById } from "../services/userAPI";
-
+import Home from "./Home";
 
 function InventoryManager() {
-  const [user, setUser] = useState(null);
+  const storage = localStorage.getItem("user");
+  const userFromStorage = JSON.parse(storage);
+
+  const [user, setUser] = useState(userFromStorage);
   const [messages, setMessages] = useState([]);
 
   const login = (token) => {
@@ -38,6 +41,7 @@ function InventoryManager() {
         return this.roles.includes(role);
       },
     };
+    localStorage.setItem("user", JSON.stringify(user));
 
     setUser(user);
   };
@@ -66,6 +70,7 @@ function InventoryManager() {
 
   const logout = () => {
     setUser(null);
+    localStorage.clear();
   };
 
   const auth = {
@@ -75,14 +80,16 @@ function InventoryManager() {
     //our User class API service call functions
     addAppUser,
     findById,
-    findAll
+    findAll,
   };
-
+  // {user ? <Home /> : <Redirect to="/login" />}
   return (
     <AuthContext.Provider value={auth}>
       <MessageContext.Provider value={{ messages, setMessages }}>
         <Router>
           <Switch>
+            <Route exact path="/" component={Home} />
+
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/materials" component={MaterialListView} />
