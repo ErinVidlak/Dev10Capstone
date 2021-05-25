@@ -19,6 +19,7 @@ export default function MaterialDetailedView() {
     purchases: [],
     products: [],
   });
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
 
   //GET material
   useEffect(() => {
@@ -76,7 +77,14 @@ export default function MaterialDetailedView() {
           </Link>
         </div>
         <div className="col 1">
-          <DeleteMaterialForm initialMaterial={material} />
+          <button
+            className="waves-effect waves-light btn  red lighten-1"
+            onClick={() => setShowDeleteForm(true)}>
+            Delete
+          </button>
+        </div>
+        <div className="col 12">
+          {showDeleteForm && <DeleteMaterialForm initialMaterial={material} setShowDeleteForm={setShowDeleteForm} />}
         </div>
       </div>
     </div>

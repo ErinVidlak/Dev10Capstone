@@ -6,7 +6,7 @@ export default function AddMaterialForm() {
   const [material, setMaterial] = useState({
     materialId: 0,
     materialName: "",
-    pricePerUnit: (0.00).toFixed(2),
+    pricePerUnit: 0.0,
     userId: "username",
   });
 
@@ -21,7 +21,7 @@ export default function AddMaterialForm() {
 
   async function handleSubmit(evt) {
     let nextMaterial = { ...material };
-    nextMaterial.pricePerUnit = parseInt(material.pricePerUnit).toFixed(2);
+    nextMaterial.pricePerUnit = parseFloat(material.pricePerUnit).toFixed(2);
     setMaterial(nextMaterial);
 
     evt.preventDefault();

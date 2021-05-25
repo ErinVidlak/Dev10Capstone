@@ -30,7 +30,7 @@ export default function UpdateMaterialForm() {
 
   async function handleSubmit(evt) {
     let nextMaterial = { ...material };
-    nextMaterial.pricePerUnit = parseInt(material.pricePerUnit).toFixed(2);
+    nextMaterial.pricePerUnit = parseFloat(material.pricePerUnit).toFixed(2);
     setMaterial(nextMaterial);
 
     evt.preventDefault();
