@@ -2,7 +2,7 @@
 import {formatPricePerUnit} from '../../utils/helpers';
 
 
-export default function MaterialPurchaseTableSummary({purchaseId, purchasePrice, quantityPurchased}) {
+export default function MaterialWithPurchaseTableSummary({purchaseId, purchasePrice, quantityPurchased}) {
 
 	return (
     <tr>

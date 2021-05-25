@@ -5,7 +5,7 @@ import { capitalizeEach, formatPricePerUnit } from "../../utils/helpers";
 import DeleteMaterialForm from "./forms/DeleteMaterialForm";
 import MaterialInventory from "./MaterialInventory";
 import MaterialProductListView from "./MaterialProductListView";
-import MaterialPurchaseListView from "./MaterialPurchaseListView";
+import MaterialWithPurchaseListView from "./MaterialWithPurchaseListView";
 
 export default function MaterialDetailedView() {
   const { materialId } = useParams();
@@ -57,7 +57,7 @@ export default function MaterialDetailedView() {
         </div>
       </div>
       <div className="row center">
-        <MaterialPurchaseListView purchases={material.purchases} />
+        <MaterialWithPurchaseListView purchases={material.purchases} />
       </div>
       <div className="row center">
         <MaterialProductListView products={material.products} />
@@ -76,8 +76,7 @@ export default function MaterialDetailedView() {
           </Link>
         </div>
         <div className="col 1">
-        <DeleteMaterialForm initialMaterial={material} />
-         
+          <DeleteMaterialForm initialMaterial={material} />
         </div>
       </div>
     </div>
