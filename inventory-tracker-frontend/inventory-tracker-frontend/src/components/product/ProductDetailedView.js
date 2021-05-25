@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { findById } from '../../services/productAPI';
 import { capitalizeEach } from '../../utils/helpers';
+import ListedProductListView from './ListedProductListView';
 
 export default function ProductDetailedView() {
     const { productId } = useParams();
@@ -55,6 +56,10 @@ export default function ProductDetailedView() {
                     </div>
                 </div>
             </div> 
+
+            <div className="row center">
+                <ListedProductListView listedProduct={product.listedProduct}/>
+            </div>
         </div> 
     );
 
