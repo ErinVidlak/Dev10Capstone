@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import Logout from "./user/Logout";
 
