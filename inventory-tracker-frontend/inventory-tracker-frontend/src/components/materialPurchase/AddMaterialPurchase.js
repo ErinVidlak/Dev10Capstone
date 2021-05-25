@@ -59,7 +59,7 @@ function AddMaterialPurchase() {
                 </div>
                 <label>Material Name</label>
                 <div className="input-field col s12">
-                <select className="browser-default" onChange={onSelectChange}>
+                <select className="browser-default" onChange={onSelectChange} required>
                     {materials.map((material) => (
                         <option key={material.materialId} value={material.materialId}>{material.materialName}</option>
                     ))}
