@@ -8,8 +8,7 @@ import DeleteCard from './DeleteCard';
 import UpdateMaterialPurchase from './UpdateMaterialPurchase';
 
 
-
-export default function MaterialPurchaseDetailedView({setMessages}) {
+export default function MaterialPurchaseDetailedView() {
     const { purchaseId } = useParams();
     const [showDeleteCard, setShowDeleteCard] = useState(false);
     const [showUpdateForm, setShowUpdateForm] = useState(false);
