@@ -10,6 +10,11 @@ import jwt_decode from "jwt-decode";
 import Login from "./Login";
 import NotFound from "./NotFound";
 import Register from "./Register";
+import MaterialPurchaseListView from "./materialPurchase/MaterialPurchaseListView";
+import MaterialPurchaseDetailedView from "./materialPurchase/MaterialPurchaseDetailedView";
+import MessageContext from "../context/MessageContext";
+import AddMaterialPurchase from "../components/materialPurchase/AddMaterialPurchase";
+
 import MaterialListView from "./material/MaterialListView";
 import MaterialDetailedView from "./material/MaterialDetailedView";
 import AddMaterialForm from "./material/forms/AddMaterialForm";
@@ -17,8 +22,7 @@ import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
 
 function InventoryManager() {
   const [user, setUser] = useState(null);
-  // const [messages, setMessages] = useState([]);
-
+  const [messages, setMessages] = useState([]);
   const login = (token) => {
     const { id, sub: username, roles: rolesString } = jwt_decode(token);
     const roles = rolesString.split(",");
@@ -70,26 +74,39 @@ function InventoryManager() {
 
   return (
     <AuthContext.Provider value={auth}>
-      <Router>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route exact path="/materials" component={MaterialListView} />
-          <Route exact path="/materials/add" component={AddMaterialForm} />
-          <Route
-            exact
-            path="/materials/edit/:materialId"
-            component={UpdateMaterialForm}
-          />
-
-          <Route
-            exact
-            path="/materials/:materialId"
-            component={MaterialDetailedView}
-          />
-          <Route path="*" component={NotFound} />
-        </Switch>
-      </Router>
+      <MessageContext.Provider value={{ messages, setMessages }}>
+        <Router>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/materials" component={MaterialListView} />
+            <Route exact path="/materials/add" component={AddMaterialForm} />
+            <Route
+              exact
+              path="/materials/edit/:materialId"
+              component={UpdateMaterialForm}
+            />
+            <Route
+              exact
+              path="/materials/:materialId"
+              component={MaterialDetailedView}
+            />
+            <Route
+              exact
+              path="/purchases"
+              component={MaterialPurchaseListView}
+            />
+            <Route path="/purchases/add" component={AddMaterialPurchase} />
+            <Route
+              path="/purchases/:purchaseId"
+              component={MaterialPurchaseDetailedView}
+            />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </Router>
+      </MessageContext.Provider>
     </AuthContext.Provider>
   );
 }
