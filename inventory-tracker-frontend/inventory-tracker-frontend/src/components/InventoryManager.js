@@ -88,7 +88,7 @@ function InventoryManager() {
                 <ProductListView />
             </Route>
             <Route
-                path="/products/:productId"
+                exact path="/products/:productId"
                 component={ProductDetailedView}
             />
             <Route path="*" component={NotFound} />

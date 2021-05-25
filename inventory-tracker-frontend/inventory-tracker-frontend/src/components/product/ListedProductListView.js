@@ -1,6 +1,16 @@
 import ListedProductTableSummary from './ListedProductTableSummary';
+import dateFormat from 'dateformat';
 
 export default function ListedProductListView({ listedProduct }) {
+    const displayDateSold = () => {
+        console.log(listedProduct);
+        if (listedProduct.dateSold) {
+            return dateFormat(new Date(listedProduct.dateSold), "paddedShortDate");
+        } else {
+            return "Unsold";
+        }
+    }
+    
     return (
         <table className="striped centered">
             <thead className="deep-purple lighten-3">
@@ -15,8 +25,8 @@ export default function ListedProductListView({ listedProduct }) {
                     <ListedProductTableSummary 
                         listingName={listedProduct.listingName}
                         listedPrice={listedProduct.listedPrice}
-                        dateListed={listedProduct.dateListed}
-                        dateSold={listedProduct.dateSold}
+                        dateListed={dateFormat(new Date(listedProduct.dateListed), "paddedShortDate")}
+                        dateSold={dateFormat(new Date(listedProduct.dateSold), "paddedShortDate")}
                     />
             </tbody>
         </table>
