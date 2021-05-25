@@ -50,7 +50,7 @@ function AddMaterialPurchase() {
     }
 
     return(
-        <>
+        <div className="container">
             <h4>Add a Purchase</h4>
             <form onSubmit={submit}>
                 <div>
@@ -85,7 +85,7 @@ function AddMaterialPurchase() {
                 <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" type="submit">Add Purchase</button>  <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" type="button" onClick={cancel}>Cancel</button>
                 </div>
             </form>
-        </>
+        </div>
     );
 } 
 
