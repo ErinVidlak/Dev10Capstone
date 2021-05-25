@@ -10,7 +10,7 @@ export default function ListedProductListView({ listedProduct }) {
             return "Unsold";
         }
     }
-    
+    console.log(listedProduct);
     return (
         <table className="striped centered">
             <thead className="deep-purple lighten-3">
@@ -26,7 +26,7 @@ export default function ListedProductListView({ listedProduct }) {
                         listingName={listedProduct.listingName}
                         listedPrice={listedProduct.listedPrice}
                         dateListed={dateFormat(new Date(listedProduct.dateListed), "paddedShortDate")}
-                        dateSold={dateFormat(new Date(listedProduct.dateSold), "paddedShortDate")}
+                        dateSold={displayDateSold()}
                     />
             </tbody>
         </table>

@@ -10,12 +10,12 @@ export default function ProductDetailedView() {
         productName: "",
         totalMaterialsCost: 0.0,
         timeToMake: 0,
-        listedProduct: {},
         materials: [] 
     });
 
     // GET product
     useEffect(() => {
+        console.log(productId);
         findById(productId).then((data) => {
         setProduct(data);
         });
@@ -58,7 +58,7 @@ export default function ProductDetailedView() {
             </div> 
 
             <div className="row center">
-                <ListedProductListView listedProduct={product.listedProduct}/>
+                {product.listedProduct && <ListedProductListView listedProduct={product.listedProduct}/>}
             </div>
         </div> 
     );
