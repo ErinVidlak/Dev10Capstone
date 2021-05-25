@@ -1,16 +1,25 @@
-import { addMaterial } from "../../../services/materialAPI";
-import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { updateMaterial, findById } from "../../../services/materialAPI";
+import { useState, useEffect } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
 
-export default function AddMaterialForm() {
+export default function UpdateMaterialForm() {
+  const { materialId } = useParams();
+
   const [material, setMaterial] = useState({
     materialId: 0,
     materialName: "",
-    pricePerUnit: (0.00).toFixed(2),
+    pricePerUnit: 0.0,
     userId: "username",
   });
 
   const history = useHistory();
+
+  //GET current material to update
+  useEffect(() => {
+    findById(materialId).then((data) => {
+      setMaterial(data);
+    });
+  }, [materialId]);
 
   function handleChange(evt) {
     let nextMaterial = { ...material };
@@ -26,8 +35,8 @@ export default function AddMaterialForm() {
 
     evt.preventDefault();
     evt.stopPropagation();
-    await addMaterial(nextMaterial);
-    history.push("/materials");
+    await updateMaterial(nextMaterial);
+    history.push(`/materials/${materialId}`);
   }
 
   return (
@@ -36,14 +45,14 @@ export default function AddMaterialForm() {
         <div class="col s12">
           <div className="card light-blue lighten-4">
             <div className="card-content black-text">
-              <span className="card-title ">Add New Material</span>
+              <span className="card-title ">Update Material {materialId}</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="row">
-        <form class="col s12" id="addMaterialForm" onSubmit={handleSubmit}>
+        <form class="col s12" id="updateMaterialForm" onSubmit={handleSubmit}>
           <div class="row">
             <div class="input-field col s12">
               <input
@@ -51,6 +60,7 @@ export default function AddMaterialForm() {
                 data-length="50"
                 id="material_name"
                 name="materialName"
+                value={material.materialName}
                 onChange={handleChange}
                 required
               />
@@ -63,14 +73,16 @@ export default function AddMaterialForm() {
                 class="decimal"
                 min="0.00"
                 step="0.01"
-                Defaultvalue={material.pricePerUnit}
+                value={material.pricePerUnit}
                 presicion={2}
                 name="pricePerUnit"
                 type="number"
                 id="price_per_unit"
                 onChange={handleChange}
               />
-              <label for="price_per_unit">Price Per Unit{" (Optional)"}</label>
+              <label htmlFor="price_per_unit">
+                Price Per Unit{" (Optional)"}
+              </label>
             </div>
             <div className="row">
               <div className="col">
@@ -82,7 +94,7 @@ export default function AddMaterialForm() {
                 </button>
               </div>
               <div className="col">
-                <Link to="/materials">
+                <Link to={"/materials/" + materialId}>
                   <button class="btn waves-effect waves-light red lighten-1 ">
                     Cancel
                   </button>

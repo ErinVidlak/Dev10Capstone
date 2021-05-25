@@ -12,7 +12,7 @@ export default function MaterialDetailedView() {
   const [material, setMaterial] = useState({
     materialId: 0,
     materialName: "",
-    pricePerUnit: 0.00,
+    pricePerUnit: 0.0,
     userId: "",
     inventory: {},
     purchases: [],
@@ -68,9 +68,11 @@ export default function MaterialDetailedView() {
           </Link>
         </div>
         <div className="col 1">
-          <button className="waves-effect waves-light btn  blue darken-3">
-            Update Material
-          </button>
+          <Link to={"/materials/edit/" + materialId}>
+            <button className="waves-effect waves-light btn  blue darken-3">
+              Update Material
+            </button>
+          </Link>
         </div>
         <div className="col 1">
           <button className="waves-effect waves-light btn  red lighten-1">
@@ -81,3 +83,4 @@ export default function MaterialDetailedView() {
     </div>
   );
 }
+//   "/materials/edit/:materialId"
