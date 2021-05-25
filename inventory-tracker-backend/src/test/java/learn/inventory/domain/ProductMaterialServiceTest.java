@@ -25,26 +25,15 @@ public class ProductMaterialServiceTest {
     ProductMaterialRepository repository;
 
     @Test
-    void findByProductId() {
-        List<ProductMaterial> initialList = repository.findByProductId(1);
-        assertEquals(initialList.size(), 2);
-        ProductMaterial expected = initialList.get(0);
-        assertNotNull(expected);
-        when(repository.findByProductId(1).get(0)).thenReturn(expected);
+    void shouldAdd() {
+        ProductMaterial expected = makeProductMaterial();
+        ProductMaterial mockOut = makeProductMaterial();
 
-        ProductMaterial actual = service.findByProductId(1).get(0);
-        assertEquals(expected, actual);
+        when(repository.add(expected)).thenReturn(mockOut);
+        Result<ProductMaterial> actual = service.add(expected);
+        assertEquals(ResultType.SUCCESS, actual.getType());
+        assertEquals(mockOut, actual.getPayload());
     }
-
-//    @Test
-//    void shouldAdd() {
-//        ProductMaterial expected = makeProductMaterial();
-//        ProductMaterial mockOut = makeProductMaterial();
-//        when(repository.add(expected)).thenReturn(mockOut);
-//        Result<ProductMaterial> actual = service.add(expected);
-//        assertEquals(ResultType.SUCCESS, actual.getType());
-//        assertEquals(mockOut, actual.getPayload());
-//    }
 
     @Test
     void shouldNotAddDuplicate() {

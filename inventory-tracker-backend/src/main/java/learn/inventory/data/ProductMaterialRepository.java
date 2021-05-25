@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProductMaterialRepository {
     List<ProductMaterial> findByProductId(int productId);
 
-    boolean add(ProductMaterial productMaterial);
+    ProductMaterial add(ProductMaterial productMaterial);
 
     boolean update(ProductMaterial productMaterial);
 

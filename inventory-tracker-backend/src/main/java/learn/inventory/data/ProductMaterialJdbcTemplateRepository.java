@@ -34,15 +34,18 @@ public class ProductMaterialJdbcTemplateRepository implements ProductMaterialRep
     }
 
     @Override
-    public boolean add(ProductMaterial productMaterial) {
+    public ProductMaterial add(ProductMaterial productMaterial) {
 
         final String sql = "insert into product_material (material_quantity_used, material_id, product_id) values "
                 + "(?,?,?);";
 
-        return jdbcTemplate.update(sql,
+        if (jdbcTemplate.update(sql,
                 productMaterial.getMaterialQuantity(),
                 productMaterial.getMaterial().getMaterialId(),
-                productMaterial.getProductId()) > 0;
+                productMaterial.getProductId()) > 0) {
+            return productMaterial;
+        }
+        return null;
     }
 
     @Override

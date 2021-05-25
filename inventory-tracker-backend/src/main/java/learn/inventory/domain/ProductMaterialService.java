@@ -29,15 +29,13 @@ public class ProductMaterialService {
 
     public Result<ProductMaterial> add(ProductMaterial productMaterial) {
         Result<ProductMaterial> result = validate(productMaterial);
+        validateNoDuplicatesExist(result, productMaterial);
         if (!result.isSuccess()) {
             return result;
         }
 
-        //forgot ! for this if statement
-        if (!repository.add(productMaterial)) {
-            result.addMessage("productMaterial not added", ResultType.INVALID);
-        }
-
+        productMaterial = repository.add(productMaterial);
+        result.setPayload(productMaterial);
         return result;
     }
 
@@ -89,5 +87,16 @@ public class ProductMaterialService {
             return result;
         }
         return result;
+    }
+
+    private void validateNoDuplicatesExist(Result<ProductMaterial> result, ProductMaterial productMaterial) {
+        List<ProductMaterial> productMaterials = repository.findByProductId(productMaterial.getProductId());
+        Material newMaterial = productMaterial.getMaterial();
+        for (ProductMaterial pm : productMaterials) {
+            Material material = pm.getMaterial();
+            if (newMaterial.getMaterialId() == material.getMaterialId()) {
+                result.addMessage("Product already is linked to this material", ResultType.INVALID);
+            }
+        }
     }
 }

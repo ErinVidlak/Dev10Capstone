@@ -41,7 +41,7 @@ public class ProductMaterialJdbcTemplateRepositoryTest {
     @Test
     void shouldAdd() {
         ProductMaterial productMaterial = makeProductMaterial();
-        assertTrue(repository.add(productMaterial));
+        assertNotNull(repository.add(productMaterial));
         try {
             repository.add(productMaterial);
             fail("cannot add the same ProductMaterial twice");

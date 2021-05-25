@@ -24,14 +24,6 @@ class ListedProductServiceTest {
     ListedProductRepository repository;
 
 
-    @Test
-    void findById() {
-        ListedProduct expected = repository.findById(1);
-        when(repository.findById(1)).thenReturn(expected);
-        ListedProduct actual = service.findById(1);
-        assertEquals(expected, actual);
-    }
-
 
     @Test
     void shouldAdd() {
