@@ -1,28 +1,23 @@
-import { useState, useEffect } from 'react'; 
+import { useState, useContext } from 'react'; 
 import { useHistory, useParams } from 'react-router';
+import MessageContext from '../../context/MessageContext';
 
-function UpdateMaterialPurchase() {
+function UpdateMaterialPurchase({ materialName, materialPurchase }) {
     const history = useHistory();
-    const { id } = useParams();
-    const [materialPurchase, setMaterialPurchase] = useState(); 
-
-    useEffect(() => {
-        fetch(`http://localhost:8080/api/materialPurchase/${id}`)
-        .then(response => response.json())
-        .then(data => setAgent(data))
-        .catch(error => console.log(error));
-    }, [id]);
+    const { purchaseId } = useParams();
+    const [updatedMaterialPurchase, setUpdatedMaterialPurchase] = useState(materialPurchase); 
+    const { setMessages } = useContext(MessageContext);
 
     const submit = (evt) => {
         evt.preventDefault()  
-        fetch(`http://localhost:8080/api/materialPurchase/${id}`, {
+        fetch(`http://localhost:8080/api/materialPurchase/${purchaseId}`, {
             method: "PUT", 
             headers: { "Content-Type": "application/json"}, 
-            body: JSON.stringify(materialPurchase),
+            body: JSON.stringify(updatedMaterialPurchase),
         }) 
             .then((response) => { 
                 if (response.ok) {
-                    setMessages([`Your ${material.materialName} purchase was successfully updated.`]);
+                    setMessages([`Your ${materialName} purchase was successfully updated.`]);
                 } else {
                     response.json().then(json => {
                         if (Array.isArray(json)) {
@@ -32,32 +27,51 @@ function UpdateMaterialPurchase() {
                         }
                     });
                 } 
-                history.push("/materialPurchase");
+                history.push("/purchases");
             }) 
     }
 
     const cancel = () => {
-        history.push("/materialPurchase");
+        history.push("/purchases");
     }
 
     return (
         <>
-        {materialPurchase && (
+        {updatedMaterialPurchase && (
             <>
             <h4>Update a Purchase</h4>
             <form onSubmit={submit}>
                 <div>
                 <label htmlFor="datePurchased">Purchase Date</label>
-                    <input type="date" id="datePurchased" name="materialPurchase[datePurchased]" onChange={evt => setMaterialPurchase({ ... materialPurchase, datePurchased: evt.target.value})}/>
+                    <input type="date" id="datePurchased" name="updatedMaterialPurchase[datePurchased]" value={updatedMaterialPurchase.datePurchased} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, datePurchased: evt.target.value})}/>
                 </div>
                 <div>
                 <label htmlFor="materialName">Material Name</label>    
+                    <input type="text" id="materialName" name="material[materialName]" readOnly value={materialName}/>
+                </div>
+                <div>
+                <label htmlFor="purchasePrice">Cost</label>    
+                    <input type="number" id="purchasePrice" name="updatedMaterialPurchase[purchasePrice]" value={updatedMaterialPurchase.purchasePrice} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, purchasePrice: evt.target.value})}/>
+                </div>
+                <div>
+                <label htmlFor="quantityPurchased">Quantity</label>    
+                    <input type="number" id="quantityPurchased" name="updatedMaterialPurchase[quantityPurchased]" value={updatedMaterialPurchase.quantityPurchased} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, quantityPurchased: evt.target.value})}/>
+                </div>
+                <div>
+                <label htmlFor="units">Units</label>    
+                    <input type="text" id="units" name="updatedMaterialPurchase[units]" value={updatedMaterialPurchase.units} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, units: evt.target.value})}/>
+                </div>
+                <div>
+                <label htmlFor="description">Description</label>    
+                    <input type="text" id="description" name="updatedMaterialPurchase[description]" value={updatedMaterialPurchase.description} onChange={evt => setUpdatedMaterialPurchase({ ... updatedMaterialPurchase, description: evt.target.value})}/>
+                </div>
+                <div>
+                <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" type="submit">Update Purchase</button>  <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" type="button" onClick={cancel}>Cancel</button>
                 </div>
             </form>
             </>
         )}
         </>
-
     );
 } 
 

@@ -3,13 +3,17 @@ import { useParams } from "react-router";
 import { findById } from "../../services/materialPurchaseAPI";
 import { capitalizeEach } from "../../utils/helpers";
 import dateFormat from 'dateformat';
-import { findById as findMaterialById } from '../../services/materialAPI'
-import DeleteCard from './DeleteCard'
+import { findById as findMaterialById } from '../../services/materialAPI';
+import DeleteCard from './DeleteCard';
+import UpdateMaterialPurchase from './UpdateMaterialPurchase';
 
 
-export default function MaterialPurchaseDetailedView() {
+
+export default function MaterialPurchaseDetailedView({setMessages}) {
     const { purchaseId } = useParams();
     const [showDeleteCard, setShowDeleteCard] = useState(false);
+    const [showUpdateForm, setShowUpdateForm] = useState(false);
+
     const [material, setMaterial] = useState({
         materialName: ""
     })
@@ -86,9 +90,13 @@ export default function MaterialPurchaseDetailedView() {
                     </tbody>
                 </table>
             </div> 
+            <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" onClick={() => setShowUpdateForm(true)}>Update</button>
             <button className="waves-effect waves-light btn  red lighten-1" onClick={() => setShowDeleteCard(true)}>Delete</button>
+            {showUpdateForm && (
+                <UpdateMaterialPurchase materialName={material.materialName} materialPurchase={materialPurchase}/>
+            )}
             {showDeleteCard && (
-                <DeleteCard setMessages={() => {}} materialName={material.materialName}/>
+                <DeleteCard materialName={material.materialName}/>
             )}
         </div>    
     );

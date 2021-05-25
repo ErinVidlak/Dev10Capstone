@@ -1,8 +1,11 @@
+import { useContext } from 'react';
 import { useHistory, useParams } from 'react-router';
+import MessageContext from '../../context/MessageContext';
 
-function DeleteCard({materialName, setMessages}) {
+function DeleteCard({ materialName }) {
     const history = useHistory();
     const { purchaseId } = useParams();
+    const { setMessages } = useContext(MessageContext);
 
     const confirm = () => {        
         fetch(`http://localhost:8080/api/materialPurchase/${purchaseId}`, {

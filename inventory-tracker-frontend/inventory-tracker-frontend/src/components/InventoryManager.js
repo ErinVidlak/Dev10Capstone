@@ -7,11 +7,11 @@ import NotFound from './NotFound';
 import Register from './Register';
 import MaterialPurchaseListView from './materialPurchase/MaterialPurchaseListView'
 import MaterialPurchaseDetailedView from './materialPurchase/MaterialPurchaseDetailedView';
+import MessageContext from '../context/MessageContext';
 
 function InventoryManager() {
     const [user, setUser] = useState(null); 
-    const [messages, setMessages] = useState([]); 
-
+    const [messages, setMessages] = useState([]);
     const login = (token) => {
         const { id, sub: username, roles: rolesString } = jwt_decode(token);
         const roles = rolesString.split(',');
@@ -63,20 +63,22 @@ function InventoryManager() {
 
     return ( 
         <AuthContext.Provider value={auth}>
-            <Router>
-            <Switch>
-                <Route exact path="/purchases">
-                    <MaterialPurchaseListView />
-                </Route>
-                <Route 
-                    path="/purchases/:purchaseId"
-                    component={MaterialPurchaseDetailedView}
-                />
-                <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
-                <Route path="*" component={NotFound} />
-            </Switch>
-        </Router> 
+            <MessageContext.Provider value={{messages, setMessages}}>
+                <Router>
+                    <Switch>
+                        <Route exact path="/purchases">
+                            <MaterialPurchaseListView />
+                        </Route>
+                        <Route 
+                            path="/purchases/:purchaseId"
+                            component={MaterialPurchaseDetailedView}
+                        />
+                        <Route path="/login" component={Login} />
+                        <Route path="/register" component={Register} />
+                        <Route path="*" component={NotFound} />
+                    </Switch>
+                </Router> 
+            </MessageContext.Provider>
         </AuthContext.Provider>
     );
 } 

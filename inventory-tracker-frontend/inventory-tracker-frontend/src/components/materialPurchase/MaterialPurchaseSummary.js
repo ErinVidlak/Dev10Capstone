@@ -6,7 +6,7 @@ export default function MaterialPurchaseSummary({
     materialId,
     datePurchased,
     purchasePrice,
-    materialPurchaseId
+    materialPurchaseId,
 }) {
     const [material, setMaterial] = useState({materialName: ""});
 
@@ -27,7 +27,7 @@ export default function MaterialPurchaseSummary({
         <tr>
             <td>{dateFormat(new Date(datePurchased), "paddedShortDate")}</td>
             <td>{material.materialName}</td>
-            <td>{purchasePrice}</td>
+            <td>${purchasePrice}</td>
             <td>
                 <Link to={`/purchases/${materialPurchaseId}`}>
                 <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3">

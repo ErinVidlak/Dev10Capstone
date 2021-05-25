@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { findAll } from "../../services/materialPurchaseAPI";
 import MaterialPurchaseSummary from "./MaterialPurchaseSummary";
 import Messages from "../Messages";
+import MessageContext from "../../context/MessageContext";
 
 export default function MaterialPurchaseListView() {
     const [materialPurchaseList, setMaterialPurchaseList] = useState([]);
-    const [messages, setMessages] = useState([]);
+    const {messages} = useContext(MessageContext);
 
     useEffect(() => {
         findAll().then((data) => {
@@ -41,6 +42,7 @@ export default function MaterialPurchaseListView() {
               ))}
             </tbody>
           </table>
+          {messages.length > 0 && <Messages messages={messages}/>}
         </div>
       );
 
