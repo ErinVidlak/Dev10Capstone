@@ -15,9 +15,8 @@ import MaterialDetailedView from "./material/MaterialDetailedView";
 import AddMaterialForm from "./material/forms/AddMaterialForm";
 import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
 import ProductDetailedView from "./product/ProductDetailedView";
-
 import ProductListView from './product/ProductListView';
-import ProductDetailedView from './product/ProductListView';
+
 
 function InventoryManager() {
   const [user, setUser] = useState(null);
@@ -84,10 +83,7 @@ function InventoryManager() {
             <Route exact path="/materials/:materialId" component={MaterialDetailedView} />
             <Route exact path="/purchases" component={MaterialPurchaseListView} />
             <Route path="/purchases/add" component={AddMaterialPurchase} />
-            <Route
-              path="/purchases/:purchaseId"
-              component={MaterialPurchaseDetailedView}
-            />
+            <Route path="/purchases/:purchaseId" component={MaterialPurchaseDetailedView} />
             <Route exact path="/products">
                 <ProductListView />
             </Route>

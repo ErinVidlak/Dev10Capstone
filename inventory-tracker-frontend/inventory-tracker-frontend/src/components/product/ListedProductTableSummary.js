@@ -1,12 +1,13 @@
-import dateFormat from 'dateformat';
 
-export default function ListedProductTableSummary({listingName, listedPrice, dateListed}) {
+
+export default function ListedProductTableSummary({listingName, listedPrice, dateListed, dateSold}) {
 
     return (
         <tr>
             <td>{listingName}</td>
             <td>${listedPrice}</td>
-            <td>{dateFormat(new Date(dateListed), "paddedShortDate")}</td>
+            <td>{dateListed}</td>
+            <td>{dateSold}</td>
         </tr>
     );
 } 

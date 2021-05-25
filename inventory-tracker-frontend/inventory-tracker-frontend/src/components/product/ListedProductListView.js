@@ -8,16 +8,16 @@ export default function ListedProductListView({ listedProduct }) {
                     <th>Listing Name</th>
                     <th>Listing Price</th>
                     <th>Date Listed</th>
+                    <th>Date Sold</th>
                 </tr>
             </thead>
             <tbody className="deep-purple lighten-4">
-                {listedProduct.map((l) => (
                     <ListedProductTableSummary 
-                        listingName={l.listingName}
-                        listedPrice={l.listedPrice}
-                        dateListed={l.dateListed}
+                        listingName={listedProduct.listingName}
+                        listedPrice={listedProduct.listedPrice}
+                        dateListed={listedProduct.dateListed}
+                        dateSold={listedProduct.dateSold}
                     />
-                ))}
             </tbody>
         </table>
     );
