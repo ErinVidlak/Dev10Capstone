@@ -30,9 +30,18 @@ public class ProductMaterialJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFind() {
+        List<ProductMaterial> actual = repository.findByProductId(1);
+        assertEquals(actual.size(), 2);
+
+        actual = repository.findByProductId(15);
+        assertEquals(actual.size(), 0);
+    }
+
+    @Test
     void shouldAdd() {
         ProductMaterial productMaterial = makeProductMaterial();
-        assertTrue(repository.add(productMaterial));
+        assertNotNull(repository.add(productMaterial));
         try {
             repository.add(productMaterial);
             fail("cannot add the same ProductMaterial twice");

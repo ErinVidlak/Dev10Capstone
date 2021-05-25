@@ -77,7 +77,7 @@ public class MaterialInventoryService {
             }
             return result;
         }
-        
+
         return result;
     }
 
