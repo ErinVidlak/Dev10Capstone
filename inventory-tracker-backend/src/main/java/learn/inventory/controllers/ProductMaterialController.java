@@ -2,6 +2,7 @@ package learn.inventory.controllers;
 
 import learn.inventory.domain.ProductMaterialService;
 import learn.inventory.domain.Result;
+import learn.inventory.models.Material;
 import learn.inventory.models.ProductMaterial;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,11 @@ public class ProductMaterialController {
 
     public ProductMaterialController(ProductMaterialService service) {
         this.service = service;
+    }
+
+    @GetMapping("/{productId}")
+    public List<ProductMaterial> findByProductId(@PathVariable int productId) {
+        return service.findByProductId(productId);
     }
 
     @PostMapping
