@@ -26,6 +26,12 @@ public class MaterialController {
         return service.findAll();
     }
 
+    @GetMapping("/user")
+    public List<Material> findAllUserMaterials() {
+        return service.findAll();
+    }
+
+
     @GetMapping("/{materialId}")
     public Material findById(@PathVariable int materialId) {
         return service.findById(materialId);

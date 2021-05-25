@@ -9,6 +9,8 @@ public interface MaterialRepository {
 
     List<Material> findAll();
 
+    List<Material> findAllUserMaterials(String userId);
+
     Material findById(int materialId);
 
     Material add(Material material);

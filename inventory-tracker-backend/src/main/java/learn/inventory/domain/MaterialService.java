@@ -23,6 +23,7 @@ public class MaterialService {
         return materialRepository.findAll();
     }
 
+    public List<Material> findAllUserMaterials(String userId){return null;  }
     public Material findById(int materialId) {
         return materialRepository.findById(materialId);
     }

@@ -13,6 +13,25 @@ export async function findAll() {
     return response.json();
 }
 
+//find all materials for a user
+export async function findAllUserMaterials(userId) {
+  userId="username";
+  const init = {
+    method: "GET",
+    headers: {
+      "userId": userId
+    }
+  };
+	  const response = await fetch( (apiUrl+"/user"), init);
+
+    if (response.status !== 200) {
+      return Promise.reject(response.status + " response is not 200 OK");
+    }
+
+    return response.json();
+}
+
+
 //find material by Id
 export async function findById(materialId) {
 	  const response = await fetch(`${apiUrl}/${materialId}`);
