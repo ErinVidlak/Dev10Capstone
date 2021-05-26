@@ -22,6 +22,9 @@ import { addAppUser, findAll, findById } from "../services/userAPI";
 import Home from "./Home";
 import AppHeader from "./AppHeader";
 
+import ProductListView from './product/ProductListView';
+import ProductDetailedView from './product/ProductListView';
+
 function InventoryManager() {
   const storage = localStorage.getItem("user");
   const userFromStorage = JSON.parse(storage);
@@ -114,6 +117,13 @@ function InventoryManager() {
             <Route
               path="/purchases/:purchaseId"
               component={MaterialPurchaseDetailedView}
+            />
+            <Route exact path="/products">
+                <ProductListView />
+            </Route>
+            <Route
+                path="/products/:productId"
+                component={ProductDetailedView}
             />
             <Route path="*" component={NotFound} />
           </Switch>
