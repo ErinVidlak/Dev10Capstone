@@ -10,6 +10,7 @@ export default function ProductMaterialListView({materials}) {
             <th>Material ID</th>
             <th>Material Name</th>
             <th>Material Quantity Used</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody className="deep-purple lighten-4">
