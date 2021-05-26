@@ -17,7 +17,7 @@ export default function Logout() {
 
   return (
     <>
-      <button className="btn red accent-2" onClick={handleClick}>
+      <button className="btn-small red accent-2" onClick={handleClick}>
         Logout
       </button>
     </>

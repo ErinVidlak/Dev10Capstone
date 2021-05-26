@@ -20,6 +20,7 @@ import AddMaterialForm from "./material/forms/AddMaterialForm";
 import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
 import { addAppUser, findAll, findById } from "../services/userAPI";
 import Home from "./Home";
+import AppHeader from "./AppHeader";
 
 function InventoryManager() {
   const storage = localStorage.getItem("user");
@@ -87,9 +88,9 @@ function InventoryManager() {
     <AuthContext.Provider value={auth}>
       <MessageContext.Provider value={{ messages, setMessages }}>
         <Router>
+          <AppHeader />
           <Switch>
             <Route exact path="/" component={Home} />
-
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/materials" component={MaterialListView} />
