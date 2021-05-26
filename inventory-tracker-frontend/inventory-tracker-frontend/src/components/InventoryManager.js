@@ -23,6 +23,7 @@ import Home from "./Home";
 import AppHeader from "./AppHeader";
 import ProductDetailedView from "./product/ProductDetailedView";
 import ProductListView from "./product/ProductListView";
+import ListedProductDetailedView from "./product/ListedProductDetailedView";
 
 function InventoryManager() {
   const storage = localStorage.getItem("user");
@@ -123,6 +124,11 @@ function InventoryManager() {
               exact
               path="/products/:productId"
               component={ProductDetailedView}
+            />
+            <Route
+              exact 
+              path="/products/:productId/listing/:listedProductId"
+              component={ListedProductDetailedView}
             />
             <Route path="*" component={NotFound} />
           </Switch>

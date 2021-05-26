@@ -57,7 +57,6 @@ export async function updateProduct(listedProduct) {
   await response.text();
   if (response.status !== 204) {
     //TODO: remove print statement after function confirmed working
-    console.log(product);
     return Promise.reject(response.status + " response not 204 NO CONTENT");
   }
 }
