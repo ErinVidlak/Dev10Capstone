@@ -19,6 +19,7 @@ export default function ListedProductListView({ listedProduct }) {
                     <th>Listing Price</th>
                     <th>Date Listed</th>
                     <th>Date Sold</th>
+                    <th>View</th>
                 </tr>
             </thead>
             <tbody className="deep-purple lighten-4">
