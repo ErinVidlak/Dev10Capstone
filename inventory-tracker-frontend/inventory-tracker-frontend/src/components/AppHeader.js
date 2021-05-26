@@ -39,6 +39,11 @@ export default function AppHeader() {
                 <span className="black-text">Purchases</span>
               </Link>
             </li>
+            <li>
+              <Link to="/products">
+                <span className="black-text">Products</span>
+              </Link>
+            </li>
           </ul>
         </div>
       ) : (

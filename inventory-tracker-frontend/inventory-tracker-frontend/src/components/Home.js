@@ -44,6 +44,9 @@ export default function Home() {
             <Link to="/purchases">
               <button className="btn"> view purchases </button>
             </Link>
+            <Link to="/products">
+              <button className="btn"> view products </button>
+            </Link>
           </div>
           <div class="divider"></div>
         </>
