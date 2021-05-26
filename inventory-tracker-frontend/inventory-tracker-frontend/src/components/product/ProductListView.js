@@ -43,6 +43,7 @@ export default function ProductListView() {
                 productName={product.productName}
                 totalMaterialsCost={product.totalMaterialsCost}
                 timeToMake={product.timeToMake}
+                productId={product.productId}
             />
             ))}
         </tbody>

@@ -21,9 +21,8 @@ import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
 import { addAppUser, findAll, findById } from "../services/userAPI";
 import Home from "./Home";
 import AppHeader from "./AppHeader";
-
-import ProductListView from './product/ProductListView';
-import ProductDetailedView from './product/ProductListView';
+import ProductDetailedView from "./product/ProductDetailedView";
+import ProductListView from "./product/ProductListView";
 
 function InventoryManager() {
   const storage = localStorage.getItem("user");
@@ -115,15 +114,15 @@ function InventoryManager() {
             />
             <Route path="/purchases/add" component={AddMaterialPurchase} />
             <Route
+              exact
               path="/purchases/:purchaseId"
               component={MaterialPurchaseDetailedView}
             />
-            <Route exact path="/products">
-                <ProductListView />
-            </Route>
+            <Route exact path="/products" component={ProductListView} />
             <Route
-                path="/products/:productId"
-                component={ProductDetailedView}
+              exact
+              path="/products/:productId"
+              component={ProductDetailedView}
             />
             <Route path="*" component={NotFound} />
           </Switch>

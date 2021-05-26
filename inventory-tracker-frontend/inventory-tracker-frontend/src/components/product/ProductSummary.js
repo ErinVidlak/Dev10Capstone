@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
 
 export default function ProductSummary({
     productId,
@@ -7,21 +6,6 @@ export default function ProductSummary({
     totalMaterialsCost,
     timeToMake,
 }) {
-
-    const [product, setProduct] = useState({productId: ""});
-
-    useEffect(() => {
-
-        fetch(`http://localhost:8080/api/product/${productId}`)  
-            .then(response => {
-                if (response.status !== 200) {
-                    return Promise.reject("Product fetch failed")
-                } 
-                return response.json();
-            }) 
-            .then(json => setProduct(json));
-
-    }, []);
     
     return (
         <tr>
