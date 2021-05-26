@@ -7,30 +7,45 @@ export default function Home() {
   const auth = useContext(AuthContext);
 
   return (
-    <div className="container">
-
+    <div className="container center">
       {!auth.user && (
         <>
-          <h2>Welcome Guest</h2>
-          <Link to="/login">
-            <button className="btn"> login </button>
-          </Link>
-          <Link to="/register">
-            <button className="btn"> register </button>
-          </Link>
+          <br />
+          <div class="divider"></div>
+          <div class="section">
+            <h2>Welcome Guest</h2>
+          </div>
+          <div class="divider"></div>
+          <div class="section">
+            <Link to="/login">
+              <button className="btn"> login </button>
+            </Link>
+            <Link to="/register">
+              <button className="btn"> register </button>
+            </Link>
+          </div>
+          <div class="divider"></div>
         </>
       )}
 
       {auth.user && (
         <>
-          <h2>Welcome Home {auth.user.username}</h2>
-          <Link to="/materials">
-            <button className="btn"> view materials </button>
-          </Link>
-          <Link to="/purchases">
-            <button className="btn"> view purchases </button>
-          </Link>
-          <Logout />
+          <br />
+          <div class="divider"></div>
+          <div class="section">
+            <h2>Welcome Home {auth.user.username}</h2>
+          </div>
+          <div class="divider"></div>
+
+          <div class="section">
+            <Link to="/materials">
+              <button className="btn"> view materials </button>
+            </Link>
+            <Link to="/purchases">
+              <button className="btn"> view purchases </button>
+            </Link>
+          </div>
+          <div class="divider"></div>
         </>
       )}
     </div>
