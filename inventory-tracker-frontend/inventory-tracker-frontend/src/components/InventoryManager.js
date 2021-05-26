@@ -1,26 +1,36 @@
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { useState } from 'react';
-import AuthContext from '../context/AuthContext';
-import jwt_decode from 'jwt-decode';
-import Login from './Login';
-import NotFound from './NotFound';
-import Register from './Register';
-import MaterialPurchaseListView from './materialPurchase/MaterialPurchaseListView'
-import MaterialPurchaseDetailedView from './materialPurchase/MaterialPurchaseDetailedView';
-import MessageContext from '../context/MessageContext';
-import AddMaterialPurchase from '../components/materialPurchase/AddMaterialPurchase';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { useState } from "react";
+import AuthContext from "../context/AuthContext";
+import jwt_decode from "jwt-decode";
+import Login from "./user/Login";
+import NotFound from "./NotFound";
+import Register from "./user/Register";
+import MaterialPurchaseListView from "./materialPurchase/MaterialPurchaseListView";
+import MaterialPurchaseDetailedView from "./materialPurchase/MaterialPurchaseDetailedView";
+import MessageContext from "../context/MessageContext";
+import AddMaterialPurchase from "../components/materialPurchase/AddMaterialPurchase";
 import MaterialListView from "./material/MaterialListView";
 import MaterialDetailedView from "./material/MaterialDetailedView";
 import AddMaterialForm from "./material/forms/AddMaterialForm";
 import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
-
-import ProductListView from './product/ProductListView';
-import ProductDetailedView from './product/ProductListView';
+import { addAppUser, findAll, findById } from "../services/userAPI";
+import Home from "./Home";
+import AppHeader from "./AppHeader";
+import ProductDetailedView from "./product/ProductDetailedView";
+import ProductListView from "./product/ProductListView";
 
 function InventoryManager() {
-  const [user, setUser] = useState(null);
+  const storage = localStorage.getItem("user");
+  const userFromStorage = JSON.parse(storage);
+
+  const [user, setUser] = useState(userFromStorage);
   const [messages, setMessages] = useState([]);
+
   const login = (token) => {
     const { id, sub: username, roles: rolesString } = jwt_decode(token);
     const roles = rolesString.split(",");
@@ -34,6 +44,7 @@ function InventoryManager() {
         return this.roles.includes(role);
       },
     };
+    localStorage.setItem("user", JSON.stringify(user));
 
     setUser(user);
   };
@@ -62,19 +73,26 @@ function InventoryManager() {
 
   const logout = () => {
     setUser(null);
+    localStorage.clear();
   };
 
   const auth = {
     user,
     authenticate,
     logout,
+    //our User class API service call functions
+    addAppUser,
+    findById,
+    findAll,
   };
-
+  // {user ? <Home /> : <Redirect to="/login" />}
   return (
     <AuthContext.Provider value={auth}>
       <MessageContext.Provider value={{ messages, setMessages }}>
         <Router>
+          <AppHeader />
           <Switch>
+            <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/materials" component={MaterialListView} />
@@ -96,15 +114,15 @@ function InventoryManager() {
             />
             <Route path="/purchases/add" component={AddMaterialPurchase} />
             <Route
+              exact
               path="/purchases/:purchaseId"
               component={MaterialPurchaseDetailedView}
             />
-            <Route exact path="/products">
-                <ProductListView />
-            </Route>
+            <Route exact path="/products" component={ProductListView} />
             <Route
-                path="/products/:productId"
-                component={ProductDetailedView}
+              exact
+              path="/products/:productId"
+              component={ProductDetailedView}
             />
             <Route path="*" component={NotFound} />
           </Switch>

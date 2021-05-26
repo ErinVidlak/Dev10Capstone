@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router-dom";
 import { findById } from "../../services/materialPurchaseAPI";
 import { capitalizeEach } from "../../utils/helpers";
 import dateFormat from 'dateformat';
@@ -8,8 +8,7 @@ import DeleteCard from './DeleteCard';
 import UpdateMaterialPurchase from './UpdateMaterialPurchase';
 
 
-
-export default function MaterialPurchaseDetailedView({setMessages}) {
+export default function MaterialPurchaseDetailedView() {
     const { purchaseId } = useParams();
     const [showDeleteCard, setShowDeleteCard] = useState(false);
     const [showUpdateForm, setShowUpdateForm] = useState(false);
@@ -90,6 +89,9 @@ export default function MaterialPurchaseDetailedView({setMessages}) {
                     </tbody>
                 </table>
             </div> 
+            <Link to="/purchases">
+            <button className=" waves-effect waves-light btn ">Back </button>
+            </Link>
             <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" onClick={() => setShowUpdateForm(true)}>Update</button>
             <button className="waves-effect waves-light btn  red lighten-1" onClick={() => setShowDeleteCard(true)}>Delete</button>
             {showUpdateForm && (
