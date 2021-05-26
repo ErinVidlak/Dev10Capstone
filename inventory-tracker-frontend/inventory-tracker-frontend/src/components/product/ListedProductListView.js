@@ -28,6 +28,8 @@ export default function ListedProductListView({ listedProduct }) {
                         listedPrice={listedProduct.listedPrice}
                         dateListed={dateFormat(new Date(listedProduct.dateListed), "paddedShortDate")}
                         dateSold={displayDateSold()}
+                        productId={listedProduct.productId}
+                        listedProductId={listedProduct.listedProductId}
                     />
             </tbody>
         </table>

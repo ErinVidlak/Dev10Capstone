@@ -15,7 +15,6 @@ export default function ProductDetailedView() {
 
     // GET product
     useEffect(() => {
-        console.log(productId);
         findById(productId).then((data) => {
         setProduct(data);
         });
