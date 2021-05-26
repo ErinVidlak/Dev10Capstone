@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -21,14 +22,17 @@ public class MaterialController {
         this.service = service;
     }
 
+
+
     @GetMapping
     public List<Material> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/user")
-    public List<Material> findAllUserMaterials() {
-        return service.findAll();
+    public List<Material> findAllUserMaterials(@RequestParam String userId) {
+        System.out.println(userId);
+        return service.findAllUserMaterials(userId);
     }
 
 

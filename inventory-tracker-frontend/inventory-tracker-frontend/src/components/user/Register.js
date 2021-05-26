@@ -31,9 +31,7 @@ function Register() {
       if (response.status === 201) {
         try {
           await auth.authenticate(username, password);
-          let user = { userId: username };
-          await addAppUser(user);
-
+        
           history.push("/");
         } catch (err) {
           throw new Error("Something went wrong here");

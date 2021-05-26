@@ -6,13 +6,21 @@ import MaterialSummary from "./MaterialSummary";
 
 export default function MaterialListView() {
   const [materialList, setMaterialList] = useState([]);
-  //const auth = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     findAll().then((data) => {
       setMaterialList(data);
     });
   }, []);
+
+  //testing new find all materials for a given user
+  // useEffect(() => {
+  //   console.log(auth.user.username);
+  //   findAllUserMaterials(auth.user.username).then((data) => {
+  //     setMaterialList(data);
+  //   });
+  // }, []);
 
   return (
     <div className="container">
