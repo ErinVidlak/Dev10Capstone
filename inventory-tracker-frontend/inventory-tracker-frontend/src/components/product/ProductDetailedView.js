@@ -22,8 +22,8 @@ export default function ProductDetailedView() {
 
     return (
         <div className="container">
-            
             <div className="row center">
+                    
                     <div className="col s12">
                         <div className="card light-blue lighten-4">
                             <div className="card-content black-text">
@@ -54,6 +54,7 @@ export default function ProductDetailedView() {
                         </div>
                     </div>
                 </div>
+                
             </div> 
 
             <div className="row center">

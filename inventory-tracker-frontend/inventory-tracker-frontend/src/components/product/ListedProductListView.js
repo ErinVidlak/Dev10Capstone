@@ -3,14 +3,13 @@ import dateFormat from 'dateformat';
 
 export default function ListedProductListView({ listedProduct }) {
     const displayDateSold = () => {
-        console.log(listedProduct);
         if (listedProduct.dateSold) {
             return dateFormat(new Date(listedProduct.dateSold), "paddedShortDate");
         } else {
             return "Unsold";
         }
     }
-    console.log(listedProduct);
+
     return (
         <table className="striped centered">
             <thead className="deep-purple lighten-3">
