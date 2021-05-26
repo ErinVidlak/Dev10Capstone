@@ -16,7 +16,7 @@ export default function ListedProductDetailedView() {
   const [listing, setListing] = useState({
     listingName: "",
     listedPrice: 0.0,
-    dateListed: null,
+    dateListed: "2000-01-01",
     dateSold: "2000-01-01",
     feeAmount: 0.0,
     isSold: false,
@@ -52,7 +52,7 @@ export default function ListedProductDetailedView() {
 
   const displayDateSold = () => {
     if (!(listing.dateSold == "2000-01-01" || listing.dateSold == "1999-12-31") && listing.sold) {
-      return dateFormat((listing.dateSold), "paddedShortDate");
+      return dateFormat((listing.dateSold).replace("-", "/"), "paddedShortDate");
     } else {
       return "Unsold";
     }
@@ -166,7 +166,10 @@ export default function ListedProductDetailedView() {
           <tbody className="deep-purple lighten-4">
             <tr>
               <td>
-                {dateFormat(new Date(listing.dateListed), "paddedShortDate")}
+                {dateFormat(
+                  listing.dateListed.replace("-", "/"),
+                  "paddedShortDate"
+                )}
               </td>
               <td>{displayDateSold()}</td>
               <td>${listing.feeAmount}</td>
