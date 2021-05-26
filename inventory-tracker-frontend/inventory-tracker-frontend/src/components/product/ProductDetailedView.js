@@ -7,6 +7,7 @@ import ProductMaterialListView from './ProductMaterialListView';
 import UpdateProductMaterial from "./forms/UpdateProductMaterial";
 import MessageContext from '../../context/MessageContext';
 import Messages from '../Messages';
+import DeleteProductMaterial from './forms/DeleteProductMaterial';
 
 export default function ProductDetailedView() {
     const {messages} = useContext(MessageContext);
@@ -18,13 +19,14 @@ export default function ProductDetailedView() {
         materials: [] 
     });
     const [showPMUpdateForm, setShowPMUpdateForm] = useState(false);
+    const [showPMDeleteCard, setShowPMDeleteCard] = useState(false);
 
     // GET product
     useEffect(() => {
         findById(productId).then((data) => {
         setProduct(data);
         });
-    }, [productId, showPMUpdateForm]);
+    }, [productId, showPMUpdateForm, showPMDeleteCard]);
 
     return (
         <div className="container">
@@ -68,16 +70,27 @@ export default function ProductDetailedView() {
             </div>
             
             <div className="row center">
-                {product.materials && <ProductMaterialListView materials={product.materials} setShowPMUpdateForm={setShowPMUpdateForm}/>}
+                {product.materials && <ProductMaterialListView materials={product.materials} setShowPMUpdateForm={setShowPMUpdateForm} setShowPMDeleteCard={setShowPMDeleteCard}/>}
             </div>
             
             <div className="row">
             {showPMUpdateForm && (
-                    <UpdateProductMaterial 
-                        materialId={showPMUpdateForm.materialId} 
-                        materialName={showPMUpdateForm.materialName} 
-                        materialQuantity={showPMUpdateForm.materialQuantity} 
-                        setShowPMUpdateForm={setShowPMUpdateForm}/>
+                <UpdateProductMaterial 
+                    materialId={showPMUpdateForm.materialId} 
+                    materialName={showPMUpdateForm.materialName} 
+                    materialQuantity={showPMUpdateForm.materialQuantity} 
+                    setShowPMUpdateForm={setShowPMUpdateForm}
+                />
+            )}
+            </div> 
+
+            <div>
+            {showPMDeleteCard && (
+                <DeleteProductMaterial 
+                    materialId={showPMDeleteCard.materialId}
+                    materialName={showPMDeleteCard.materialName}
+                    setShowPMDeleteCard={setShowPMDeleteCard}
+                />
             )}
             </div>
             {messages.length > 0 && <Messages messages={messages}/>}

@@ -1,11 +1,9 @@
-import { useState } from "react";
-import UpdateProductMaterial from "./forms/UpdateProductMaterial";
-
 export default function ProductMaterialTableSummary({
     materialId,
     materialName,
     materialQuantity,
     setShowPMUpdateForm,
+    setShowPMDeleteCard,
   }) {
 
     return (
@@ -15,7 +13,7 @@ export default function ProductMaterialTableSummary({
         <td>{materialQuantity}</td>
         <td>
         <button className="btn waves-effect waves-light btn teal accent-1 black-text" onClick={() => setShowPMUpdateForm({materialId, materialName, materialQuantity})}>Update</button>
-        <button className="btn waves-effect waves-light btn teal accent-1 black-text">Delete</button>
+        <button className="btn waves-effect waves-light btn teal accent-1 black-text" onClick={() => setShowPMDeleteCard({materialId, materialName})}>Delete</button>
         </td>
       </tr>
     );
