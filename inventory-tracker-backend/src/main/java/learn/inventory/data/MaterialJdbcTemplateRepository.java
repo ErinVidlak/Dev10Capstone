@@ -31,6 +31,16 @@ public class MaterialJdbcTemplateRepository implements MaterialRepository{
     }
 
     @Override
+    public List<Material> findAllUserMaterials(String userId) {
+        final String sql = "select material_id, material_name, price_per_unit, user_id "
+                + "from material " +
+                " where user_id = ? " +
+                " limit 1000;";
+
+        return jdbcTemplate.query(sql, new MaterialMapper(), userId);
+    }
+
+    @Override
     @Transactional
     public Material findById(int materialId) {
 

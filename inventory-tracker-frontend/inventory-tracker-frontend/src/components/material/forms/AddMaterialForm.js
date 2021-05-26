@@ -1,8 +1,11 @@
 import { addMaterial } from "../../../services/materialAPI";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+import AuthContext from "../../../context/AuthContext";
 
 export default function AddMaterialForm() {
+  const auth = useContext(AuthContext);
+
   const [material, setMaterial] = useState({
     materialId: 0,
     materialName: "",
@@ -15,6 +18,7 @@ export default function AddMaterialForm() {
   function handleChange(evt) {
     let nextMaterial = { ...material };
     nextMaterial[evt.target.name] = evt.target.value;
+
     setMaterial(nextMaterial);
     console.log(nextMaterial);
   }

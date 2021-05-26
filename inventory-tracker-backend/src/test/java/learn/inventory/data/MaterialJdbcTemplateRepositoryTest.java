@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,6 +32,13 @@ class MaterialJdbcTemplateRepositoryTest {
     void shouldFindYarn() {
         Material yarn = repository.findById(5);
         assertTrue("yarn".equals(yarn.getMaterialName()));
+    }
+
+    @Test
+    void shouldFindUsernameMaterials() {
+        List<Material> userMaterials = repository.findAllUserMaterials("username");
+       userMaterials.forEach(System.out::println);
+        assertTrue(userMaterials.size() > 0);
     }
 
     @Test

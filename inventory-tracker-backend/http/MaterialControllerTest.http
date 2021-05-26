@@ -5,7 +5,13 @@
 // Should give 200 & show materials
 GET /api/material HTTP/1.1 
 Host: localhost:8080 
-### 
+###
+
+// Find All Materials
+// Should give 200 & show materials
+GET /api/material?userId=username HTTP/1.1
+Host: localhost:8080
+###
 
 // Find Material by ID
 // Should give 200 & show material
