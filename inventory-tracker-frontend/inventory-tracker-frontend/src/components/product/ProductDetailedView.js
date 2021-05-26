@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { findById } from '../../services/productAPI';
 import { capitalizeEach } from '../../utils/helpers';
 import ListedProductListView from './ListedProductListView';
+import ProductMaterialListView from './ProductMaterialListView';
 
 export default function ProductDetailedView() {
     const { productId } = useParams();
@@ -60,7 +61,11 @@ export default function ProductDetailedView() {
             <div className="row center">
                 {product.listedProduct && <ListedProductListView listedProduct={product.listedProduct}/>}
             </div>
+            
+            <div className="row center">
+                {product.materials && <ProductMaterialListView materials={product.materials} />}
+            </div>
+
         </div> 
     );
-
 }
