@@ -14,9 +14,9 @@ import MaterialListView from "./material/MaterialListView";
 import MaterialDetailedView from "./material/MaterialDetailedView";
 import AddMaterialForm from "./material/forms/AddMaterialForm";
 import UpdateMaterialForm from "./material/forms/UpdateMaterialForm";
-
+import ProductDetailedView from "./product/ProductDetailedView";
 import ProductListView from './product/ProductListView';
-import ProductDetailedView from './product/ProductListView';
+
 
 function InventoryManager() {
   const [user, setUser] = useState(null);
@@ -79,33 +79,13 @@ function InventoryManager() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/materials" component={MaterialListView} />
             <Route exact path="/materials/add" component={AddMaterialForm} />
-            <Route
-              exact
-              path="/materials/edit/:materialId"
-              component={UpdateMaterialForm}
-            />
-            <Route
-              exact
-              path="/materials/:materialId"
-              component={MaterialDetailedView}
-            />
-            <Route
-              exact
-              path="/purchases"
-              component={MaterialPurchaseListView}
-            />
+            <Route exact path="/materials/edit/:materialId" component={UpdateMaterialForm} />
+            <Route exact path="/materials/:materialId" component={MaterialDetailedView} />
+            <Route exact path="/purchases" component={MaterialPurchaseListView} />
             <Route path="/purchases/add" component={AddMaterialPurchase} />
-            <Route
-              path="/purchases/:purchaseId"
-              component={MaterialPurchaseDetailedView}
-            />
-            <Route exact path="/products">
-                <ProductListView />
-            </Route>
-            <Route
-                path="/products/:productId"
-                component={ProductDetailedView}
-            />
+            <Route exact path="/purchases/:purchaseId" component={MaterialPurchaseDetailedView} />
+            <Route exact path="/products" component={ProductListView} />
+            <Route exact path="/products/:productId" component={ProductDetailedView} />
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>
