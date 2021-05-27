@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { findAll } from "../../services/materialAPI";
 import AuthContext from "../../context/AuthContext";
 import MaterialSummary from "./MaterialSummary";
+import UpdateMaterialPricePerUnit from "./forms/UpdateMaterialPricePerUnit";
 
 export default function MaterialListView() {
   const [materialList, setMaterialList] = useState([]);
@@ -56,11 +57,21 @@ export default function MaterialListView() {
         </table>
       </div>
       <div className="row">
-        <Link to="/materials/add">
-          <button className="btn waves-effect waves-light btn teal accent-1 black-text">
-            Add New Material
-          </button>
-        </Link>
+        <div className="col s3">
+          <Link to="/materials/add">
+            <button className="btn waves-effect waves-light btn teal accent-1 black-text">
+              Add New Material
+            </button>
+          </Link>
+        </div>
+
+          <UpdateMaterialPricePerUnit />
+          <Link to="/purchases">
+            <button className="btn waves-effect waves-light btn  blue accent-1 black-text">
+              Go to purchases
+            </button>
+          </Link>
+
       </div>
     </div>
   );
