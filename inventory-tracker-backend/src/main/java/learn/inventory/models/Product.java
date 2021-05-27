@@ -30,7 +30,7 @@ public class Product {
     @NotBlank(message = "UserId is required")
     private String userId;
 
-    private  ListedProduct listedProduct;
+    private  ListedProduct listedProduct = new ListedProduct();
 
     private List<ProductMaterial> materials = new ArrayList<>();
 
