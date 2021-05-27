@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router';
+import { useParams, Link } from 'react-router-dom';
 import { findById } from '../../services/productAPI';
 import { capitalizeEach } from '../../utils/helpers';
 import { Link, useHistory } from "react-router-dom";
@@ -9,6 +9,8 @@ import UpdateProductMaterial from "./forms/UpdateProductMaterial";
 import MessageContext from '../../context/MessageContext';
 import Messages from '../Messages';
 import DeleteProductMaterial from './forms/DeleteProductMaterial';
+import DeleteProductCard from './forms/DeleteProductCard';
+import UpdateProduct from './forms/UpdateProduct';
 
 export default function ProductDetailedView() {
     const {messages} = useContext(MessageContext);
@@ -22,13 +24,19 @@ export default function ProductDetailedView() {
     });
     const [showPMUpdateForm, setShowPMUpdateForm] = useState(false);
     const [showPMDeleteCard, setShowPMDeleteCard] = useState(false);
+    const [showDeleteProductCard, setShowDeleteProductCard] = useState(false);
+    const [showUpdateProduct, setShowUpdateProduct] = useState(false);
+
+    const formatTotalMaterialsCost = (cost) => {
+        return cost.toFixed(2);
+    }
 
     // GET product
     useEffect(() => {
         findById(productId).then((data) => {
         setProduct(data);
         });
-    }, [productId, showPMUpdateForm, showPMDeleteCard]);
+    }, [productId, showPMUpdateForm, showPMDeleteCard, showUpdateProduct]);
 
     return (
         <div className="container">
@@ -49,7 +57,7 @@ export default function ProductDetailedView() {
                     <div className="card indigo lighten-3">
                         <div className="card-content black-text">
                             <span className="card-title">
-                            Total Cost of Materials Used: ${product.totalMaterialsCost}
+                            Total Cost of Materials Used: ${formatTotalMaterialsCost(product.totalMaterialsCost)}
                             </span>
                         </div>
                     </div>
@@ -95,6 +103,24 @@ export default function ProductDetailedView() {
                 />
             )}
             </div>
+
+            <div>
+            {showDeleteProductCard && (
+                <DeleteProductCard
+                    productName={product.productName}
+                    setShowDeleteProductCard={setShowDeleteProductCard}
+                />
+            )}
+            </div>
+
+            <div className="row">
+            {showUpdateProduct && (
+                <UpdateProduct product={product}
+                productName={product.productName}
+                setShowUpdateProduct ={setShowUpdateProduct} />
+            )}
+            </div>
+
             {messages.length > 0 && <Messages messages={messages}/>}
 
             <div className="row">

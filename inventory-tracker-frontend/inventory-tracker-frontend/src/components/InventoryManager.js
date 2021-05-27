@@ -24,8 +24,9 @@ import AppHeader from "./AppHeader";
 import ProductDetailedView from "./product/ProductDetailedView";
 import ProductListView from "./product/ProductListView";
 import ListedProductDetailedView from "./product/ListedProductDetailedView";
+import AdminUserView from "./user/AdminUserView";
+import AddProductForm from "./product/forms/AddProductForm";
 import AddProductMaterialForm from "./product/forms/AddProductMaterialForm";
-
 
 function InventoryManager() {
   const storage = localStorage.getItem("user");
@@ -98,6 +99,12 @@ function InventoryManager() {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            {user ? (
+              <Route exact path="/users" component={AdminUserView} />
+            ) : (
+              <Redirect to="/" />
+            )}
+
             <Route exact path="/materials" component={MaterialListView} />
             <Route exact path="/materials/add" component={AddMaterialForm} />
             <Route
@@ -122,6 +129,8 @@ function InventoryManager() {
               component={MaterialPurchaseDetailedView}
             />
             <Route exact path="/products" component={ProductListView} />
+            <Route exact path="/products/add" component={AddProductForm} />
+
             <Route
               exact
               path="/products/:productId"
@@ -133,7 +142,7 @@ function InventoryManager() {
               component={AddProductMaterialForm}
             />
             <Route
-              exact 
+              exact
               path="/products/:productId/listing/:listedProductId"
               component={ListedProductDetailedView}
             />

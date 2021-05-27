@@ -19,6 +19,12 @@ function Login() {
     event.preventDefault();
     try {
       await auth.authenticate(username, password);
+      try {
+        let appUser = { userId: username}
+  auth.addAppUser(appUser);
+      } catch(err){
+        console.log(err);
+      }
       history.push(from);
     } catch (err) {
       console.log(err);
