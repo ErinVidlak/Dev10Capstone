@@ -13,8 +13,6 @@ export default function AddProductMaterialForm() {
     findAll().then((result) => {setMaterials(result)});
   }, []);
 
-
-
 const onSelectChange = (event) => {
   const mat = materials.find((m) => m.materialId == +event.target.value);
   setProductMaterial({
@@ -22,6 +20,7 @@ const onSelectChange = (event) => {
       material: mat
   })
 }
+
 
   const [productMaterial, setProductMaterial] = useState({
     productId: productId,
@@ -48,6 +47,7 @@ const onSelectChange = (event) => {
 
     evt.preventDefault();
     evt.stopPropagation();
+    console.log(nextProductMaterial);
     await addProductMaterial(nextProductMaterial);
     history.push("/products");
   }
