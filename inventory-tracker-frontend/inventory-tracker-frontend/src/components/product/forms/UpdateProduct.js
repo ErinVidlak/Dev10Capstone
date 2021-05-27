@@ -27,7 +27,7 @@ export default function UpdateProduct({ productName, product, setShowUpdateProdu
                         }
                     });
                 } 
-                history.push(`/products/${productId}`);
+                setShowUpdateProduct(false);
             }) 
     }
 
@@ -36,9 +36,9 @@ export default function UpdateProduct({ productName, product, setShowUpdateProdu
     }
 
     return (
-        <>
+        <div>
         {updatedProduct && (
-            <>
+            <div className="col s6">
             <h4>Update a Product</h4>
             <form onSubmit={submit}>
                 <div>
@@ -50,15 +50,15 @@ export default function UpdateProduct({ productName, product, setShowUpdateProdu
                     <input type="number" id="timeToMake" name="updatedProductTimeToMake[timeToMake]" value={updatedProduct.timeToMake} onChange={evt => setUpdatedProduct({ ... updatedProduct, timeToMake: evt.target.value})}/>
                 </div>
                 <div>
-                <label htmlFor="totalMaterialsCost">Total Cost of Materials Used</label>    
+                <label htmlFor="totalMaterialsCost">Total Cost of Materials Used ($)</label>    
                     <input type="number" step="0.01" id="totalMaterialsCost" name="updatedProductTotalMaterialsCost[totalMaterialsCost]" value={updatedProduct.totalMaterialsCost} onChange={evt => setUpdatedProduct({ ... updatedProduct, totalMaterialsCost: evt.target.value})}/>
                 </div>
                 <div>
                 <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" type="submit">Update Product</button>  <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" type="button" onClick={cancel}>Cancel</button>
                 </div>
             </form>
-            </>
+            </div>
         )}
-        </>
+        </div>
     );
 }

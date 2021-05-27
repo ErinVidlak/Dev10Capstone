@@ -113,9 +113,14 @@ export default function ProductDetailedView() {
                 />
             )}
             </div>
+            
+            <div className="row">
             {showUpdateProduct && (
-                <UpdateProduct product={product} />
+                <UpdateProduct product={product}
+                productName={product.productName}
+                setShowUpdateProduct ={setShowUpdateProduct} />
             )}    
+            </div>    
 
             {messages.length > 0 && <Messages messages={messages}/>}
         </div> 
