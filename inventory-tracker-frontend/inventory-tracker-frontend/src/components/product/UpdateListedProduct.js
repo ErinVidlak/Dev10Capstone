@@ -50,8 +50,7 @@ export default function UpdateListedProduct({
   }
 
   async function handleSubmit(evt) {
-    //    evt.preventDefault();
-    //  evt.stopPropagation();
+  
     let nextListing = { ...updatedListing };
     nextListing[evt.target.name] = evt.target.value;
 

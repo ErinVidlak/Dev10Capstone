@@ -34,7 +34,7 @@ public class ListedProduct {
 
     private boolean isSold;
 
-    @Positive(message = "Product to list must already exist")
+    @Positive(message = "Product for listing must already exist")
     private int productId;
 
     //Want to protect against null value for mathematical operations
