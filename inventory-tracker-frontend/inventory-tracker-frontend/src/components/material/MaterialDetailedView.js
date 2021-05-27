@@ -80,7 +80,7 @@ export default function MaterialDetailedView() {
           <button
             className="waves-effect waves-light btn  red lighten-1"
             onClick={() => setShowDeleteForm(true)}>
-            Delete
+            Delete Material
           </button>
         </div>
         <div className="col 12">
