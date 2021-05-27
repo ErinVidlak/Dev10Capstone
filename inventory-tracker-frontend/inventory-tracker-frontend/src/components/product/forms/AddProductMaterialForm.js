@@ -1,31 +1,36 @@
 import { addProductMaterial } from "../../../services/productMaterialAPI";
 import { useState, useContext, useEffect } from "react";
+import { useParams } from 'react-router';
 import { Link, useHistory } from "react-router-dom";
 import { findAll } from '../../../services/materialAPI';
-import AuthContext from "../../../context/AuthContext";
 
-export default function AddProductMaterialForm() {
-  const auth = useContext(AuthContext);
-
-  const [productMaterial, setProductMaterial] = useState({
-    productId: 0,
-    materialQuantity: 0,
-    material: null
-  });
+export default function AddProductMaterialForm() {  
+  const { productId } = useParams();
 
   const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
     findAll().then((result) => {setMaterials(result)});
-}, []);
+  }, []);
+
+
 
 const onSelectChange = (event) => {
-    const mat = materials.find((m) => m.materialId == +event.target.value);
-    setProductMaterial({
-        ...productMaterial,
-        material: mat
-    })
+  const mat = materials.find((m) => m.materialId == +event.target.value);
+  setProductMaterial({
+      ...productMaterial,
+      material: mat
+  })
 }
+
+  const [productMaterial, setProductMaterial] = useState({
+    productId: productId,
+    materialQuantity: 0,
+    material: materials[0]
+  });
+
+  console.log(productMaterial);
+
 
   const history = useHistory();
 
@@ -34,7 +39,6 @@ const onSelectChange = (event) => {
     nextProductMaterial[evt.target.name] = evt.target.value;
 
     setProductMaterial(nextProductMaterial);
-    console.log(nextProductMaterial);
   }
 
   async function handleSubmit(evt) {
