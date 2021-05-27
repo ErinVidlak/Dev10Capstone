@@ -143,10 +143,10 @@ function InventoryManager() {
             />
             <Route path="*" component={NotFound} />
           </Switch>
+          <div className="container">
+            {messages.length > 0 && <Messages messages={messages}/>}
+          </div>
         </Router>
-        <div className="container">
-        {messages.length > 0 && <Messages messages={messages}/>}
-        </div>
       </MessageContext.Provider>
     </AuthContext.Provider>
   );
