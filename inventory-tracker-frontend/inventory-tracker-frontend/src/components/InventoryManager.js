@@ -28,7 +28,6 @@ import AdminUserView from "./user/AdminUserView";
 import AddProductForm from "./product/forms/AddProductForm";
 import AddProductMaterialForm from "./product/forms/AddProductMaterialForm";
 
-
 function InventoryManager() {
   const storage = localStorage.getItem("user");
   const userFromStorage = JSON.parse(storage);
@@ -137,13 +136,9 @@ function InventoryManager() {
               path="/products/:productId"
               component={ProductDetailedView}
             />
+
             <Route
               exact
-              path="/products/:productId/add"
-              component={AddProductMaterialForm}
-            />
-            <Route
-              exact 
               path="/products/:productId/listing/:listedProductId"
               component={ListedProductDetailedView}
             />

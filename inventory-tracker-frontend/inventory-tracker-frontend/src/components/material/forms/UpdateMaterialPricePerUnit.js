@@ -24,7 +24,7 @@ export default function UpdateMaterialPricePerUnit() {
     let currentMaterial = null;
     materialList.forEach((m) => {
       currentMaterial = { ...m };
-	  let pricePer = 0.0;
+      let pricePer = 0.0;
       purchaseList.forEach((p) => {
         if (p.materialId == currentMaterial.materialId) {
           pricePer += p.purchasePrice / parseFloat(p.quantityPurchased);
@@ -33,16 +33,23 @@ export default function UpdateMaterialPricePerUnit() {
       m.pricePerUnit = pricePer;
       setMaterial(m);
 
-    //   evt.preventDefault();
-    //   evt.stopPropagation();
-
+      //   evt.preventDefault();
+      //   evt.stopPropagation();
+      window.setTimeout(function () {
+        window.location.reload();
+      }, 1000);
       updateMaterial(m);
+      window.setTimeout(function () {
+        window.location.reload();
+      }, 2000);
     });
   }
 
   return (
     <>
-      <button className="btn  green lighten-1 black-text" onClick={recalculatePPU}>
+      <button
+        className="btn  green lighten-1 black-text"
+        onClick={recalculatePPU}>
         Calculate Price Per Unit Based On Purchases
       </button>
     </>
