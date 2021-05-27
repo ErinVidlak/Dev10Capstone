@@ -1,7 +1,7 @@
 import ProductMaterialTableSummary from "./ProductMaterialTableSummary";
 
 
-export default function ProductMaterialListView({ materials, setShowPMUpdateForm }) {
+export default function ProductMaterialListView({ materials, setShowPMUpdateForm, setShowPMDeleteCard }) {
     return (
 
       <table className="striped centered">
@@ -20,7 +20,8 @@ export default function ProductMaterialListView({ materials, setShowPMUpdateForm
               materialId={pm.material.materialId}
               materialName={pm.material.materialName}
               materialQuantity={pm.materialQuantity}
-              setShowPMUpdateForm={setShowPMUpdateForm} />
+              setShowPMUpdateForm={setShowPMUpdateForm}
+              setShowPMDeleteCard={setShowPMDeleteCard}/>
           ))}
         </tbody>
       </table>
