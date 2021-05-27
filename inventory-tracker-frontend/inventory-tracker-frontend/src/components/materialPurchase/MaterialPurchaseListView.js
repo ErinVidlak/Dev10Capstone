@@ -11,6 +11,10 @@ export default function MaterialPurchaseListView() {
         history.push("/purchases/add");
     } 
 
+    const formatPurchasePrice = (purchasePrice) => {
+        return purchasePrice.toFixed(2);
+    }
+
     useEffect(() => {
         findAll().then((data) => {
           setMaterialPurchaseList(data);
@@ -47,7 +51,7 @@ export default function MaterialPurchaseListView() {
                         key={materialPurchase.purchaseId}
                         datePurchased={materialPurchase.datePurchased}
                         materialId={materialPurchase.materialId}
-                        purchasePrice={materialPurchase.purchasePrice}
+                        purchasePrice={formatPurchasePrice(materialPurchase.purchasePrice)}
                         materialPurchaseId={materialPurchase.purchaseId}
                     />
                     ))}
