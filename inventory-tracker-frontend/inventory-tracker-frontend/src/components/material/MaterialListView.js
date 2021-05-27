@@ -57,8 +57,8 @@ export default function MaterialListView() {
       </div>
       <div className="row">
         <Link to="/materials/add">
-          <button className="waves-effect waves-light btn green accent-1 black-text">
-            Add Material
+          <button className="btn waves-effect waves-light btn teal accent-1 black-text">
+            Add New Material
           </button>
         </Link>
       </div>

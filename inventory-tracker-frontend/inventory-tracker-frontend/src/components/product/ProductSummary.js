@@ -14,7 +14,7 @@ export default function ProductSummary({
             <td>{timeToMake}</td>
             <td>
                 <Link to={`/products/${productId}`}>
-                <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3">
+                <button className="btn waves-effect waves-light btn teal accent-1 black-text">
                     View
                 </button>
                 </Link>
