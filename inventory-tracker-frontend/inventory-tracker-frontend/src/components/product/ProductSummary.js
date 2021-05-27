@@ -7,10 +7,14 @@ export default function ProductSummary({
     timeToMake,
 }) {
     
+    const formatTotalMaterialsCost = (cost) => {
+        return cost.toFixed(2);
+    }
+
     return (
         <tr>
             <td>{productName}</td>
-            <td>${totalMaterialsCost}</td>
+            <td>${formatTotalMaterialsCost(totalMaterialsCost)}</td>
             <td>{timeToMake}</td>
             <td>
                 <Link to={`/products/${productId}`}>

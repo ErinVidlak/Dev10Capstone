@@ -25,6 +25,10 @@ export default function ProductDetailedView() {
     const [showDeleteProductCard, setShowDeleteProductCard] = useState(false);
     const [showUpdateProduct, setShowUpdateProduct] = useState(false);
 
+    const formatTotalMaterialsCost = (cost) => {
+        return cost.toFixed(2);
+    }
+
     // GET product
     useEffect(() => {
         findById(productId).then((data) => {
@@ -51,7 +55,7 @@ export default function ProductDetailedView() {
                     <div className="card indigo lighten-3">
                         <div className="card-content black-text">
                             <span className="card-title">
-                            Total Cost of Materials Used: ${product.totalMaterialsCost}
+                            Total Cost of Materials Used: ${formatTotalMaterialsCost(product.totalMaterialsCost)}
                             </span>
                         </div>
                     </div>

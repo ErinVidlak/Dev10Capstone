@@ -7,6 +7,11 @@ export default function UpdateProduct({ productName, product, setShowUpdateProdu
     const { productId } = useParams();
     const { setMessages } = useContext(MessageContext);
     const [updatedProduct, setUpdatedProduct] = useState(product)
+    
+    const formatTotalMaterialsCost = (cost) => {
+        return cost.toFixed(2);
+    }
+
 
     const submit = (evt) => {
         evt.preventDefault()
@@ -51,7 +56,7 @@ export default function UpdateProduct({ productName, product, setShowUpdateProdu
                 </div>
                 <div>
                 <label htmlFor="totalMaterialsCost">Total Cost of Materials Used ($)</label>    
-                    <input type="number" step="0.01" id="totalMaterialsCost" name="updatedProductTotalMaterialsCost[totalMaterialsCost]" value={updatedProduct.totalMaterialsCost} onChange={evt => setUpdatedProduct({ ... updatedProduct, totalMaterialsCost: evt.target.value})}/>
+                    <input type="number" step="0.01" id="totalMaterialsCost" name="updatedProductTotalMaterialsCost[totalMaterialsCost]" value={formatTotalMaterialsCost(updatedProduct.totalMaterialsCost)} onChange={evt => setUpdatedProduct({ ... updatedProduct, totalMaterialsCost: evt.target.value})}/>
                 </div>
                 <div>
                 <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" type="submit">Update Product</button>  <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" type="button" onClick={cancel}>Cancel</button>
