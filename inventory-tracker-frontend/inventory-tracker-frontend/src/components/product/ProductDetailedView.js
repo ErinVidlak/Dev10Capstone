@@ -96,7 +96,7 @@ export default function ProductDetailedView() {
             )}
             </div>
             {messages.length > 0 && <Messages messages={messages}/>}
-        </div>
+
             <div className="row">
                 <Link to={"/products/" + productId + "/add"}>
                 <button className="waves-effect waves-light btn green accent-1 black-text">
@@ -104,7 +104,6 @@ export default function ProductDetailedView() {
                 </button>
                 </Link>
             </div>
-
-        
+        </div>
     );
 }
