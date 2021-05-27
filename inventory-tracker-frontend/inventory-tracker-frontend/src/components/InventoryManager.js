@@ -26,6 +26,7 @@ import ProductListView from "./product/ProductListView";
 import ListedProductDetailedView from "./product/ListedProductDetailedView";
 import AdminUserView from "./user/AdminUserView";
 import AddProductForm from "./product/forms/AddProductForm";
+import Messages from "./Messages";
 
 function InventoryManager() {
   const storage = localStorage.getItem("user");
@@ -143,6 +144,9 @@ function InventoryManager() {
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>
+        <div className="container">
+        {messages.length > 0 && <Messages messages={messages}/>}
+        </div>
       </MessageContext.Provider>
     </AuthContext.Provider>
   );

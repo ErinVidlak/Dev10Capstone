@@ -1,13 +1,10 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { findAll } from "../../services/productAPI";
 import ProductSummary from "./ProductSummary";
-import Messages from "../Messages";
-import MessageContext from "../../context/MessageContext";
 import { useHistory } from 'react-router';
 
 export default function ProductListView() {
     const [productList, setProductList] = useState([]);
-    const {messages} = useContext(MessageContext);
     const history = useHistory();
 
     const addProduct = () => {
@@ -60,7 +57,6 @@ export default function ProductListView() {
             </table>
         </div>
         <button className="btn waves-effect waves-light btn teal accent-1 black-text" onClick={addProduct}>Add New Product</button>
-        {messages.length > 0 && <Messages messages={messages}/>}
     </div>
     );
 

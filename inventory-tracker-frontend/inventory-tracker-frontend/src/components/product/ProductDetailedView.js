@@ -5,14 +5,11 @@ import { capitalizeEach } from '../../utils/helpers';
 import ListedProductListView from './ListedProductListView';
 import ProductMaterialListView from './ProductMaterialListView';
 import UpdateProductMaterial from "./forms/UpdateProductMaterial";
-import MessageContext from '../../context/MessageContext';
-import Messages from '../Messages';
 import DeleteProductMaterial from './forms/DeleteProductMaterial';
 import DeleteProductCard from './forms/DeleteProductCard';
 import UpdateProduct from './forms/UpdateProduct';
 
 export default function ProductDetailedView() {
-    const {messages} = useContext(MessageContext);
     const { productId } = useParams();
     const [product, setProduct] = useState({
         productName: "",
@@ -125,8 +122,6 @@ export default function ProductDetailedView() {
                 setShowUpdateProduct ={setShowUpdateProduct} />
             )}    
             </div>    
-
-            {messages.length > 0 && <Messages messages={messages}/>}
         </div> 
     );
 }

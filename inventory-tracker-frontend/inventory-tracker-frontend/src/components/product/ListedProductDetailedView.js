@@ -237,7 +237,7 @@ export default function ListedProductDetailedView() {
               />
             )}
           </div>
-          <div className="container left">
+          <div>
             <Link to={`/products/${listing.productId}`}>
               <button className=" waves-effect waves-light btn ">Back </button>
             </Link>

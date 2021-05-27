@@ -6,12 +6,9 @@ import DeleteMaterialForm from "./forms/DeleteMaterialForm";
 import MaterialInventory from "./MaterialInventory";
 import MaterialProductListView from "./MaterialProductListView";
 import MaterialWithPurchaseListView from "./MaterialWithPurchaseListView";
-import Messages from "../Messages";
-import MessageContext from "../../context/MessageContext";
 
 export default function MaterialDetailedView() {
   const { materialId } = useParams();
-  const {messages} = useContext(MessageContext);
 
   const [material, setMaterial] = useState({
     materialId: 0,
@@ -90,7 +87,6 @@ export default function MaterialDetailedView() {
           {showDeleteForm && <DeleteMaterialForm initialMaterial={material} setShowDeleteForm={setShowDeleteForm} />}
         </div>
       </div>
-      {messages.length > 0 && <Messages messages={messages}/>}
     </div>
   );
 }

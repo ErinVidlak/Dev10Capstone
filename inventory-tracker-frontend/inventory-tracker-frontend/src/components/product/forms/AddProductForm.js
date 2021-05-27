@@ -10,10 +10,11 @@ import { capitalizeEach } from "../../../utils/helpers";
 import "materialize-css";
 import { Select } from "react-materialize";
 import AuthContext from "../../../context/AuthContext";
+import MessageContext from "../../../context/MessageContext";
 
 export default function AddProductForm() {
   const history = useHistory();
-
+  const { setMessages } = useContext(MessageContext);
   const auth = useContext(AuthContext);
   const [materialList, setMaterialList] = useState([]);
   const [updatedProductList, setUpdatedProductList] = useState([]);
@@ -108,7 +109,18 @@ export default function AddProductForm() {
     evt.preventDefault();
     evt.stopPropagation();
 
-    await addProduct(nextProduct);
+    const response = await addProduct(nextProduct);
+    if (response.ok) {
+      setMessages([`Your ${nextProduct.productName} product was successfully updated.`]);
+    } else {
+      response.json().then(json => {
+          if (Array.isArray(json)) {
+              setMessages(json);
+          } else {
+              setMessages([json.message])
+          }
+      });
+    } 
     history.push("/products");
 
     // try {

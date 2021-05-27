@@ -39,6 +39,7 @@ export async function addProduct(product) {
     console.log(product);
     return Promise.reject(response.status + " response not 201 CREATED");
   }
+  return response;
 }
 
 //update product

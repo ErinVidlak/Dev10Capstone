@@ -1,5 +1,5 @@
 function Messages({messages}) {
-    return ( 
+    return (  
         <div className="card">
             <div className="card-content">
                 <span className="card-title">Messages</span>
@@ -9,7 +9,7 @@ function Messages({messages}) {
                 </ul>
             </div>
         </div>
-    );
+    )
 } 
 
 export default Messages;
