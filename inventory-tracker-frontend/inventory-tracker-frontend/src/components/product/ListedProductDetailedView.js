@@ -11,7 +11,7 @@ import UpdateListedProduct from "./UpdateListedProduct";
 
 export default function ListedProductDetailedView() {
   const { listedProductId } = useParams();
-    const { productId } = useParams();
+  const { productId } = useParams();
 
   const [listing, setListing] = useState({
     listingName: "",
@@ -26,9 +26,9 @@ export default function ListedProductDetailedView() {
   // GET listing
   useEffect(() => {
     findById(listedProductId).then((data) => {
-        if(!data.dateSold){
-            data.dateSold = "2000-01-01";
-        }
+      if (!data.dateSold) {
+        data.dateSold = "2000-01-01";
+      }
       setListing(data);
     });
   }, [listedProductId]);
@@ -36,7 +36,7 @@ export default function ListedProductDetailedView() {
   const [product, setProduct] = useState({
     productName: "",
     totalMaterialsCost: 0.0,
-    timeToMake: 0
+    timeToMake: 0,
   });
 
   const [showDateSoldForm, setShowDateSoldForm] = useState(false);
@@ -51,8 +51,11 @@ export default function ListedProductDetailedView() {
   }, [productId]);
 
   const displayDateSold = () => {
-    if (!(listing.dateSold == "2000-01-01" || listing.dateSold == "1999-12-31") && listing.sold) {
-      return dateFormat((listing.dateSold).replace("-", "/"), "paddedShortDate");
+    if (
+      !(listing.dateSold == "2000-01-01" || listing.dateSold == "1999-12-31") &&
+      listing.sold
+    ) {
+      return dateFormat(listing.dateSold.replace("-", "/"), "paddedShortDate");
     } else {
       return "Unsold";
     }
@@ -94,12 +97,11 @@ export default function ListedProductDetailedView() {
     let soldListing = { ...listing };
     console.log(listing.sold);
     if (!listing.sold) {
-         setShowDateSoldForm(true);
+      setShowDateSoldForm(true);
     } else {
-         setShowRelistForm(true);
+      setShowRelistForm(true);
     }
   }
-
 
   return (
     <div className="container">
@@ -194,7 +196,7 @@ export default function ListedProductDetailedView() {
           </tbody>
         </table>
       </div>
-      <div className="container left">
+      <div className="row">
         {showRelistForm && (
           <UpdateListedProduct
             currentListing={listing}
@@ -215,22 +217,32 @@ export default function ListedProductDetailedView() {
             setShowRelistForm={setShowRelistForm}
           />
         )}
+        {showUpdateAllForm && (
+          <UpdateListedProduct
+            isUpdatingAll={true}
+            relisting={false}
+            setShowDateSoldForm={setShowDateSoldForm}
+            setShowUpdateAllForm={setShowUpdateAllForm}
+            setShowRelistForm={setShowRelistForm}
+          />
+        )}
       </div>
-      <Link to={`/products/${listing.productId}`}>
-        <button className=" waves-effect waves-light btn ">Back </button>
-      </Link>
-      <button
-        className="btn waves-effect waves-light btn teal accent-1 black-text"
-        onClick={() => setShowUpdateAllForm(true)}>
-        Edit Listing
-      </button>
-      <button className="btn waves-effect waves-light btn teal accent-1 black-text">
-        Clear Listing
-      </button>
+      <div className="container left">
+        <Link to={`/products/${listing.productId}`}>
+          <button className=" waves-effect waves-light btn ">Back </button>
+        </Link>
+        <button
+          className="btn waves-effect waves-light btn teal accent-1 black-text"
+          onClick={() => setShowUpdateAllForm(true)}>
+          Edit Listing
+        </button>
+        <button className="btn waves-effect waves-light btn teal accent-1 black-text">
+          Clear Listing
+        </button>
+      </div>
     </div>
   );
 }
-
 
 //  {
 //    showRelistForm && (

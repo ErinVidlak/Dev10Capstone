@@ -20,7 +20,7 @@ export default function UpdateListedProduct({
   const { listedProductId } = useParams();
   const { setMessages } = useContext(MessageContext);
   const [relistingForm, setRelistingForm] = useState(relisting);
-  const [isUpdatingAllForm, setIsUpdatingAllForm ] = useState(isUpdatingAll);
+  const [isUpdatingAllForm, setIsUpdatingAllForm] = useState(isUpdatingAll);
 
   const [updatedListing, setUpdatedListing] = useState({
     listingName: "",
@@ -49,10 +49,8 @@ export default function UpdateListedProduct({
     console.log(nextListing);
   }
 
-
-
   async function handleSubmit(evt) {
-	//    evt.preventDefault();
+    //    evt.preventDefault();
     //  evt.stopPropagation();
     let nextListing = { ...updatedListing };
     nextListing[evt.target.name] = evt.target.value;
@@ -62,8 +60,10 @@ export default function UpdateListedProduct({
       nextListing.dateSold = null;
     } else if (!isUpdatingAllForm && !relistingForm) {
       nextListing.sold = true;
-    } else {
-      nextListing[evt.target.name] = evt.target.value;
+    } else if (isUpdatingAllForm && !relistingForm) {
+      if (!nextListing.sold) {
+        nextListing.dateSold = null;
+      }
     }
 
     nextListing.feeAmount = parseFloat(nextListing.feeAmount).toFixed(2);
@@ -71,13 +71,11 @@ export default function UpdateListedProduct({
 
     setUpdatedListing(nextListing);
 
-   
-
     await updateListing(nextListing);
     history.push(
       `/products/${updatedListing.productId}/listing/${nextListing.listingId}`
     );
-  };
+  }
 
   const cancel = async () => {
     await setShowDateSoldForm(false);
@@ -260,16 +258,19 @@ export default function UpdateListedProduct({
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="dateSold">Date Sold</label>
-                  <input
-                    min="2000-01-01"
-                    value={updatedListing.dateSold}
-                    name="dateSold"
-                    type="date"
-                    onChange={handleChange}
-                  />
-                </div>
+                {updatedListing.sold && (
+                  <div>
+                    <label htmlFor="dateSold">Date Sold</label>
+                    <input
+                      min="2000-01-01"
+                      value={updatedListing.dateSold}
+                      name="dateSold"
+                      type="date"
+                      onChange={handleChange}
+                    />
+                  </div>
+                )}
+
                 <div>
                   <button
                     className="btn waves-effect waves-light btn-flat deep-purple lighten-3"
