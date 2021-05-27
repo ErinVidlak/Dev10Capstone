@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { findById } from '../../services/productAPI';
 import { capitalizeEach } from '../../utils/helpers';
 import ListedProductListView from './ListedProductListView';
@@ -14,11 +14,12 @@ import UpdateProduct from './forms/UpdateProduct';
 export default function ProductDetailedView() {
     const {messages} = useContext(MessageContext);
     const { productId } = useParams();
+
     const [product, setProduct] = useState({
         productName: "",
         totalMaterialsCost: 0.0,
         timeToMake: 0,
-        materials: [] 
+        materials: []
     });
     const [showPMUpdateForm, setShowPMUpdateForm] = useState(false);
     const [showPMDeleteCard, setShowPMDeleteCard] = useState(false);
@@ -39,7 +40,7 @@ export default function ProductDetailedView() {
     return (
         <div className="container">
             <div className="row center">
-                    
+
                     <div className="col s12">
                         <div className="card light-blue lighten-4">
                             <div className="card-content black-text">
@@ -49,7 +50,7 @@ export default function ProductDetailedView() {
                             </div>
                         </div>
                     </div>
-                
+
 
                 <div className="col s6">
                     <div className="card indigo lighten-3">
@@ -70,63 +71,64 @@ export default function ProductDetailedView() {
                         </div>
                     </div>
                 </div>
-                
-            </div> 
+
+            </div>
 
             <div className="row center">
                 {product.listedProduct && <ListedProductListView listedProduct={product.listedProduct}/>}
             </div>
-            
+
             <div className="row center">
                 {product.materials && <ProductMaterialListView materials={product.materials} setShowPMUpdateForm={setShowPMUpdateForm} setShowPMDeleteCard={setShowPMDeleteCard}/>}
             </div>
-            <Link to="/products">
-            <button className=" waves-effect waves-light btn ">Back </button>
-            </Link>
-            <button className="waves-effect waves-light btn  blue darken-3" onClick={() => setShowUpdateProduct(true)}>Update Product</button>
-            <button className="waves-effect waves-light btn  red lighten-1" onClick={() => setShowDeleteProductCard(true)}>Delete Product</button>
-
-
 
             <div className="row">
             {showPMUpdateForm && (
-                <UpdateProductMaterial 
-                    materialId={showPMUpdateForm.materialId} 
-                    materialName={showPMUpdateForm.materialName} 
-                    materialQuantity={showPMUpdateForm.materialQuantity} 
+                <UpdateProductMaterial
+                    materialId={showPMUpdateForm.materialId}
+                    materialName={showPMUpdateForm.materialName}
+                    materialQuantity={showPMUpdateForm.materialQuantity}
                     setShowPMUpdateForm={setShowPMUpdateForm}
                 />
             )}
-            </div> 
+            </div>
 
             <div>
             {showPMDeleteCard && (
-                <DeleteProductMaterial 
+                <DeleteProductMaterial
                     materialId={showPMDeleteCard.materialId}
                     materialName={showPMDeleteCard.materialName}
                     setShowPMDeleteCard={setShowPMDeleteCard}
                 />
             )}
-            </div>   
+            </div>
 
             <div>
             {showDeleteProductCard && (
-                <DeleteProductCard 
+                <DeleteProductCard
                     productName={product.productName}
                     setShowDeleteProductCard={setShowDeleteProductCard}
                 />
             )}
             </div>
-            
+
             <div className="row">
             {showUpdateProduct && (
                 <UpdateProduct product={product}
                 productName={product.productName}
                 setShowUpdateProduct ={setShowUpdateProduct} />
-            )}    
-            </div>    
+            )}
+            </div>
 
             {messages.length > 0 && <Messages messages={messages}/>}
-        </div> 
+
+            <div className="row">
+                <Link to={"/products/" + productId + "/add"}>
+                <button className="waves-effect waves-light btn green accent-1 black-text">
+                    Add Material
+                </button>
+                </Link>
+            </div>
+        </div>
     );
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { findById } from "../../services/materialPurchaseAPI";
-import { capitalizeEach } from "../../utils/helpers";
+import { capitalizeEach, formatPricePerUnit } from "../../utils/helpers";
 import dateFormat from 'dateformat';
 import { findById as findMaterialById } from '../../services/materialAPI';
 import DeleteCard from './DeleteCard';
@@ -16,6 +16,11 @@ export default function MaterialPurchaseDetailedView() {
     const [material, setMaterial] = useState({
         materialName: ""
     })
+
+    const formatPurchasePrice = (purchasePrice) => {
+        return purchasePrice.toFixed(2);
+    }
+
     const [materialPurchase, setMaterialPurchase] = useState({
         datePurchased: null,
         purchasePrice: 0.0,
@@ -37,6 +42,8 @@ export default function MaterialPurchaseDetailedView() {
             });
         }
     }, [materialPurchase]);
+
+    
 
     return (
         <div className="container">
@@ -64,7 +71,7 @@ export default function MaterialPurchaseDetailedView() {
                     <div className="card indigo lighten-3">
                         <div className="card-content black-text">
                             <span className="card-title">
-                            Cost: ${materialPurchase.purchasePrice}
+                            Cost: ${formatPricePerUnit(materialPurchase.purchasePrice)}
                             </span>
                         </div>
                     </div>
