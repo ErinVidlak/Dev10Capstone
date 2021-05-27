@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { findById } from '../../services/productAPI';
 import { capitalizeEach } from '../../utils/helpers';
+import { Link, useHistory } from "react-router-dom";
 import ListedProductListView from './ListedProductListView';
 import ProductMaterialListView from './ProductMaterialListView';
 
 export default function ProductDetailedView() {
     const { productId } = useParams();
+
     const [product, setProduct] = useState({
         productName: "",
         totalMaterialsCost: 0.0,
@@ -64,6 +66,14 @@ export default function ProductDetailedView() {
             
             <div className="row center">
                 {product.materials && <ProductMaterialListView materials={product.materials} />}
+            </div>
+
+            <div className="row">
+                <Link to={"/products/" + productId + "/add"}>
+                <button className="waves-effect waves-light btn green accent-1 black-text">
+                    Add Material
+                </button>
+                </Link>
             </div>
 
         </div> 
