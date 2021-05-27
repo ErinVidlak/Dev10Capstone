@@ -8,6 +8,7 @@ import UpdateProductMaterial from "./forms/UpdateProductMaterial";
 import MessageContext from '../../context/MessageContext';
 import Messages from '../Messages';
 import DeleteProductMaterial from './forms/DeleteProductMaterial';
+import DeleteProductCard from './forms/DeleteProductCard';
 
 export default function ProductDetailedView() {
     const {messages} = useContext(MessageContext);
@@ -20,6 +21,7 @@ export default function ProductDetailedView() {
     });
     const [showPMUpdateForm, setShowPMUpdateForm] = useState(false);
     const [showPMDeleteCard, setShowPMDeleteCard] = useState(false);
+    const [showDeleteProductCard, setShowDeleteProductCard] = useState(false);
 
     // GET product
     useEffect(() => {
@@ -73,6 +75,8 @@ export default function ProductDetailedView() {
                 {product.materials && <ProductMaterialListView materials={product.materials} setShowPMUpdateForm={setShowPMUpdateForm} setShowPMDeleteCard={setShowPMDeleteCard}/>}
             </div>
             
+            <button className="waves-effect waves-light btn  red lighten-1" onClick={() => setShowDeleteProductCard(true)}>Delete Product</button>
+
             <div className="row">
             {showPMUpdateForm && (
                 <UpdateProductMaterial 
@@ -90,6 +94,15 @@ export default function ProductDetailedView() {
                     materialId={showPMDeleteCard.materialId}
                     materialName={showPMDeleteCard.materialName}
                     setShowPMDeleteCard={setShowPMDeleteCard}
+                />
+            )}
+            </div> 
+
+            <div>
+            {showDeleteProductCard && (
+                <DeleteProductCard 
+                    productName={product.productName}
+                    setShowDeleteProductCard={setShowDeleteProductCard}
                 />
             )}
             </div>

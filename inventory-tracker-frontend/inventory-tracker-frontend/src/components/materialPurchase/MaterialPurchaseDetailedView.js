@@ -95,10 +95,10 @@ export default function MaterialPurchaseDetailedView() {
             <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3" onClick={() => setShowUpdateForm(true)}>Update</button>
             <button className="waves-effect waves-light btn  red lighten-1" onClick={() => setShowDeleteCard(true)}>Delete</button>
             {showUpdateForm && (
-                <UpdateMaterialPurchase materialName={material.materialName} materialPurchase={materialPurchase}/>
+                <UpdateMaterialPurchase materialName={material.materialName} materialPurchase={materialPurchase} />
             )}
             {showDeleteCard && (
-                <DeleteCard materialName={material.materialName}/>
+                <DeleteCard materialName={material.materialName} setShowDeleteCard={setShowDeleteCard}/>
             )}
         </div>    
     );
