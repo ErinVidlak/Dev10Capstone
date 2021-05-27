@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
 import { findById } from '../../services/productAPI';
 import { capitalizeEach } from '../../utils/helpers';
 import ListedProductListView from './ListedProductListView';
+import ProductMaterialListView from './ProductMaterialListView';
+import UpdateProductMaterial from "./forms/UpdateProductMaterial";
+import MessageContext from '../../context/MessageContext';
+import Messages from '../Messages';
 
 export default function ProductDetailedView() {
+    const {messages} = useContext(MessageContext);
     const { productId } = useParams();
     const [product, setProduct] = useState({
         productName: "",
@@ -12,13 +17,14 @@ export default function ProductDetailedView() {
         timeToMake: 0,
         materials: [] 
     });
+    const [showPMUpdateForm, setShowPMUpdateForm] = useState(false);
 
     // GET product
     useEffect(() => {
         findById(productId).then((data) => {
         setProduct(data);
         });
-    }, [productId]);
+    }, [productId, showPMUpdateForm]);
 
     return (
         <div className="container">
@@ -60,7 +66,21 @@ export default function ProductDetailedView() {
             <div className="row center">
                 {product.listedProduct && <ListedProductListView listedProduct={product.listedProduct}/>}
             </div>
+            
+            <div className="row center">
+                {product.materials && <ProductMaterialListView materials={product.materials} setShowPMUpdateForm={setShowPMUpdateForm}/>}
+            </div>
+            
+            <div className="row">
+            {showPMUpdateForm && (
+                    <UpdateProductMaterial 
+                        materialId={showPMUpdateForm.materialId} 
+                        materialName={showPMUpdateForm.materialName} 
+                        materialQuantity={showPMUpdateForm.materialQuantity} 
+                        setShowPMUpdateForm={setShowPMUpdateForm}/>
+            )}
+            </div>
+            {messages.length > 0 && <Messages messages={messages}/>}
         </div> 
     );
-
 }

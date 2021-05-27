@@ -16,7 +16,6 @@ function UpdateMaterialPurchase({ materialName, materialPurchase }) {
 
     const submit = (evt) => {
         evt.preventDefault()
-        console.log(updatedMaterialPurchase)
         fetch(`http://localhost:8080/api/materialPurchase/${purchaseId}`, {
             method: "PUT", 
             headers: { "Content-Type": "application/json"}, 
