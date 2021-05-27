@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router';
+import { useParams, Link } from 'react-router-dom';
 import { findById } from '../../services/productAPI';
 import { capitalizeEach } from '../../utils/helpers';
 import ListedProductListView from './ListedProductListView';
@@ -74,7 +74,9 @@ export default function ProductDetailedView() {
             <div className="row center">
                 {product.materials && <ProductMaterialListView materials={product.materials} setShowPMUpdateForm={setShowPMUpdateForm} setShowPMDeleteCard={setShowPMDeleteCard}/>}
             </div>
-            
+            <Link to="/products">
+            <button className=" waves-effect waves-light btn ">Back </button>
+            </Link>
             <button className="waves-effect waves-light btn  red lighten-1" onClick={() => setShowDeleteProductCard(true)}>Delete Product</button>
 
             <div className="row">
