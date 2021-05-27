@@ -14,7 +14,6 @@ export default function AddProductMaterialForm() {
   }, []);
 
 
-
 const onSelectChange = (event) => {
   const mat = materials.find((m) => m.materialId == +event.target.value);
   setProductMaterial({
@@ -62,7 +61,7 @@ const onSelectChange = (event) => {
             <div className="input-field col s12">
                 <select className="browser-default" onChange={onSelectChange} required>
                     {materials.map((m) => (
-                        <option key={m.materialId} value={m.materialId}>{m.materialName}</option>
+                        <option key={m.materialId} defaultValue={materials[0]} value={m.materialId}>{m.materialName}</option>
                     ))}
                 </select>
             </div>

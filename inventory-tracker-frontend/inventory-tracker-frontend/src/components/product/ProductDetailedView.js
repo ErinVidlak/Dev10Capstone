@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { findById } from '../../services/productAPI';
 import { capitalizeEach } from '../../utils/helpers';
-import { Link, useHistory } from "react-router-dom";
 import ListedProductListView from './ListedProductListView';
 import ProductMaterialListView from './ProductMaterialListView';
 import UpdateProductMaterial from "./forms/UpdateProductMaterial";
