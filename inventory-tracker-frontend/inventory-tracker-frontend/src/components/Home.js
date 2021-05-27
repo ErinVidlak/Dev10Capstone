@@ -42,7 +42,7 @@ export default function Home() {
               <button className="btn"> view materials </button>
             </Link>
             <Link to="/purchases">
-              <button className="btn"> view purchases </button>
+              <button className="btn"> view material purchases </button>
             </Link>
             <Link to="/products">
               <button className="btn"> view products </button>
