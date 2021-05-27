@@ -25,6 +25,7 @@ import ProductDetailedView from "./product/ProductDetailedView";
 import ProductListView from "./product/ProductListView";
 import ListedProductDetailedView from "./product/ListedProductDetailedView";
 import AdminUserView from "./user/AdminUserView";
+import AddProductForm from "./product/forms/AddProductForm";
 
 function InventoryManager() {
   const storage = localStorage.getItem("user");
@@ -99,7 +100,9 @@ function InventoryManager() {
             <Route exact path="/register" component={Register} />
             {user ? (
               <Route exact path="/users" component={AdminUserView} />
-            ) : <Redirect to="/"/> }
+            ) : (
+              <Redirect to="/" />
+            )}
 
             <Route exact path="/materials" component={MaterialListView} />
             <Route exact path="/materials/add" component={AddMaterialForm} />
@@ -125,6 +128,8 @@ function InventoryManager() {
               component={MaterialPurchaseDetailedView}
             />
             <Route exact path="/products" component={ProductListView} />
+            <Route exact path="/products/add" component={AddProductForm} />
+
             <Route
               exact
               path="/products/:productId"
