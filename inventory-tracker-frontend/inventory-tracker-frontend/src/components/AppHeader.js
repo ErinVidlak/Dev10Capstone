@@ -44,6 +44,13 @@ export default function AppHeader() {
                 <span className="black-text">Products</span>
               </Link>
             </li>
+            {auth.user.roles.includes("ADMIN") && (
+              <li>
+                <Link to="/users">
+                  <span className="black-text">Admin</span>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       ) : (

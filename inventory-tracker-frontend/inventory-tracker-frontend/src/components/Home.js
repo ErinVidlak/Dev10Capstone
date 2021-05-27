@@ -47,6 +47,11 @@ export default function Home() {
             <Link to="/products">
               <button className="btn"> view products </button>
             </Link>
+            {auth.user.roles.includes("ADMIN") && (
+              <Link to="/users">
+                <button className="btn"> view registered users </button>
+              </Link>
+            )}
           </div>
           <div class="divider"></div>
         </>
