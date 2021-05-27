@@ -80,7 +80,11 @@ public class MaterialJdbcTemplateRepository implements MaterialRepository{
         }
 
         material.setMaterialId(keyHolder.getKey().intValue());
-        material.setInventory(generateInventoryOnAdd(material));
+        MaterialInventory inventory = generateInventoryOnAdd(material);
+        if(inventory != null){
+            material.setInventory(inventory);
+        }
+
         return material;
     }
 

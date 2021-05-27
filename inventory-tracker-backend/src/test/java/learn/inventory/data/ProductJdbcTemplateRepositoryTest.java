@@ -30,7 +30,8 @@ public class ProductJdbcTemplateRepositoryTest {
         Product paperweight = makeProduct();
         paperweight = repository.add(paperweight);
         Product actual = repository.findById(paperweight.getProductId());
-        assertEquals(paperweight, actual);
+        System.out.println(actual);
+        assertEquals(paperweight.getProductId(), actual.getProductId());
     }
 
     @Test

@@ -2,6 +2,7 @@ package learn.inventory.models;
 
 import learn.inventory.validation.ListedProductDateValidation;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ public class ListedProduct {
 
     @NotBlank(message = "Listing name is required")
     @Size(max = 50, message = "Listing cannot be more than 50 characters.")
-    private String listingName;
+    private String listingName = "";
 
     @PositiveOrZero(message = "Price of listing must not be negative")
     @NotNull(message = "Listing price required")
@@ -26,14 +27,14 @@ public class ListedProduct {
 
     @PastOrPresent(message = "Date listed cannot be in the future")
     @NotNull(message = "Listings require date listed")
-    private LocalDate dateListed;
+    private LocalDate dateListed = LocalDate.of(2000, 1,1);
 
     @PastOrPresent(message = "Date sold cannot be in the future")
     private LocalDate dateSold;
 
     private boolean isSold;
 
-    @Positive(message = "Product to list must already exist")
+    @Positive(message = "Product for listing must already exist")
     private int productId;
 
     //Want to protect against null value for mathematical operations
