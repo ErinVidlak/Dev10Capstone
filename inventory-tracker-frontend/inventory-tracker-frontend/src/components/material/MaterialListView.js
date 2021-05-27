@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import { findAll } from "../../services/materialAPI";
 import AuthContext from "../../context/AuthContext";
 import MaterialSummary from "./MaterialSummary";
+import Messages from "../Messages";
+import MessageContext from "../../context/MessageContext";
 
 export default function MaterialListView() {
   const [materialList, setMaterialList] = useState([]);
   const auth = useContext(AuthContext);
+  const {messages} = useContext(MessageContext);
 
   useEffect(() => {
     findAll().then((data) => {
@@ -62,6 +65,7 @@ export default function MaterialListView() {
           </button>
         </Link>
       </div>
+      {messages.length > 0 && <Messages messages={messages}/>}
     </div>
   );
 }
