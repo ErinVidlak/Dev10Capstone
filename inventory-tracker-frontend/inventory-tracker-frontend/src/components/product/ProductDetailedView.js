@@ -9,6 +9,7 @@ import MessageContext from '../../context/MessageContext';
 import Messages from '../Messages';
 import DeleteProductMaterial from './forms/DeleteProductMaterial';
 import DeleteProductCard from './forms/DeleteProductCard';
+import UpdateProduct from './forms/UpdateProduct';
 
 export default function ProductDetailedView() {
     const {messages} = useContext(MessageContext);
@@ -22,13 +23,14 @@ export default function ProductDetailedView() {
     const [showPMUpdateForm, setShowPMUpdateForm] = useState(false);
     const [showPMDeleteCard, setShowPMDeleteCard] = useState(false);
     const [showDeleteProductCard, setShowDeleteProductCard] = useState(false);
+    const [showUpdateProduct, setShowUpdateProduct] = useState(false);
 
     // GET product
     useEffect(() => {
         findById(productId).then((data) => {
         setProduct(data);
         });
-    }, [productId, showPMUpdateForm, showPMDeleteCard]);
+    }, [productId, showPMUpdateForm, showPMDeleteCard, showUpdateProduct]);
 
     return (
         <div className="container">
@@ -77,7 +79,10 @@ export default function ProductDetailedView() {
             <Link to="/products">
             <button className=" waves-effect waves-light btn ">Back </button>
             </Link>
+            <button className="waves-effect waves-light btn  blue darken-3" onClick={() => setShowUpdateProduct(true)}>Update Product</button>
             <button className="waves-effect waves-light btn  red lighten-1" onClick={() => setShowDeleteProductCard(true)}>Delete Product</button>
+
+
 
             <div className="row">
             {showPMUpdateForm && (
@@ -98,7 +103,7 @@ export default function ProductDetailedView() {
                     setShowPMDeleteCard={setShowPMDeleteCard}
                 />
             )}
-            </div> 
+            </div>   
 
             <div>
             {showDeleteProductCard && (
@@ -108,6 +113,10 @@ export default function ProductDetailedView() {
                 />
             )}
             </div>
+            {showUpdateProduct && (
+                <UpdateProduct product={product} />
+            )}    
+
             {messages.length > 0 && <Messages messages={messages}/>}
         </div> 
     );
