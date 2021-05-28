@@ -3,10 +3,11 @@ import { useState, useContext, useEffect } from "react";
 import { useParams } from 'react-router';
 import { Link, useHistory } from "react-router-dom";
 import { findAll } from '../../../services/materialAPI';
+import MessageContext from '../../../context/MessageContext';
 
 export default function AddProductMaterialForm() {  
   const { productId } = useParams();
-
+  const { setMessages } = useContext(MessageContext);
   const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
@@ -47,8 +48,23 @@ const onSelectChange = (event) => {
 
     evt.preventDefault();
     evt.stopPropagation();
-    await addProductMaterial(nextProductMaterial);
-    history.push("/products");
+    const response = await addProductMaterial(nextProductMaterial);
+    if (response.ok) { 
+      setMessages([`Your material was successfully added.`]);
+    } else {
+      response.json().then(json => {
+          if (Array.isArray(json)) {
+              setMessages(json);
+          } else {
+              setMessages([json.message])
+          }
+      });
+    }
+    history.push(`/products/${productId}`);
+  }
+
+  const cancel = () => {
+    history.push(`/products/${productId}`);
   }
 
   return (
@@ -88,11 +104,9 @@ const onSelectChange = (event) => {
                 </button>
               </div>
               <div className="col">
-                <Link to="/products">
-                  <button class="btn waves-effect waves-light red lighten-1 ">
+                  <button class="btn waves-effect waves-light red lighten-1" onClick={cancel}>
                     Cancel
                   </button>
-                </Link>
               </div>
             </div>
           </div>
