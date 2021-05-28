@@ -6,7 +6,7 @@ import { findAll } from "../../../services/materialAPI";
 import "materialize-css";
 import { Select } from "react-materialize";
 import { capitalizeEach } from "../../../utils/helpers";
-import MessageContext from '../../../context/MessageContext';
+import MessageContext from "../../../context/MessageContext";
 
 export default function AddProductMaterialForm({ setShowAddMaterial }) {
   const { productId } = useParams();
@@ -55,24 +55,23 @@ export default function AddProductMaterialForm({ setShowAddMaterial }) {
     );
     setProductMaterial(nextProductMaterial);
 
-    // evt.preventDefault();
-    // evt.stopPropagation();
+    evt.preventDefault();
+    evt.stopPropagation();
     const response = await addProductMaterial(nextProductMaterial);
-    if (response.ok) { 
+    if (response.ok) {
       setMessages([`Your material was successfully added.`]);
+      setShowAddMaterial(false);
       history.push(`/products/${productId}`);
     } else {
-      response.json().then(json => {
-          if (Array.isArray(json)) {
-              setMessages(json);
-          } else {
-              setMessages([json.message])
-          }
+      response.json().then((json) => {
+        if (Array.isArray(json)) {
+          setMessages(json);
+        } else {
+          setMessages([json.message]);
+        }
       });
     }
   }
-
-  
 
   return (
     <div className="card left col s5">
