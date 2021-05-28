@@ -6,10 +6,11 @@ import { findAll } from "../../../services/materialAPI";
 import "materialize-css";
 import { Select } from "react-materialize";
 import { capitalizeEach } from "../../../utils/helpers";
+import MessageContext from '../../../context/MessageContext';
 
 export default function AddProductMaterialForm({ setShowAddMaterial }) {
   const { productId } = useParams();
-
+  const { messages, setMessages } = useContext(MessageContext);
   const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
@@ -56,9 +57,22 @@ export default function AddProductMaterialForm({ setShowAddMaterial }) {
 
     // evt.preventDefault();
     // evt.stopPropagation();
-    await addProductMaterial(nextProductMaterial);
-    history.push("/products/" + productId);
+    const response = await addProductMaterial(nextProductMaterial);
+    if (response.ok) { 
+      setMessages([`Your material was successfully added.`]);
+    } else {
+      response.json().then(json => {
+          if (Array.isArray(json)) {
+              setMessages(json);
+          } else {
+              setMessages([json.message])
+          }
+      });
+    }
+    history.push(`/products/${productId}`);
   }
+
+  
 
   return (
     <div className="card left col s5">

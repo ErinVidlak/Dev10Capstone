@@ -152,7 +152,6 @@ export default function ProductDetailedView() {
           </button>
         </div>
 
-        {messages.length > 0 && <Messages messages={messages} />}
 
         <div className="row"></div>
       </div>

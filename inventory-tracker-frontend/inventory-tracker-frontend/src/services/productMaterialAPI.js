@@ -28,6 +28,7 @@ export async function addProductMaterial(productMaterial) {
     console.log(productMaterial);
     return Promise.reject(response.status + " response not 201 CREATED");
   }
+  return response;
 }
 
 //update productMaterial
