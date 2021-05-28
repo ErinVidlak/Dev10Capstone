@@ -1,35 +1,43 @@
 import { addProductMaterial } from "../../../services/productMaterialAPI";
 import { useState, useContext, useEffect } from "react";
-import { useParams } from 'react-router';
+import { useParams } from "react-router";
 import { Link, useHistory } from "react-router-dom";
-import { findAll } from '../../../services/materialAPI';
+import { findAll } from "../../../services/materialAPI";
+import "materialize-css";
+import { Select } from "react-materialize";
+import { capitalizeEach } from "../../../utils/helpers";
+import MessageContext from "../../../context/MessageContext";
 
-export default function AddProductMaterialForm() {  
+export default function AddProductMaterialForm({ setShowAddMaterial }) {
   const { productId } = useParams();
-
+  const { messages, setMessages } = useContext(MessageContext);
   const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
-    findAll().then((result) => {setMaterials(result)});
+    findAll().then((result) => {
+      setMaterials(result);
+    });
   }, []);
 
+  const cancel = () => {
+    setShowAddMaterial(false);
+  };
 
-const onSelectChange = (event) => {
-  const mat = materials.find((m) => m.materialId == +event.target.value);
-  setProductMaterial({
+  const onSelectChange = (event) => {
+    const mat = materials.find((m) => m.materialId == +event.target.value);
+    setProductMaterial({
       ...productMaterial,
-      material: mat
-  })
-}
+      material: mat,
+    });
+  };
 
   const [productMaterial, setProductMaterial] = useState({
     productId: productId,
     materialQuantity: 0,
-    material: materials[0]
+    material: materials[0],
   });
 
   console.log(productMaterial);
-
 
   const history = useHistory();
 
@@ -42,32 +50,76 @@ const onSelectChange = (event) => {
 
   async function handleSubmit(evt) {
     let nextProductMaterial = { ...productMaterial };
-    nextProductMaterial.materialQuantity = parseInt(productMaterial.materialQuantity);
+    nextProductMaterial.materialQuantity = parseInt(
+      productMaterial.materialQuantity
+    );
     setProductMaterial(nextProductMaterial);
 
     evt.preventDefault();
     evt.stopPropagation();
-    await addProductMaterial(nextProductMaterial);
-    history.push("/products");
+    const response = await addProductMaterial(nextProductMaterial);
+    if (response.ok) {
+      setMessages([`Your material was successfully added.`]);
+      setShowAddMaterial(false);
+      history.push(`/products/${productId}`);
+    } else {
+      response.json().then((json) => {
+        if (Array.isArray(json)) {
+          setMessages(json);
+        } else {
+          setMessages([json.message]);
+        }
+      });
+    }
   }
 
   return (
-    <div className="container">
-      
-      <div class="row">
-        <form class="col s12" id="addProductMaterialForm" onSubmit={handleSubmit}>
-
-        <label>Material Name</label>
-            <div className="input-field col s12">
-                <select className="browser-default" onChange={onSelectChange} required>
-                    {materials.map((m) => (
-                        <option key={m.materialId} defaultValue={materials[0]} value={m.materialId}>{m.materialName}</option>
-                    ))}
-                </select>
-            </div>
-
+    <div className="card left col s5">
+      <div className="card-content">
+        <form id="addProductMaterialForm" onSubmit={handleSubmit}>
           <div class="row">
-            <div class="input-field col s12">
+            <div className="col s12">
+              <div className="input-field ">
+                <Select
+                  id="selectMaterial"
+                  multiple={false}
+                  onChange={onSelectChange}
+                  options={{
+                    classes: "",
+                    dropdownOptions: {
+                      alignment: "left",
+                      autoTrigger: true,
+                      closeOnClick: true,
+                      constrainWidth: true,
+                      coverTrigger: true,
+                      hover: false,
+                      inDuration: 150,
+                      onCloseEnd: null,
+                      onCloseStart: null,
+                      onOpenEnd: null,
+                      onOpenStart: null,
+                      outDuration: 250,
+                    },
+                  }}
+                  value="">
+                  <option disabled value="">
+                    Choose a material
+                  </option>
+                  {materials.map((material) => (
+                    <option
+                      key={material.materialId}
+                      value={material.materialId}
+                      className="text-black">
+                      {capitalizeEach(material.materialName)}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div class="input-field col s5">
               <input
                 name="materialQuantity"
                 type="number"
@@ -77,25 +129,20 @@ const onSelectChange = (event) => {
               />
               <label for="material_quantity">Material Quantity </label>
             </div>
-
-            <div className="row">
-              <div className="col">
-                <button
-                  class="btn waves-effect waves-light"
-                  type="submit"
-                  name="action">
-                  Submit
-                </button>
-              </div>
-              <div className="col">
-                <Link to="/products">
-                  <button class="btn waves-effect waves-light red lighten-1 ">
-                    Cancel
-                  </button>
-                </Link>
-              </div>
-            </div>
           </div>
+
+          <button
+            class="btn waves-effect waves-light"
+            type="submit"
+            name="action">
+            Submit
+          </button>
+
+          <button
+            class="btn waves-effect waves-light red lighten-1 "
+            onClick={cancel}>
+            Cancel
+          </button>
         </form>
       </div>
     </div>

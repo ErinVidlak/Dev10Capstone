@@ -1,8 +1,10 @@
 import { updateMaterial, findById } from "../../../services/materialAPI";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+import MessageContext from "../../../context/MessageContext";
 
 export default function UpdateMaterialForm() {
+  const { setMessages } = useContext(MessageContext);
   const { materialId } = useParams();
 
   const [material, setMaterial] = useState({
@@ -35,8 +37,19 @@ export default function UpdateMaterialForm() {
 
     evt.preventDefault();
     evt.stopPropagation();
-    await updateMaterial(nextMaterial);
-    history.push(`/materials/${materialId}`);
+    const response = await updateMaterial(nextMaterial);
+    if (response.ok) { 
+      setMessages([`Your ${nextMaterial.materialName} was successfully updated.`]);
+      history.push(`/materials/${materialId}`);
+    } else {
+      response.json().then(json => {
+          if (Array.isArray(json)) {
+              setMessages(json);
+          } else {
+              setMessages([json.message])
+          }
+      });
+    }
   }
 
   return (

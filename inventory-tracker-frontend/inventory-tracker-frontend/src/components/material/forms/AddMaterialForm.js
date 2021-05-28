@@ -2,9 +2,11 @@ import { addMaterial } from "../../../services/materialAPI";
 import { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
+import MessageContext from "../../../context/MessageContext";
 
 export default function AddMaterialForm() {
   const auth = useContext(AuthContext);
+  const { setMessages } = useContext(MessageContext);
 
   const [material, setMaterial] = useState({
     materialId: 0,
@@ -20,18 +22,30 @@ export default function AddMaterialForm() {
     nextMaterial[evt.target.name] = evt.target.value;
 
     setMaterial(nextMaterial);
-    console.log(nextMaterial);
   }
 
   async function handleSubmit(evt) {
+
     let nextMaterial = { ...material };
     nextMaterial.pricePerUnit = parseFloat(material.pricePerUnit).toFixed(2);
     setMaterial(nextMaterial);
 
     evt.preventDefault();
     evt.stopPropagation();
-    await addMaterial(nextMaterial);
-    history.push("/materials");
+    const response = await addMaterial(nextMaterial);
+
+    if (response.ok) { 
+      setMessages([`Your ${nextMaterial.materialName} was successfully added.`]);
+      history.push("/materials");
+    } else {
+      response.json().then(json => {
+          if (Array.isArray(json)) {
+              setMessages(json);
+          } else {
+              setMessages([json.message])
+          }
+      });
+    }
   }
 
   return (

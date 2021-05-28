@@ -8,6 +8,7 @@ export default function MaterialWithPurchaseListView({ purchases }) {
           <th>Purchase ID</th>
           <th>Purchase Price</th>
           <th>Quantity Purchased</th>
+          <th>View Purchase</th>
         </tr>
       </thead>
       <tbody className="deep-purple lighten-4">

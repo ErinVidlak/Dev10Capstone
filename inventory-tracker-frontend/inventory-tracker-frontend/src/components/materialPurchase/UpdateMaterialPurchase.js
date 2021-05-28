@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router';
 import MessageContext from '../../context/MessageContext';
 import { findAll } from '../../services/materialAPI';
 
-function UpdateMaterialPurchase({ materialName, materialPurchase }) {
+function UpdateMaterialPurchase({ materialName, materialPurchase, setShowUpdateForm }) {
     const history = useHistory();
     const { purchaseId } = useParams();
     const [updatedMaterialPurchase, setUpdatedMaterialPurchase] = useState(materialPurchase); 
@@ -24,6 +24,7 @@ function UpdateMaterialPurchase({ materialName, materialPurchase }) {
             .then((response) => { 
                 if (response.ok) {
                     setMessages([`Your ${materialName} purchase was successfully updated.`]);
+                    setShowUpdateForm(false);
                 } else {
                     response.json().then(json => {
                         if (Array.isArray(json)) {
@@ -33,12 +34,11 @@ function UpdateMaterialPurchase({ materialName, materialPurchase }) {
                         }
                     });
                 } 
-                history.push("/purchases");
             }) 
     }
 
     const cancel = () => {
-        history.push("/purchases");
+        setShowUpdateForm(false);
     }
 
     const onSelectChange = (event) => {

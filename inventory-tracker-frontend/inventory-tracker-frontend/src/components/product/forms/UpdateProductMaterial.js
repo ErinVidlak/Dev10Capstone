@@ -30,6 +30,7 @@ function UpdateProductMaterial({
             .then((response) => { 
                 if (response.ok) {
                     setMessages([`Your ${materialName} quantity was successfully updated.`]);
+                    setShowPMUpdateForm(false);
                 } else {
                     response.json().then(json => {
                         if (Array.isArray(json)) {
@@ -39,7 +40,6 @@ function UpdateProductMaterial({
                         }
                     });
                 } 
-                setShowPMUpdateForm(false);
             }) 
     }
 

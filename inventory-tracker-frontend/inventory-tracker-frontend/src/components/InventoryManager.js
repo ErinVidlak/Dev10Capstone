@@ -26,6 +26,7 @@ import ProductListView from "./product/ProductListView";
 import ListedProductDetailedView from "./product/ListedProductDetailedView";
 import AdminUserView from "./user/AdminUserView";
 import AddProductForm from "./product/forms/AddProductForm";
+import Messages from "./Messages";
 import AddProductMaterialForm from "./product/forms/AddProductMaterialForm";
 
 function InventoryManager() {
@@ -136,11 +137,7 @@ function InventoryManager() {
               path="/products/:productId"
               component={ProductDetailedView}
             />
-            <Route
-              exact
-              path="/products/:productId/add"
-              component={AddProductMaterialForm}
-            />
+
             <Route
               exact
               path="/products/:productId/listing/:listedProductId"
@@ -148,6 +145,9 @@ function InventoryManager() {
             />
             <Route path="*" component={NotFound} />
           </Switch>
+          <div className="container">
+            {messages.length > 0 && <Messages messages={messages}/>}
+          </div>
         </Router>
       </MessageContext.Provider>
     </AuthContext.Provider>
