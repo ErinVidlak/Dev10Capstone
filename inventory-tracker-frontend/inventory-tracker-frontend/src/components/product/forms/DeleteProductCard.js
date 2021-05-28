@@ -14,6 +14,7 @@ export default function DeleteProductCard({ productName, setShowDeleteProductCar
             .then((response) => {
                 if (response.ok) {
                     setMessages([`Your ${productName} product was successfully deleted.`]);
+                    history.push("/products");
                 } else {
                     response.json().then(json => {
                         if (Array.isArray(json)) {
@@ -23,7 +24,6 @@ export default function DeleteProductCard({ productName, setShowDeleteProductCar
                         }
                     });
                 }
-                history.push("/products");
             }) 
     } 
 

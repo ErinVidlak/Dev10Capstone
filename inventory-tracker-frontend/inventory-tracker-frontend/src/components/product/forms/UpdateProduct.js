@@ -29,6 +29,7 @@ export default function UpdateProduct({
     }).then((response) => {
       if (response.ok) {
         setMessages([`Your ${productName} product was successfully updated.`]);
+        setShowUpdateProduct(false);
       } else {
         response.json().then((json) => {
           if (Array.isArray(json)) {
@@ -38,7 +39,6 @@ export default function UpdateProduct({
           }
         });
       }
-      setShowUpdateProduct(false);
     });
   };
 

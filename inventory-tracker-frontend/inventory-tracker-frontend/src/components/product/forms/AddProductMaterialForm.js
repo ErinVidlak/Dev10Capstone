@@ -51,6 +51,7 @@ const onSelectChange = (event) => {
     const response = await addProductMaterial(nextProductMaterial);
     if (response.ok) { 
       setMessages([`Your material was successfully added.`]);
+      history.push(`/products/${productId}`);
     } else {
       response.json().then(json => {
           if (Array.isArray(json)) {
@@ -60,7 +61,6 @@ const onSelectChange = (event) => {
           }
       });
     }
-    history.push(`/products/${productId}`);
   }
 
   const cancel = () => {

@@ -36,6 +36,7 @@ export default function AddMaterialForm() {
 
     if (response.ok) { 
       setMessages([`Your ${nextMaterial.materialName} was successfully added.`]);
+      history.push("/materials");
     } else {
       response.json().then(json => {
           if (Array.isArray(json)) {
@@ -45,7 +46,6 @@ export default function AddMaterialForm() {
           }
       });
     }
-    history.push("/materials");
   }
 
   return (

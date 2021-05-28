@@ -18,6 +18,7 @@ function DeleteProductMaterial({
             .then((response) => { 
                 if (response.ok) {
                     setMessages([`Your ${materialName} was successfully deleted.`]);
+                    setShowPMDeleteCard(false);
                 } else {
                     response.json().then(json => {
                         if (Array.isArray(json)) {
@@ -27,7 +28,6 @@ function DeleteProductMaterial({
                         }
                     });
                 } 
-                setShowPMDeleteCard(false);
             }) 
     }
 

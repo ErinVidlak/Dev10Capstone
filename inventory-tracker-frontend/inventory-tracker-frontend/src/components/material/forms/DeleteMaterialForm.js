@@ -26,6 +26,7 @@ export default function DeleteMaterialForm({
     const response = await deleteMaterial(nextMaterial.materialId);  
     if (response.ok) { 
       setMessages([`Your ${nextMaterial.materialName} was successfully deleted.`]);
+      history.push("/materials");
     } else {
       response.json().then(json => {
           if (Array.isArray(json)) {
@@ -35,8 +36,6 @@ export default function DeleteMaterialForm({
           }
       });
     }
-
-    history.push("/materials");
   }
 
   const cancel = async () => {

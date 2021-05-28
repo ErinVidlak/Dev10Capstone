@@ -112,6 +112,7 @@ export default function AddProductForm() {
     const response = await addProduct(nextProduct);
     if (response.ok) {
       setMessages([`Your ${nextProduct.productName} product was successfully updated.`]);
+      history.push("/products");
     } else {
       response.json().then(json => {
           if (Array.isArray(json)) {
@@ -121,7 +122,7 @@ export default function AddProductForm() {
           }
       });
     } 
-    history.push("/products");
+   
 
     // try {
     //   await addProduct(product);

@@ -23,11 +23,11 @@ export async function addProductMaterial(productMaterial) {
 
   const response = await fetch(apiUrl, init);
 
-  if (response.status !== 201) {
-    //TODO: remove print statement after function confirmed working
-    console.log(productMaterial);
-    return Promise.reject(response.status + " response not 201 CREATED");
-  }
+  // if (response.status !== 201) {
+  //   //TODO: remove print statement after function confirmed working
+  //   console.log(productMaterial);
+  //   return Promise.reject(response.status + " response not 201 CREATED");
+  // }
   return response;
 }
 

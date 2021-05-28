@@ -23,6 +23,7 @@ function AddMaterialPurchase() {
             .then((response) => {
                 if (response.ok) { 
                     setMessages([`Your ${materialPurchase.materialName} purchase was successfully added.`]);
+                    history.push("/purchases");
                 } else {
                     response.json().then(json => {
                         if (Array.isArray(json)) {
@@ -32,7 +33,6 @@ function AddMaterialPurchase() {
                         }
                     });
                 }
-                history.push("/purchases");
             })  
     } 
 
