@@ -40,6 +40,7 @@ export default function UpdateMaterialForm() {
     const response = await updateMaterial(nextMaterial);
     if (response.ok) { 
       setMessages([`Your ${nextMaterial.materialName} was successfully updated.`]);
+      history.push(`/materials/${materialId}`);
     } else {
       response.json().then(json => {
           if (Array.isArray(json)) {
@@ -49,7 +50,6 @@ export default function UpdateMaterialForm() {
           }
       });
     }
-    history.push(`/materials/${materialId}`);
   }
 
   return (

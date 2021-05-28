@@ -14,6 +14,7 @@ function DeleteCard({ materialName, setShowDeleteCard }) {
             .then((response) => {
                 if (response.ok) {
                     setMessages([`Your ${materialName} purchase was successfully deleted.`]);
+                    history.push("/purchases");
                 } else {
                     response.json().then(json => {
                         if (Array.isArray(json)) {
@@ -23,7 +24,6 @@ function DeleteCard({ materialName, setShowDeleteCard }) {
                         }
                     });
                 }
-                history.push("/purchases");
             }) 
     }
 

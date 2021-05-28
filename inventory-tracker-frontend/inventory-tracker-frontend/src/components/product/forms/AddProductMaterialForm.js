@@ -60,6 +60,7 @@ export default function AddProductMaterialForm({ setShowAddMaterial }) {
     const response = await addProductMaterial(nextProductMaterial);
     if (response.ok) { 
       setMessages([`Your material was successfully added.`]);
+      history.push(`/products/${productId}`);
     } else {
       response.json().then(json => {
           if (Array.isArray(json)) {
@@ -69,7 +70,6 @@ export default function AddProductMaterialForm({ setShowAddMaterial }) {
           }
       });
     }
-    history.push(`/products/${productId}`);
   }
 
   

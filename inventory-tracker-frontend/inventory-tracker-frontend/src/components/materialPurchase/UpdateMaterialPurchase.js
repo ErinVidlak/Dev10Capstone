@@ -24,6 +24,7 @@ function UpdateMaterialPurchase({ materialName, materialPurchase, setShowUpdateF
             .then((response) => { 
                 if (response.ok) {
                     setMessages([`Your ${materialName} purchase was successfully updated.`]);
+                    setShowUpdateForm(false);
                 } else {
                     response.json().then(json => {
                         if (Array.isArray(json)) {
@@ -33,7 +34,6 @@ function UpdateMaterialPurchase({ materialName, materialPurchase, setShowUpdateF
                         }
                     });
                 } 
-                setShowUpdateForm(false);
             }) 
     }
 
