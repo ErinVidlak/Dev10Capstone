@@ -9,6 +9,7 @@ export default function MaterialWithPurchaseTableSummary({purchaseId, purchasePr
       <td>{purchaseId}</td>
       <td>${formatPricePerUnit(purchasePrice)}</td>
       <td>{quantityPurchased}</td>
+      <td><button className="btn "> view </button>   </td>
     </tr>
   );
 }

@@ -183,17 +183,17 @@ export default function AddProductForm() {
     <div className="container">
       <h4>Add a Product</h4>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="units">Product Name</label>
+        <div className="input-field col s12">
+          <label htmlFor="productName">Product Name</label>
           <input
             type="text"
             id="productName"
             name="productName"
-            value={product.name}
+            defaultValue={product.name}
             onChange={handleChange}
           />
         </div>
-
+        <label htmlFor="totalMaterialCost">Estimated Total Material Cost</label>
         <div class="input-field col s12">
           <input
             class="decimal"
@@ -206,15 +206,12 @@ export default function AddProductForm() {
             id="totalMaterialCost"
             onChange={handleChange}
           />
-          <label htmlFor="totalMaterialCost">
-            Estimated Total Material Cost{" "}
-          </label>
         </div>
 
-        <div>
-          <label htmlFor="timeToMake">
-            {"Total Time Taken to Make Product (hrs)"}
-          </label>
+        <label htmlFor="timeToMake">
+          {"Total Time Taken to Make Product (hrs)"}
+        </label>
+        <div class="input-field col s12">
           <input
             type="number"
             min="0"

@@ -24,17 +24,17 @@ export default function MaterialPurchaseSummary({
     }, []);
     
     return (
-        <tr>
-            <td>{dateFormat(new Date(datePurchased), "paddedShortDate")}</td>
-            <td>{material.materialName}</td>
-            <td>${purchasePrice}</td>
-            <td>
-                <Link to={`/purchases/${materialPurchaseId}`}>
-                <button className="btn waves-effect waves-light btn-flat deep-purple lighten-3">
-                    View
-                </button>
-                </Link>
-            </td>
-        </tr>
+      <tr>
+        <td>{dateFormat(new Date(datePurchased), "paddedShortDate")}</td>
+        <td>{material.materialName}</td>
+        <td>${purchasePrice}</td>
+        <td>
+          <Link to={`/purchases/${materialPurchaseId}`}>
+            <button className="btn waves-effect waves-light btn pink lighten-4 black-text">
+              View Purchase
+            </button>
+          </Link>
+        </td>
+      </tr>
     );
 }
