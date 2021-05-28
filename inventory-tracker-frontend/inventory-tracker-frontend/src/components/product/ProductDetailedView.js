@@ -5,8 +5,6 @@ import { capitalizeEach } from '../../utils/helpers';
 import ListedProductListView from './ListedProductListView';
 import ProductMaterialListView from './ProductMaterialListView';
 import UpdateProductMaterial from "./forms/UpdateProductMaterial";
-import MessageContext from '../../context/MessageContext';
-import Messages from '../Messages';
 import DeleteProductMaterial from './forms/DeleteProductMaterial';
 import DeleteProductCard from './forms/DeleteProductCard';
 import UpdateProduct from './forms/UpdateProduct';
@@ -14,7 +12,6 @@ import AddProductMaterialForm from './forms/AddProductMaterialForm';
 import UpdateProductTotalCost from './forms/UpdateProductTotalCost';
 
 export default function ProductDetailedView() {
-    const {messages} = useContext(MessageContext);
     const { productId } = useParams();
 
     const [product, setProduct] = useState({

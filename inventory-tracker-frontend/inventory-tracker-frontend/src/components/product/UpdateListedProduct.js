@@ -6,7 +6,6 @@ import {
 } from "../../services/listedProductAPI";
 import { capitalizeEach } from "../../utils/helpers";
 import dateFormat from "dateformat";
-import MessageContext from "../../context/MessageContext";
 
 export default function UpdateListedProduct({
   currentListing,
@@ -18,7 +17,6 @@ export default function UpdateListedProduct({
 }) {
   const history = useHistory();
   const { listedProductId } = useParams();
-  const { setMessages } = useContext(MessageContext);
   const [relistingForm, setRelistingForm] = useState(relisting);
   const [isUpdatingAllForm, setIsUpdatingAllForm] = useState(isUpdatingAll);
 

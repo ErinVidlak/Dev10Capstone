@@ -1,13 +1,10 @@
 import { useContext, useState, useEffect } from "react";
 import { findAll } from "../../services/materialPurchaseAPI";
 import MaterialPurchaseSummary from "./MaterialPurchaseSummary";
-import Messages from "../Messages";
-import MessageContext from "../../context/MessageContext";
 import { useHistory } from 'react-router';
 
 export default function MaterialPurchaseListView() {
     const [materialPurchaseList, setMaterialPurchaseList] = useState([]);
-    const {messages} = useContext(MessageContext);
     const history = useHistory();
 
     const addMaterialPurchase = () => {
@@ -62,7 +59,6 @@ export default function MaterialPurchaseListView() {
             </table>
         </div>
         <button className="btn waves-effect waves-light btn teal accent-1 black-text" onClick={addMaterialPurchase}>Add a New Purchase</button>
-        {messages.length > 0 && <Messages messages={messages}/>}
     </div>
     );
 

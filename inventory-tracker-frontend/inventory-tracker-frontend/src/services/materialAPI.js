@@ -49,7 +49,8 @@ export async function addMaterial(material) {
     //TODO: remove print statement after function confirmed working
     console.log(material);
     return Promise.reject(response.status + " response not 201 CREATED");
-  }
+  } 
+  return response;
 }
 
 //update material
@@ -68,7 +69,8 @@ export async function updateMaterial(material) {
     //TODO: remove print statement after function confirmed working
     console.log(material);
     return Promise.reject(response.status + " response not 204 NO CONTENT");
-  }
+  } 
+  return response;
 }
 
 //delete material
@@ -84,4 +86,5 @@ export async function deleteMaterial(materialId) {
     console.log(materialId);
     return Promise.reject(response.status + " response not 204 NO CONTENT");
   }
+  return response;
 }
