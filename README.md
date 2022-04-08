@@ -14,35 +14,21 @@ Erin Vidlak, Mark Belgum, Rachael Hazlett
 
 Description
 
-> TODO: write project description --> pull from project proposal 
+
+This full stack application seeks to help small business owners centralize the costs of doing business while maximizing their potential profits without the overhead of learning more complicated tools.
+
+The main technical features of this application includes a database for both materials and products. A product is defined as something that is sold on a marketplace, and materials are the physical pieces/parts/objects used to make that product; the product is the sum or whole of the materials. The expense tracker for materials bought can help business owners better budget their time and resources, with the added benefit of consolidating this information in one place for tax purposes. The material inventory offers a complete view of all current materials with CRUD capabilities, so the business owner easily knows how much material is available at all times.
+
+On the product side, a calculator helps determine what the total cost was to make a product based on its material cost and the amount of materials used, as well as a feature that shows what price the owner should sell it at in order to reach a desired profit margin.
+
+These tools can help first-time business owners be able to easily keep track of all the expenses that go into running a business, as well as the knowledge of what their proper pricing should be.
 
 
 
-TODO: Application Set-up
+
+Application Set-up
 
 - Start or create mysql docker container
-
-  - ```powershell
-    PowerShell command
-    > docker run `
-    --name inventory-tracker-mysql `
-    -e MYSQL_ROOT_PASSWORD=teambean `
-    -p 3306:3306 `
-    -d `
-    mysql
-    ```
-
-  - ```bash
-    Bash command 
-    > docker run \
-    --name inventory-tracker-mysql  \
-    -e MYSQL_ROOT_PASSWORD=teambean \
-    -p 3306:3306 \
-    -d \
-    mysql
-    ```
-
-    
 
   - Link MySQL Workbench to this mysql server
 
@@ -54,33 +40,5 @@ TODO: Application Set-up
 
 - navigate to react project directory and do `npm start` from the terminal
 
-  
 
-TODO: Diagrams
-
-
-
-TODO: Technical Requirements/ Details
-
-
-
-TODO: Implementation Details
-
-
-
-TODO: Testing Plan
-
-
-
-TODO: Dependency libraries and other soft technical details
-
-Google Drive Document: https://docs.google.com/document/d/13JKfZd1I-laKHnOSUhpMPvYxjj2PxafvFzYYXhX1nlo/edit?usp=sharing
-
-Emails:
-
-erin.vidlak@gmail.com    |    mtbelgum@gmail.com    |    rph9ab@virginia.edu
-
-Github: 
-
-ErinVidlak, MarkBelgum, rhazlett
 
